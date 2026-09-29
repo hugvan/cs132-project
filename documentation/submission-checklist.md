@@ -7,8 +7,9 @@
 - [x] Sample drawn → detail pages scraped → `efoi_2025.csv` (1,641 rows)
 - [x] Failed pages checked: 22 no longer public (20 not found, 2 login-only), excluded
 - [ ] Team checks the 100 rows in `validation_100.csv` against the live pages
-- [ ] Skim titles/purposes for personal names before publishing
-- [ ] Google Sheet with tabs: `efoi_2025` (study dataset), `frame_2025` (all 2025 requests), `agencies`
+- [x] Public copies without `title`/`detail_url` (titles can name people; URLs repeat the title) → `data/public/`
+- [ ] Skim `purpose` for personal names before publishing
+- [ ] Google Sheet with one tab per file in `data/public/`: `efoi_2025`, `frame_2025`, `agencies`
 
 ## Portfolio (`docs/index.html`)
 

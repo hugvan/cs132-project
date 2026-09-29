@@ -28,6 +28,7 @@ python scripts/build_dataset.py frame                             # -> data/proc
 python scripts/build_dataset.py sample                            # -> data/interim/sample.csv
 python scripts/scrape_efoi.py details --sample data/interim/sample.csv   # reply timestamps
 python scripts/build_dataset.py dataset                           # -> data/processed/efoi_2025.csv
+python scripts/build_dataset.py public                            # -> data/public/ (Google Sheet copies)
 ```
 
 Scrape commands are resumable: if one stops, run the same command again. A Chrome window opens
@@ -44,6 +45,7 @@ Page numbers move as new requests are filed, so re-run `range` before a fresh li
 | `data/raw/` | Scraped outputs as collected (`listing.csv`, `details.csv`, `agencies.csv`, `errors.csv`) |
 | `data/interim/` | `sample.csv`, the drawn sample with sampling weights |
 | `data/processed/` | `frame_2025.csv` (all 2025 requests), `efoi_2025.csv` (study dataset), `validation_100.csv` |
+| `data/public/` | Google Sheet copies of `efoi_2025`, `frame_2025` and `agencies`, without `title` and `detail_url` |
 | `documentation/` | Methodology, data dictionary, collection log, submission checklist |
 | `docs/` | Portfolio website |
 | `tests/` | Parser tests on synthetic HTML (`python -m unittest discover -s tests`) |

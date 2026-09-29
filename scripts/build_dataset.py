@@ -3,6 +3,7 @@
   python scripts/build_dataset.py frame     # data/raw/listing.csv -> data/processed/frame_2025.csv
   python scripts/build_dataset.py sample    # frame -> data/interim/sample.csv (stratified, seed 132)
   python scripts/build_dataset.py dataset   # sample + data/raw/details.csv -> data/processed/efoi_2025.csv
+  python scripts/build_dataset.py public    # Google Sheet copies without titles -> data/public/
 
 Between `sample` and `dataset`, run: python scripts/scrape_efoi.py details --sample data/interim/sample.csv
 """
@@ -14,6 +15,9 @@ import pandas as pd
 
 ROOT = Path(__file__).resolve().parents[1]
 RAW, INTERIM, PROCESSED = ROOT / "data/raw", ROOT / "data/interim", ROOT / "data/processed"
+PUBLIC = ROOT / "data/public"
+# Titles can name private individuals, and the detail URL slug repeats the title.
+PRIVATE_COLUMNS = ["title", "detail_url"]
 SEED = 132
 PER_GROUP = 300  # target sample size per agency group; smaller groups are taken in full
 
@@ -122,10 +126,21 @@ def cmd_dataset():
     print(df.groupby("agency_group")["first_response_days"].describe().round(2))
 
 
+def cmd_public():
+    """Copies for the public Google Sheet, without columns that can contain personal names."""
+    PUBLIC.mkdir(parents=True, exist_ok=True)
+    for name in ["efoi_2025", "frame_2025"]:
+        df = pd.read_csv(PROCESSED / f"{name}.csv", dtype=str)
+        df.drop(columns=PRIVATE_COLUMNS).to_csv(PUBLIC / f"{name}.csv", index=False)
+        print(f"{name}: {len(df)} rows, dropped {PRIVATE_COLUMNS}")
+    pd.read_csv(RAW / "agencies.csv", dtype=str).to_csv(PUBLIC / "agencies.csv", index=False)
+    print(f"-> {PUBLIC}")
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("cmd", choices=["frame", "sample", "dataset"])
-    {"frame": cmd_frame, "sample": cmd_sample, "dataset": cmd_dataset}[ap.parse_args().cmd]()
+    ap.add_argument("cmd", choices=["frame", "sample", "dataset", "public"])
+    {"frame": cmd_frame, "sample": cmd_sample, "dataset": cmd_dataset, "public": cmd_public}[ap.parse_args().cmd]()
 
 
 if __name__ == "__main__":

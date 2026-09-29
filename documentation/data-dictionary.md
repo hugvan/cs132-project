@@ -32,5 +32,8 @@ One row per sampled eFOI request filed in 2025. Times are Manila local time as s
 | `detail_url` | url | Source page |
 | `scraped_at` | datetime | When the detail page was scraped |
 
+The public copies in `data/public/` (used for the Google Sheet) omit `title` and `detail_url`,
+because titles can name private individuals and the URL slug repeats the title.
+
 `data/processed/frame_2025.csv` holds every public 2025 request, with the listing-level columns:
 `tracking_number` through `purpose`, plus `status`, `outcome`, `filing_quarter` and `detail_url`.
