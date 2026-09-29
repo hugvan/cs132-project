@@ -1,43 +1,36 @@
-# Data dictionary
+# Data dictionary: `data/processed/efoi_2025.csv`
 
-CSV encoding: UTF-8. One request per tracking number. All template columns must
-exist; some cell values may be blank as described below. Blank means missing,
-never zero. Use ISO 8601 timestamps with offsets where available.
+One row per sampled eFOI request filed in 2025. Times are Manila local time as shown on the portal.
 
-| Field | Meaning / validation |
-| --- | --- |
-| `tracking_number` | Required string, unique request identifier; preserve leading zeros. |
-| `agency` | Required source agency name. |
-| `agency_group` | NGA, GOCC, SUC, WATER DISTRICT, LGU, LEA; blank is flagged, never inferred. |
-| `filed_at` | Required filing timestamp/date in 2025 in Asia/Manila. |
-| `first_response_at` | First agency reply after filing; blank when unavailable; may be after 2025. |
-| `status` | Exact source status at observation time; unmapped labels remain unknown. |
-| `purpose` | Optional source purpose; review for personal information before sharing. |
-| `source_url` | Required HTTP(S) source page/download URL for provenance. |
-| `collected_at` | Required date/time at which the record/status was observed or extracted. |
+| Column | Type | Description |
+| --- | --- | --- |
+| `tracking_number` | text | Portal tracking number, e.g. `DOJ-416806374185`. Unique key. |
+| `title` | text | Request title as published |
+| `agency_name` | text | Receiving agency, e.g. `Department of Justice(DOJ)` |
+| `agency_code` | text | Agency slug from the URL, e.g. `doj` |
+| `agency_group` | category | NGA, GOCC, SUC, WATER-DISTRICT, LGU, LEA (agency directory) |
+| `filed_at` | datetime | Filing date and time (to the minute) |
+| `filing_quarter` | category | Q1–Q4 of 2025 |
+| `purpose` | text | Requester-stated purpose |
+| `status` | category | Portal status on the scrape date |
+| `outcome` | category | successful / partially successful / unsuccessful / referred / open (see methodology) |
+| `is_final` | bool | Status is SUCCESSFUL, PARTIALLY SUCCESSFUL, DENIED or CLOSED |
+| `is_successful` | bool | Status is SUCCESSFUL or PARTIALLY SUCCESSFUL |
+| `has_agency_reply` | bool | At least one agency message exists |
+| `first_agency_reply_at` | datetime | Earliest agency message (to the minute); empty if none |
+| `first_response_days` | float | Days from filing to the first agency message; empty if none |
+| `last_agency_reply_at` | datetime | Latest agency message |
+| `processing_at` | datetime | "Processing" timestamp on the status timeline, if shown |
+| `final_status_at` | datetime | Final-status timestamp on the timeline, if shown |
+| `days_to_final_status` | float | Days from filing to `final_status_at` |
+| `n_agency_messages` | int | Number of agency messages |
+| `n_requester_messages` | int | Number of requester messages |
+| `flag_reply_before_filing` | bool | First reply earlier than filing (data error, kept for review) |
+| `stratum_population` | int | 2025 requests in this agency group × quarter |
+| `stratum_sample` | int | Sampled requests in this stratum |
+| `sampling_weight` | float | `stratum_population / stratum_sample` |
+| `detail_url` | url | Source page |
+| `scraped_at` | datetime | When the detail page was scraped |
 
-Example date formats (not observations): `2025-06-01` or
-`2025-06-01T14:30:00+08:00`. A timestamp without an offset is interpreted as
-Asia/Manila; record that assumption in the collection log. Date-only records retain
-their date-only representation. Comparisons with date-only values use calendar
-dates; precise elapsed hours cannot be recovered.
-
-## Derived output fields
-
-| Field | Meaning |
-| --- | --- |
-| `filing_quarter` | Q1–Q4 in Asia/Manila. |
-| `first_response_days` | Nonnegative calendar days from filing; blank for missing replies. |
-| `response_time_precision` | `timestamp`, `date`, `mixed`, or `missing`. |
-| `outcome` | Reviewed mapping, or `unknown` when unmapped. |
-| `is_closed` | `true`/`false` from mapping; blank if unknown. |
-| `quality_flags` | Semicolon-separated warning codes for the retained row. |
-
-## Status mapping
-
-`status_mapping.csv` has `status,outcome,is_closed,definition,source_url`.
-Matching ignores case and repeated whitespace, while preserving the original
-input status. Every mapping must have a definition and supporting URL. Successful
-and unsuccessful outcomes must be marked closed; pending outcomes must be open.
-This is a research coding rule, not a claim about official status semantics.
-The header-only template intentionally supplies no classifications.
+`data/processed/frame_2025.csv` holds every public 2025 request, with the listing-level columns:
+`tracking_number` through `purpose`, plus `status`, `outcome`, `filing_quarter` and `detail_url`.

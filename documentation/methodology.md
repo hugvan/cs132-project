@@ -1,88 +1,91 @@
-# Collection and processing protocol
+# Methodology
 
-**Status: planned. No requests have been collected, sampled or analyzed.**
+## Source
 
-## Research scope
+The public [eFOI portal](https://www.foi.gov.ph/) (Philippine Freedom of Information,
+Executive Order No. 2, s. 2016). Two page types are used:
 
-One row represents one eFOI request filed from 2025-01-01 through 2025-12-31
-in Asia/Manila. The proposal targets at least 1,000 unique tracking numbers.
-Dates of replies may fall in later years; do not filter replies to 2025.
-The directory categories are NGA, GOCC, SUC, WATER DISTRICT, LGU and LEA.
-Preserve these official labels without guessing categories from agency names.
+- **Listing pages** (`/requests/page/N/`, 15 requests per page, newest first). Each card has the
+  title, agency, filing date and time, purpose, tracking number and current status.
+- **Detail pages** (`/agencies/<agency>/<slug>/`). These add the status timeline (submitted,
+  processing, final status with timestamps) and the conversation, which has a timestamp on each
+  requester and agency message.
 
-## Planned acquisition
+Agency groups (NGA, GOCC, SUC, WATER-DISTRICT, LGU, LEA) come from the
+[agency directory](https://www.foi.gov.ph/agencies/), saved in `data/raw/agencies.csv`
+(739 agencies) and joined on the agency code in the URL.
 
-Primary route: ask the FOI Program Management Office for a de-identified CSV
-containing tracking number, agency, group, filing date, first agency reply date,
-status and purpose. No request has been sent by this repository setup.
-Record the source's extraction date and coverage, not just the download date.
+`robots.txt` allows all user agents and has no crawl delay. The terms of service allow
+non-commercial research use of the information.
 
-Fallback: build a 2025 request frame and stratify by filing quarter and agency
-group. Before sampling, record frame completeness, stratum counts, allocation,
-random seed and inclusion probabilities. Draw at least 1,000 unique requests,
-using a documented reproducible script. Proportional allocation is a starting
-option, not an implemented decision; retain weights if groups are oversampled.
-Do not silently replace failed pages with convenient alternatives.
+## Why a browser-based scraper
 
-The proposal specifies a 1–2 second delay, caching completed pages and logging
-errors. A scraper and sampler are intentionally not implemented yet. Verify
-access conditions at collection time, avoid requester information and keep
-cached source pages out of Git. Store only needed de-identified fields.
+The site is behind Cloudflare. Plain HTTP clients (`urllib`, `requests`, `curl`) get
+HTTP 403 with a "Just a moment..." challenge page, whatever User-Agent they send.
+A browser that Playwright launches in automation mode is also challenged after the first page.
+A normal Google Chrome window loads the pages without a challenge. `scrape_efoi.py` starts
+Chrome with a remote-debugging port and a separate profile (`.chrome-profile/`), connects to it
+with Playwright, and reads each page's rendered HTML. It does not solve or bypass challenges: if
+one appears, a team member ticks it in the window.
 
-## Operational definitions
+Politeness: one page at a time, with a random 1–2 second wait between loads and backoff on errors.
 
-- **First response:** first agency-authored reply after filing; requester follow-ups
-  do not count. The collector must verify author attribution. The processing script
-  cannot determine authorship from a timestamp alone.
-- **Response time:** elapsed calendar days, including fractional days when times
-  are known. Date-only inputs produce calendar-date differences; do not interpret
-  them as exact elapsed hours or mix precision without reporting it. This is not a
-  business-day or statutory-compliance measure. Missing replies stay missing.
-- **Status:** portal label as observed at the recorded extraction/collection date,
-  not necessarily a final outcome. Do not call pending records unsuccessful.
-- **Outcome/closure:** manually reviewed mapping in `status_mapping.csv`. Specify
-  the definition and supporting URL for every label. Allowed outcomes are
-  `successful`, `unsuccessful`, `pending`, `other`, `unknown`; `is_closed` is
-  `true`/`false`. Partial fulfillment, referral and ambiguous labels need an
-  explicit decision; the scaffold makes none. Unknown mappings generate warnings.
+## Sampling frame
 
-## Implemented preprocessing
+1. Binary search over listing pages finds the first and last page with 2025 filings
+   (pages 1024–2002 on 2026-09-29).
+2. Every listing page in that range is scraped to `data/raw/listing.csv`.
+3. `build_dataset.py frame` deduplicates on tracking number, keeps filings from
+   2025-01-01 to 2025-12-31 (Manila time, as displayed), and attaches the agency group.
+   Result: `data/processed/frame_2025.csv`, the full population of public 2025 requests.
 
-`scripts/process_data.py` reads UTF-8 CSVs with the documented columns. It trims
-outer whitespace, uppercases agency-group codes, interprets timezone-free dates
-as Asia/Manila, normalizes timestamps to that timezone, and retains the original
-CSV untouched. It rejects unexpected columns rather than accidentally carrying
-unapproved personal fields through the output.
+The frame alone answers RQ2 (status by agency group) for the full population.
 
-Missing tracking IDs/agencies, invalid dates, out-of-scope filing dates, replies
-before filing, collection before filing/reply, unknown nonblank agency groups and
-invalid source URLs are quarantined. Identical duplicate IDs retain one record;
-conflicting duplicates quarantine all versions. Missing groups/replies/purpose,
-unknown outcomes and mixed date precision generate warnings and are preserved.
-Inputs with incomplete CSV rows or extra cells fail instead of being silently read.
+## Sample for response times
 
-Outputs include clean data, quarantine data, issue codes by input record, and a JSON
-report with input SHA-256, status-map SHA-256, counts, missing values and coverage.
-It reports the 100/500/1,000 size bands but does not certify quality or a grade.
-Do not interpret a successful command as submission readiness.
+Detail pages are needed for reply timestamps, so a stratified random sample is drawn
+(`build_dataset.py sample`, seed 132):
 
-## Manual validation and reporting
+- Strata: agency group × filing quarter.
+- Each agency group gets up to 300 requests, split across quarters in proportion to that group's
+  filings. Groups with fewer than 300 requests in 2025 are taken in full.
+- `sampling_weight` = stratum population ÷ stratum sample size, for population-level estimates.
 
-Compare 100 collected rows with original pages, recording selection method,
-reviewer, discrepancies and corrections in the manual validation template.
-Also investigate every flagged issue. Record before/after counts and retained
-sample sizes; do not fill missing response times with zero.
+## Definitions
 
-For RQ1, report missing first responses by group alongside timing summaries.
-For RQ2, show all status categories and explicit denominators. For RQ3, restrict
-binary comparisons to reviewed closed requests with successful/unsuccessful
-outcomes and known response times. Report excluded records and reasons.
-Tests must be chosen after assessing distributions, counts and agency clustering.
-Association does not establish that speed causes success.
+- **First response**: the earliest message the agency posted in the conversation.
+  `first_response_days` = (first agency message − filing time) in fractional days. A request
+  with no agency message has an empty value, not zero.
+- **Outcome** (from portal status at scrape time): SUCCESSFUL → successful;
+  PARTIALLY SUCCESSFUL → partially successful; DENIED, CLOSED → unsuccessful;
+  REFERRED → referred; PENDING, ACCEPTED, PROCESSING, AWAITING CLARIFICATION → open.
+- **Final (closed) request**: status is SUCCESSFUL, PARTIALLY SUCCESSFUL, DENIED or CLOSED.
+  RQ3 uses these. `is_successful` is true for SUCCESSFUL and PARTIALLY SUCCESSFUL.
 
-## Limitations to assess
+## Quality checks
 
-Incomplete public coverage, self-selection into eFOI, uneven agency participation,
-sampling imbalance, unobserved replies, date precision and changing statuses may
-affect interpretation. Fix a status observation cutoff and document follow-up time
-before analysis. Portal records do not measure all Philippine information requests.
+- Tracking numbers are unique in every output.
+- Replies timestamped before filing are flagged (`flag_reply_before_filing`), not dropped.
+- Pages that fail to load or parse are logged in `data/raw/errors.csv`. The team re-runs the
+  command to retry them. Pages the portal no longer serves (not found, or login required) are
+  excluded, not replaced: 22 of 1,663 sampled requests.
+- `data/processed/validation_100.csv` lists 100 random dataset rows. Team members open each URL
+  and mark whether filing date, first reply and status match.
+
+## Privacy
+
+Only structural fields are stored: no requester names, contact details, message text or
+attachments. Titles and purposes are public on the portal and kept for EDA. Before sharing,
+check them for personal names.
+
+## Limitations
+
+- **Coverage gap:** the portal lists no public requests filed from 2025-03-20 22:30 to
+  2025-06-18 16:00, so Q2 holds only late-June filings (324 requests). Quarter comparisons
+  should note this. The cause is unknown; check with the FOI-PMO before reporting it.
+
+- Status and replies are observed on the scrape date. Late-2025 requests have had less time to
+  close.
+- Only requests published on the portal are visible. Requests filed by other channels, or not
+  made public, are not in the frame.
+- The first agency message may be an acknowledgment, not a substantive answer.

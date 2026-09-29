@@ -1,0 +1,740 @@
+agency_name,agency_url,agency_group
+Privatization and Management Office,https://www.foi.gov.ph/agencies/pmo/,NGA
+Bureau of Treasury,https://www.foi.gov.ph/agencies/btr/,NGA
+Securities and Exchange Commission,https://www.foi.gov.ph/agencies/sec/,NGA
+Central Board of Assessment Appeals,https://www.foi.gov.ph/agencies/cbaa/,NGA
+Bureau of Customs,https://www.foi.gov.ph/agencies/boc/,NGA
+Bureau of Local Government Finance,https://www.foi.gov.ph/agencies/blgf/,NGA
+Bureau of Internal Revenue,https://www.foi.gov.ph/agencies/bir/,NGA
+Insurance Commission,https://www.foi.gov.ph/agencies/ic/,NGA
+National Tax Research Center,https://www.foi.gov.ph/agencies/ntrc/,NGA
+Philippine National AIDS Council,https://www.foi.gov.ph/agencies/pnac/,NGA
+National Nutrition Council,https://www.foi.gov.ph/agencies/nnc/,NGA
+National Telecommunications Commission,https://www.foi.gov.ph/agencies/ntc/,NGA
+National Privacy Commission,https://www.foi.gov.ph/agencies/npc/,NGA
+Cybercrime Investigation and Coordinating Center,https://www.foi.gov.ph/agencies/cicc/,NGA
+Bureau of Corrections,https://www.foi.gov.ph/agencies/bucor/,NGA
+Presidential Commission on Good Government,https://www.foi.gov.ph/agencies/pcgg/,NGA
+Bureau of Immigration,https://www.foi.gov.ph/agencies/bi/,NGA
+Public Attorneys Office,https://www.foi.gov.ph/agencies/pao/,NGA
+Parole and Probation Administration,https://www.foi.gov.ph/agencies/papa/,NGA
+Land Registration Authority,https://www.foi.gov.ph/agencies/lra/,NGA
+Office of the Government Corporate Counsel,https://www.foi.gov.ph/agencies/ogcc/,NGA
+Office of the Solicitor General,https://www.foi.gov.ph/agencies/osg/,NGA
+Office for Alternative Dispute Resolution,https://www.foi.gov.ph/agencies/oadr/,NGA
+National Bureau of Investigation,https://www.foi.gov.ph/agencies/nbi/,NGA
+Philippine Coast Guard,https://www.foi.gov.ph/agencies/pcg/,NGA
+Office for Transportation Security,https://www.foi.gov.ph/agencies/ots/,NGA
+Toll Regulatory Board,https://www.foi.gov.ph/agencies/trb/,NGA
+Maritime Industry Authority,https://www.foi.gov.ph/agencies/marina/,NGA
+Land Transportation Office,https://www.foi.gov.ph/agencies/lto/,NGA
+Civil Aeronautics Board,https://www.foi.gov.ph/agencies/cab/,NGA
+Land Transportation Franchising and Regulatory Board,https://www.foi.gov.ph/agencies/ltfrb/,NGA
+Office of Transportation Cooperatives,https://www.foi.gov.ph/agencies/otc/,NGA
+Procurement Service,https://www.foi.gov.ph/agencies/psdbm/,NGA
+Government Procurement Policy Board  Technical Support Office,https://www.foi.gov.ph/agencies/gppb/,NGA
+Bureau of Communication Services,https://www.foi.gov.ph/agencies/bcs/,NGA
+Philippine Broadcasting Service Bureau of Broadcast Services,https://www.foi.gov.ph/agencies/pbsbbs/,NGA
+National Printing Office,https://www.foi.gov.ph/agencies/npo/,NGA
+Freedom of Information Program Management Office,https://www.foi.gov.ph/agencies/foipmo/,NGA
+News and Information Bureau,https://www.foi.gov.ph/agencies/nib/,NGA
+Presidential Broadcast Staff-Radio Television Malacanang,https://www.foi.gov.ph/agencies/rtvm/,NGA
+Tariff Commission,https://www.foi.gov.ph/agencies/tc/,NGA
+Public-Private Partnership Center,https://www.foi.gov.ph/agencies/pppc/,NGA
+Philippine Statistical Research and Training Institute,https://www.foi.gov.ph/agencies/psrti/,NGA
+Philippine Statistics Authority,https://www.foi.gov.ph/agencies/psa/,NGA
+Commission on Population and Development,https://www.foi.gov.ph/agencies/popcom/,NGA
+Philippine National Volunteer Service Coordinating Agency,https://www.foi.gov.ph/agencies/pnvsca/,NGA
+Philippine Commission on Women,https://www.foi.gov.ph/agencies/pcw/,NGA
+Bureau of Jail Management and Penology,https://www.foi.gov.ph/agencies/bjmp/,NGA
+Philippine Public Safety College,https://www.foi.gov.ph/agencies/ppsc/,NGA
+National Commission on Muslim Filipinos,https://www.foi.gov.ph/agencies/ncmf/,NGA
+National Youth Commission,https://www.foi.gov.ph/agencies/nyc/,NGA
+Bureau of Fire Protection,https://www.foi.gov.ph/agencies/bfp/,NGA
+National Police Commission,https://www.foi.gov.ph/agencies/napolcom/,NGA
+Local Government Academy,https://www.foi.gov.ph/agencies/lga/,NGA
+National Mapping and Resource Information Authority,https://www.foi.gov.ph/agencies/denrnamria/,NGA
+Environmental Management Bureau,https://www.foi.gov.ph/agencies/denremb/,NGA
+Palawan Council for Sustainable Development Staff (PCSDS),https://www.foi.gov.ph/agencies/denrpcsds/,NGA
+Land Management Bureau,https://www.foi.gov.ph/agencies/denrlmb/,NGA
+Ecosystems Research and Development Bureau,https://www.foi.gov.ph/agencies/denrerdb/,NGA
+Mines and Geosciences Bureau,https://www.foi.gov.ph/agencies/mgb/,NGA
+National Water Resources Board,https://www.foi.gov.ph/agencies/denrnwrb/,NGA
+Forest Management Bureau,https://www.foi.gov.ph/agencies/denrfmb/,NGA
+Biodiversity Management Bureau,https://www.foi.gov.ph/agencies/denrbmb/,NGA
+Fertilizer and Pesticide Authority,https://www.foi.gov.ph/agencies/fpa/,NGA
+Bureau of Animal Industry,https://www.foi.gov.ph/agencies/bai/,NGA
+Bureau of Agriculture and Fisheries Standards,https://www.foi.gov.ph/agencies/bafps/,NGA
+National Meat Inspection Service,https://www.foi.gov.ph/agencies/nmis/,NGA
+Philippine Carabao Center,https://www.foi.gov.ph/agencies/pcc/,NGA
+Agricultural Training Institute,https://www.foi.gov.ph/agencies/ati/,NGA
+Agricultural Credit Policy Council,https://www.foi.gov.ph/agencies/acpc/,NGA
+Bureau of Agricultural Research,https://www.foi.gov.ph/agencies/bar/,NGA
+Bureau of Fisheries and Aquatic Resources,https://www.foi.gov.ph/agencies/bfar/,NGA
+Philippine Council for Agricultural and Fisheries,https://www.foi.gov.ph/agencies/pcaf/,NGA
+Bureau of Soils and Water Management,https://www.foi.gov.ph/agencies/bswm/,NGA
+National Fisheries Research and Development Institute,https://www.foi.gov.ph/agencies/nfrdi/,NGA
+Philippine Fiber Industry Development Authority,https://www.foi.gov.ph/agencies/philfida/,NGA
+Philippine Center for Postharvest Development and Mechanization,https://www.foi.gov.ph/agencies/philmech/,NGA
+Bureau of Plant Industry,https://www.foi.gov.ph/agencies/bpi/,NGA
+Cooperative Development Authority,https://www.foi.gov.ph/agencies/cda/,NGA
+Board of Investments,https://www.foi.gov.ph/agencies/boi/,NGA
+Philippine Trade Training Center,https://www.foi.gov.ph/agencies/pttc/,NGA
+Construction Industry Authority of the Philippines,https://www.foi.gov.ph/agencies/ciap/,NGA
+Design Center of the Philippines,https://www.foi.gov.ph/agencies/dcp/,NGA
+National Conciliation and Mediation Board,https://www.foi.gov.ph/agencies/ncmb/,NGA
+Philippine Overseas Employment Administration,https://www.foi.gov.ph/agencies/poea/,NGA
+Technical Education and Skills Development Authority,https://www.foi.gov.ph/agencies/tesda/,NGA
+Professional Regulation Commission,https://www.foi.gov.ph/agencies/prc/,NGA
+Institute for Labor Studies,https://www.foi.gov.ph/agencies/ils/,NGA
+National Labor Relations Commission,https://www.foi.gov.ph/agencies/nlrcom/,NGA
+National Wages and Productivity Commission,https://www.foi.gov.ph/agencies/nwpc/,NGA
+National Maritime Polytechnic,https://www.foi.gov.ph/agencies/nmp/,NGA
+Industrial Technology Development Institute,https://www.foi.gov.ph/agencies/itdi/,NGA
+National Academy of Science and Technology,https://www.foi.gov.ph/agencies/nast/,NGA
+Food and Nutrition Research Institute,https://www.foi.gov.ph/agencies/fnri/,NGA
+Metals Industry Research and Development Center,https://www.foi.gov.ph/agencies/mirdc/,NGA
+Philippine Council for Health Research and Development,https://www.foi.gov.ph/agencies/pchrd/,NGA
+"Philippine Atmospheric, Geophysical and Astronomical Services Administration",https://www.foi.gov.ph/agencies/pagasa/,NGA
+Philippine Nuclear Research Institute,https://www.foi.gov.ph/agencies/pnri/,NGA
+Philippine Textile Research Institute,https://www.foi.gov.ph/agencies/ptri/,NGA
+Technology Application and Promotion Institute,https://www.foi.gov.ph/agencies/tapi/,NGA
+Philippine Science High School System,https://www.foi.gov.ph/agencies/pshs/,NGA
+Advanced Science and Technology Institute,https://www.foi.gov.ph/agencies/asti/,NGA
+Forest Products Research and Development Institute,https://www.foi.gov.ph/agencies/fprdi/,NGA
+"Philippine Council for Industry, Energy and Emerging Technology Research and Development",https://www.foi.gov.ph/agencies/pcieerd/,NGA
+"Philippine Council for Agriculture, Aquatic and Natural Resources Research and Development",https://www.foi.gov.ph/agencies/pcaarrd/,NGA
+Philippine Institute of Volcanology and Seismology,https://www.foi.gov.ph/agencies/phivolcs/,NGA
+National Research Council of the Philippines,https://www.foi.gov.ph/agencies/nrcp/,NGA
+Science Education Institute,https://www.foi.gov.ph/agencies/sei/,NGA
+Science and Technology Information Institute,https://www.foi.gov.ph/agencies/stii/,NGA
+Juvenile Justice and Welfare Council,https://www.foi.gov.ph/agencies/jjwc/,NGA
+Presidential Commission for the Urban Poor,https://www.foi.gov.ph/agencies/pcup/,NGA
+Council for the Welfare of Children,https://www.foi.gov.ph/agencies/cwc/,NGA
+National Commission on Indigenous Peoples,https://www.foi.gov.ph/agencies/ncip/,NGA
+National Council on Disability Affairs,https://www.foi.gov.ph/agencies/ncda/,NGA
+Intercountry Adoption Board,https://www.foi.gov.ph/agencies/icab/,NGA
+National Anti Poverty Commission,https://www.foi.gov.ph/agencies/napc/,NGA
+National Defense College of the Philippines,https://www.foi.gov.ph/agencies/ndcp/,NGA
+Office of Civil Defense,https://www.foi.gov.ph/agencies/ocd/,NGA
+Veterans Memorial Medical Center,https://www.foi.gov.ph/agencies/vmmc/,NGA
+Philippine Veterans Affairs Office,https://www.foi.gov.ph/agencies/pvao/,NGA
+Armed Forces of the Philippines,https://www.foi.gov.ph/agencies/afp/,NGA
+Government Arsenal,https://www.foi.gov.ph/agencies/ga/,NGA
+National Council for Childrens Television,https://www.foi.gov.ph/agencies/ncct/,NGA
+National Museum of the Philippines,https://www.foi.gov.ph/agencies/natmu/,NGA
+Philippine High School for the Arts,https://www.foi.gov.ph/agencies/phsa/,NGA
+National Book Development Board,https://www.foi.gov.ph/agencies/nbdb/,NGA
+Intramuros Administration,https://www.foi.gov.ph/agencies/ia/,NGA
+National Parks Development Committee,https://www.foi.gov.ph/agencies/npdc/,NGA
+Technical Cooperation Council of the Philippines,https://www.foi.gov.ph/agencies/tccp/,NGA
+Foreign Service Institute,https://www.foi.gov.ph/agencies/fsi/,NGA
+National Commission for Culture and the Arts,https://www.foi.gov.ph/agencies/ncca/,NGA
+Mindanao Development Authority,https://www.foi.gov.ph/agencies/minda/,NGA
+Metropolitan Manila Development Authority,https://www.foi.gov.ph/agencies/mmda/,NGA
+Film Development Council of the Philippines,https://www.foi.gov.ph/agencies/fdcp/,NGA
+National Intelligence Coordinating Agency,https://www.foi.gov.ph/agencies/nica/,NGA
+Climate Change Commission,https://www.foi.gov.ph/agencies/ccc/,NGA
+Anti-Money Laundering Council,https://www.foi.gov.ph/agencies/amlcs/,NGA
+Presidential Management Staff,https://www.foi.gov.ph/agencies/pms/,NGA
+National Security Council,https://www.foi.gov.ph/agencies/nsc/,NGA
+National Archives of the Philippines,https://www.foi.gov.ph/agencies/nap/,NGA
+Commission on Higher Education,https://www.foi.gov.ph/agencies/ched/,NGA
+Optical Media Board,https://www.foi.gov.ph/agencies/omb/,NGA
+Office of the Presidential Adviser on the Peace Process,https://www.foi.gov.ph/agencies/opapp/,NGA
+Philippine Drug Enforcement Agency,https://www.foi.gov.ph/agencies/pdea/,NGA
+Energy Regulatory Commission,https://www.foi.gov.ph/agencies/erc/,NGA
+National Historical Commission of the Philippines,https://www.foi.gov.ph/agencies/nhcp/,NGA
+Pasig River Rehabilitation Commission,https://www.foi.gov.ph/agencies/prrc/,NGA
+Philippine Competition Commission,https://www.foi.gov.ph/agencies/pccom/,NGA
+Commission on Filipinos Overseas,https://www.foi.gov.ph/agencies/cfo/,NGA
+Presidential Legislative Liaison Office,https://www.foi.gov.ph/agencies/pllo/,NGA
+Career Executive Service Board,https://www.foi.gov.ph/agencies/cesb/,NGA
+Presidential Communications Office,https://www.foi.gov.ph/agencies/pco/,NGA
+Games and Amusements Board,https://www.foi.gov.ph/agencies/gab/,NGA
+Early Childhood Care and Development Council,https://www.foi.gov.ph/agencies/eccd/,NGA
+Komisyon sa Wikang Filipino,https://www.foi.gov.ph/agencies/kwf/,NGA
+Movie and Television Review and Classification Board,https://www.foi.gov.ph/agencies/mtrcb/,NGA
+Housing and Urban Development Coordinating Council,https://www.foi.gov.ph/agencies/hudcc/,NGA
+National Solid Waste Management Commission,https://www.foi.gov.ph/agencies/nswmc/,NGA
+Philippine Racing Commission,https://www.foi.gov.ph/agencies/philracom/,NGA
+Dangerous Drugs Board,https://www.foi.gov.ph/agencies/ddb/,NGA
+Governance Commission for GOCCs,https://www.foi.gov.ph/agencies/gcg/,NGA
+National Library of the Philippines,https://www.foi.gov.ph/agencies/nlp/,NGA
+Housing and Land Use Regulatory Board,https://www.foi.gov.ph/agencies/hlurb/,NGA
+Philippine Sports Commission,https://www.foi.gov.ph/agencies/psc/,NGA
+Overseas Workers Welfare Administration,https://www.foi.gov.ph/agencies/owwa/,NGA
+"Department of Economy, Planning, and Development (DEPDev)",https://www.foi.gov.ph/agencies/neda/,NGA
+Department of Foreign Affairs,https://www.foi.gov.ph/agencies/dfa/,NGA
+Human Settlements Adjudication Commission,https://www.foi.gov.ph/agencies/hsac/,NGA
+Philippine Space Agency,https://www.foi.gov.ph/agencies/philsa/,NGA
+Philippine Information Agency,https://www.foi.gov.ph/agencies/pia/,NGA
+Department of Tourism,https://www.foi.gov.ph/agencies/dot/,NGA
+Department of Transportation,https://www.foi.gov.ph/agencies/dotr/,NGA
+Department of Social Welfare and Development,https://www.foi.gov.ph/agencies/dswd/,NGA
+Department of Science and Technology,https://www.foi.gov.ph/agencies/dost/,NGA
+Department of Agriculture,https://www.foi.gov.ph/agencies/da/,NGA
+Department of Finance,https://www.foi.gov.ph/agencies/dof/,NGA
+Department of Migrant Workers,https://www.foi.gov.ph/agencies/dmw/,NGA
+Department of Information and Communications Technology,https://www.foi.gov.ph/agencies/dict/,NGA
+Department of National Defense,https://www.foi.gov.ph/agencies/dnd/,NGA
+Office of the Vice President,https://www.foi.gov.ph/agencies/ovp/,NGA
+Department of Health,https://www.foi.gov.ph/agencies/doh/,NGA
+Department of Justice,https://www.foi.gov.ph/agencies/doj/,NGA
+Department of Education,https://www.foi.gov.ph/agencies/deped/,NGA
+Bagac Water District,https://www.foi.gov.ph/agencies/bagwadi/,NGA
+Department of Human Settlements and Urban Development,https://www.foi.gov.ph/agencies/dhsud/,NGA
+Department of Public Works and Highways,https://www.foi.gov.ph/agencies/dpwh/,NGA
+Department of the Interior and Local Government,https://www.foi.gov.ph/agencies/dilg/,NGA
+Department of Environment and Natural Resources,https://www.foi.gov.ph/agencies/denr/,NGA
+Department of Budget and Management,https://www.foi.gov.ph/agencies/dbm/,NGA
+Department of Energy,https://www.foi.gov.ph/agencies/doe/,NGA
+Department of Trade and Industry,https://www.foi.gov.ph/agencies/dti/,NGA
+Department of Labor and Employment,https://www.foi.gov.ph/agencies/dole/,NGA
+Department of Agrarian Reform,https://www.foi.gov.ph/agencies/dar/,NGA
+Anti-Red Tape Authority,https://www.foi.gov.ph/agencies/arta/,NGA
+Office of the President,https://www.foi.gov.ph/agencies/op/,NGA
+Philippine National Oil Company,https://www.foi.gov.ph/agencies/pnoc/,GOCC
+National Dairy Authority,https://www.foi.gov.ph/agencies/nda/,GOCC
+National Tobacco Administration,https://www.foi.gov.ph/agencies/nta/,GOCC
+Philippine Economic Zone Authority,https://www.foi.gov.ph/agencies/peza/,GOCC
+Employees Compensation Commission,https://www.foi.gov.ph/agencies/ecc/,GOCC
+PNOC Renewables Corporation,https://www.foi.gov.ph/agencies/pnocrc/,GOCC
+LBP Leasing and Finance Corporation,https://www.foi.gov.ph/agencies/llfc/,GOCC
+LBP Resources and Development Corporation,https://www.foi.gov.ph/agencies/lbrdc/,GOCC
+Intellectual Property Office of the Philippines,https://www.foi.gov.ph/agencies/ipophl/,GOCC
+PHIVIDEC Industrial Authority,https://www.foi.gov.ph/agencies/phividec/,GOCC
+Food Terminal Incorporated,https://www.foi.gov.ph/agencies/fti/,GOCC
+Development Academy of the Philippines,https://www.foi.gov.ph/agencies/dap/,GOCC
+Philippine Ports Authority,https://www.foi.gov.ph/agencies/ppa/,GOCC
+Palacio Del Gobernador Condominium Corporation,https://www.foi.gov.ph/agencies/pdgcc/,GOCC
+PNOC Exploration Corporation,https://www.foi.gov.ph/agencies/pnocec/,GOCC
+National Home Mortgage Finance Corporation,https://www.foi.gov.ph/agencies/nhmfc/,GOCC
+Philippine Fisheries Development Authority,https://www.foi.gov.ph/agencies/pfda/,GOCC
+Metropolitan Waterworks and Sewerage System Regulatory Office,https://www.foi.gov.ph/agencies/mwss/,GOCC
+Laguna Lake Development Authority,https://www.foi.gov.ph/agencies/denrllda/,GOCC
+Bases Conversion and Development Authority,https://www.foi.gov.ph/agencies/bcda/,GOCC
+National Transmission Corporation,https://www.foi.gov.ph/agencies/transco/,GOCC
+Sugar Regulatory Administration,https://www.foi.gov.ph/agencies/sra/,GOCC
+"Overseas Filipino Bank, A Digital Bank of Landbank",https://www.foi.gov.ph/agencies/ofb/,GOCC
+Boy Scouts of the Philippines,https://www.foi.gov.ph/agencies/bsp/,GOCC
+Philippine Guarantee Corporation,https://www.foi.gov.ph/agencies/pgcorp/,GOCC
+National Power Corporation,https://www.foi.gov.ph/agencies/napocor/,GOCC
+Light Rail Transit Authority,https://www.foi.gov.ph/agencies/lrta/,GOCC
+Duty Free Philippines Corporation,https://www.foi.gov.ph/agencies/dfpc/,GOCC
+Clark International Airport Corporation,https://www.foi.gov.ph/agencies/ciac/,GOCC
+Credit Information Corporation,https://www.foi.gov.ph/agencies/cic/,GOCC
+Philippine Deposit Insurance Corporation,https://www.foi.gov.ph/agencies/pdic/,GOCC
+Philippine National Commission for UNESCO,https://www.foi.gov.ph/agencies/unacom/,GOCC
+Coconut Industry Investment Fund Oil Mills Group,https://www.foi.gov.ph/agencies/ciifomg/,GOCC
+National Kidney and Transplant Institute,https://www.foi.gov.ph/agencies/nkti/,GOCC
+"Peoples Television Network, Inc.",https://www.foi.gov.ph/agencies/ptv/,GOCC
+Philippine Retirement Authority,https://www.foi.gov.ph/agencies/phra/,GOCC
+Cagayan Economic Zone Authority,https://www.foi.gov.ph/agencies/ceza/,GOCC
+Philippine Aerospace Development Corp,https://www.foi.gov.ph/agencies/padc/,GOCC
+"Corregidor Foundation, Inc.",https://www.foi.gov.ph/agencies/cfi/,GOCC
+Cultural Center of the Philippines,https://www.foi.gov.ph/agencies/ccp/,GOCC
+Philippine Coconut Authority,https://www.foi.gov.ph/agencies/pca/,GOCC
+Philippine Pharma Procurement Inc.,https://www.foi.gov.ph/agencies/pppi/,GOCC
+Social Security System,https://www.foi.gov.ph/agencies/sss/,GOCC
+Local Water Utilities Administration,https://www.foi.gov.ph/agencies/lwua/,GOCC
+Philippine Postal Corporation,https://www.foi.gov.ph/agencies/phlpost/,GOCC
+Small Business Corporation,https://www.foi.gov.ph/agencies/sbc/,GOCC
+APO Production Unit Inc.,https://www.foi.gov.ph/agencies/apo/,GOCC
+Home Development Mutual Fund/Pag-IBIG Fund,https://www.foi.gov.ph/agencies/hdmf/,GOCC
+PhilHealth,https://www.foi.gov.ph/agencies/ph/,GOCC
+Cebu Port Authority,https://www.foi.gov.ph/agencies/cpa/,GOCC
+Subic Bay Metropolitan Authority,https://www.foi.gov.ph/agencies/sbma/,GOCC
+Natural Resources Development Corporation,https://www.foi.gov.ph/agencies/nrdc/,GOCC
+National Irrigation Administration,https://www.foi.gov.ph/agencies/nia/,GOCC
+Philippine Rice Research Institute,https://www.foi.gov.ph/agencies/philrice/,GOCC
+DBP Data Center Inc.,https://www.foi.gov.ph/agencies/dci/,GOCC
+Quedan and Rural Credit Guarantee Corporation,https://www.foi.gov.ph/agencies/quedancor/,GOCC
+Poro Point Management Corporation,https://www.foi.gov.ph/agencies/ppmc/,GOCC
+Social Housing Finance Corporation,https://www.foi.gov.ph/agencies/shfc/,GOCC
+Tourism Infrastructure and Enterprise Zone Authority,https://www.foi.gov.ph/agencies/tieza/,GOCC
+Philippine Institute for Development Studies,https://www.foi.gov.ph/agencies/pids/,GOCC
+Philippine Children's Medical Center,https://www.foi.gov.ph/agencies/pcmc/,GOCC
+National Food Authority,https://www.foi.gov.ph/agencies/nfa/,GOCC
+Manila International Airport Authority,https://www.foi.gov.ph/agencies/miaa/,GOCC
+Philippine National Railways,https://www.foi.gov.ph/agencies/pnr/,GOCC
+Development Bank of the Philippines,https://www.foi.gov.ph/agencies/dbp/,GOCC
+Tourism Promotions Board Philippines,https://www.foi.gov.ph/agencies/tpb/,GOCC
+National Electrification Administration,https://www.foi.gov.ph/agencies/nea/,GOCC
+Center for International Trade Expositions and Missions,https://www.foi.gov.ph/agencies/citem/,GOCC
+Philippine Mining Development Corporation,https://www.foi.gov.ph/agencies/denrpmdc/,GOCC
+Philippine Charity Sweepstakes Office,https://www.foi.gov.ph/agencies/pcso/,GOCC
+Authority of the Freeport of Bataan,https://www.foi.gov.ph/agencies/afab/,GOCC
+"Masaganang Sakahan, Inc.",https://www.foi.gov.ph/agencies/msi/,GOCC
+Government Service Insurance System,https://www.foi.gov.ph/agencies/gsis/,GOCC
+Clark Development Corporation,https://www.foi.gov.ph/agencies/cdc/,GOCC
+Northern Foods Corporation,https://www.foi.gov.ph/agencies/nfc/,GOCC
+John Hay Management Corporation,https://www.foi.gov.ph/agencies/jhmc/,GOCC
+National Development Company,https://www.foi.gov.ph/agencies/ndc/,GOCC
+Southern Utility Management and Services Inc.,https://www.foi.gov.ph/agencies/sumsi/,GOCC
+Power Sector Assets and Liabilities Management Corporation,https://www.foi.gov.ph/agencies/psalm/,GOCC
+Philippine Sugar Corporation,https://www.foi.gov.ph/agencies/philsucor/,GOCC
+Civil Aviation Authority of the Philippines,https://www.foi.gov.ph/agencies/caap/,GOCC
+Occupational Safety And Health Center,https://www.foi.gov.ph/agencies/oshc/,GOCC
+Mactan-Cebu International Airport Authority,https://www.foi.gov.ph/agencies/mciaa/,GOCC
+"LBP (Land Bank of the Phil.) Insurance Brokerage, Inc.",https://www.foi.gov.ph/agencies/libi/,GOCC
+North Luzon Railways Corp.,https://www.foi.gov.ph/agencies/nlrc/,GOCC
+Philippine Heart Center,https://www.foi.gov.ph/agencies/phc/,GOCC
+"LANDBANK Countryside Development Foundation, Inc.",https://www.foi.gov.ph/agencies/lcdfi/,GOCC
+Philippine National Construction Corporation,https://www.foi.gov.ph/agencies/pncc/,GOCC
+Philippine Reclamation Authority,https://www.foi.gov.ph/agencies/pra/,GOCC
+Philippine Crop Insurance Corporation,https://www.foi.gov.ph/agencies/pcic/,GOCC
+National Housing Authority,https://www.foi.gov.ph/agencies/nha/,GOCC
+Lung Center of the Philippines,https://www.foi.gov.ph/agencies/lcp/,GOCC
+Land Bank of the Philippines,https://www.foi.gov.ph/agencies/lbp/,GOCC
+DBP Leasing Corporation,https://www.foi.gov.ph/agencies/dbp-lc/,GOCC
+Nayong Pilipino Foundation,https://www.foi.gov.ph/agencies/nayon/,GOCC
+Veterans Federation of the Philippines,https://www.foi.gov.ph/agencies/vfp/,GOCC
+PEA Tollway Corporation,https://www.foi.gov.ph/agencies/peatc/,GOCC
+Metropolitan Waterworks and Sewerage System Corporate Office,https://www.foi.gov.ph/agencies/mwssco/,GOCC
+Partido Development Administration,https://www.foi.gov.ph/agencies/pda/,GOCC
+"UCPB Savings Bank, Inc.",https://www.foi.gov.ph/agencies/ucpbs/,GOCC
+Philippine Institute of Traditional and Alternative Health Care,https://www.foi.gov.ph/agencies/pitahc/,GOCC
+Philippine Amusement and Gaming Corporation,https://www.foi.gov.ph/agencies/pagcor/,GOCC
+Philippine International Convention Center,https://www.foi.gov.ph/agencies/picc/,GOCC
+Zamboanga City Special Economic Zone Authority,https://www.foi.gov.ph/agencies/zcseza/,GOCC
+University of the Philippines - Philippine General Hospital,https://www.foi.gov.ph/agencies/uppgh/,SUC
+University of the Philippines Mindanao,https://www.foi.gov.ph/agencies/upmin/,SUC
+Siquijor State College,https://www.foi.gov.ph/agencies/ssc/,SUC
+Nueva Ecija University of Science and Technology,https://www.foi.gov.ph/agencies/neust/,SUC
+Northern Iloilo State University,https://www.foi.gov.ph/agencies/nisu/,SUC
+Pangasinan State University,https://www.foi.gov.ph/agencies/pangsu/,SUC
+University of Rizal System,https://www.foi.gov.ph/agencies/urs/,SUC
+University of Antique,https://www.foi.gov.ph/agencies/ua/,SUC
+University of the Philippines Baguio,https://www.foi.gov.ph/agencies/upb/,SUC
+Mariano Marcos State University,https://www.foi.gov.ph/agencies/mmsu/,SUC
+Eastern Samar State University,https://www.foi.gov.ph/agencies/essu/,SUC
+President Ramon Magsaysay State University,https://www.foi.gov.ph/agencies/prmsu/,SUC
+Laguna State Polytechnic University,https://www.foi.gov.ph/agencies/lspu/,SUC
+Bicol State College of Applied Sciences and Technology,https://www.foi.gov.ph/agencies/biscast/,SUC
+University of the Philippines Visayas,https://www.foi.gov.ph/agencies/upv/,SUC
+University of the Philippines Tacloban College,https://www.foi.gov.ph/agencies/uptc/,SUC
+Negros Oriental State University,https://www.foi.gov.ph/agencies/norsu/,SUC
+University of the Philippines Diliman,https://www.foi.gov.ph/agencies/upd/,SUC
+Cotabato Foundation College of Science and Technology,https://www.foi.gov.ph/agencies/cfcst/,SUC
+Marikina Polytechnic University,https://www.foi.gov.ph/agencies/mpc/,SUC
+Agusan del Sur University,https://www.foi.gov.ph/agencies/asscat/,SUC
+"Dr. Emilio B. Espinosa Sr., Memorial State College of Agriculture and Technology",https://www.foi.gov.ph/agencies/debesmscat/,SUC
+Camarines Norte State College,https://www.foi.gov.ph/agencies/cnsc/,SUC
+Aurora State College of Technology,https://www.foi.gov.ph/agencies/ascot/,SUC
+Bataan Peninsula State University,https://www.foi.gov.ph/agencies/bpsu/,SUC
+North Luzon Philippines State College,https://www.foi.gov.ph/agencies/nlpsc/,SUC
+Mindoro State University,https://www.foi.gov.ph/agencies/minsu/,SUC
+Compostela Valley State College,https://www.foi.gov.ph/agencies/cvsc/,SUC
+Cebu Normal University,https://www.foi.gov.ph/agencies/cnu/,SUC
+Pampanga State Agricultural University,https://www.foi.gov.ph/agencies/psau/,SUC
+Zamboanga Peninsula Polytechnic State University,https://www.foi.gov.ph/agencies/zcspc/,SUC
+MARINDUQUE STATE UNIVERSITY,https://www.foi.gov.ph/agencies/msc/,SUC
+University of Southeastern Philippines,https://www.foi.gov.ph/agencies/usep/,SUC
+University of Southern Mindanao,https://www.foi.gov.ph/agencies/usm/,SUC
+Bulacan Agricultural State College,https://www.foi.gov.ph/agencies/basc/,SUC
+Philippine State College of Aeronautics,https://www.foi.gov.ph/agencies/philsca/,SUC
+Western Philippines University,https://www.foi.gov.ph/agencies/wpu/,SUC
+Samar State University,https://www.foi.gov.ph/agencies/ssu/,SUC
+NORTH EASTERN MINDANAO STATE UNIVERSITY,https://www.foi.gov.ph/agencies/nemsu/,SUC
+University of Northern Philippines,https://www.foi.gov.ph/agencies/unp/,SUC
+Iloilo Science and Technology University,https://www.foi.gov.ph/agencies/isatu/,SUC
+Biliran Province State University,https://www.foi.gov.ph/agencies/bipsu/,SUC
+J. H. Cerilles State College,https://www.foi.gov.ph/agencies/jhcsc/,SUC
+Bicol University,https://www.foi.gov.ph/agencies/bu/,SUC
+Technological University of the Philippines,https://www.foi.gov.ph/agencies/tup/,SUC
+Northern Bukidnon State College,https://www.foi.gov.ph/agencies/nbsc/,SUC
+Zamboanga State College of Marine Sciences and Technology,https://www.foi.gov.ph/agencies/zscmst/,SUC
+STATE UNIVERSITY OF NORTHERN NEGROS,https://www.foi.gov.ph/agencies/nonescost/,SUC
+Palawan State University,https://www.foi.gov.ph/agencies/psu/,SUC
+Sulu State College,https://www.foi.gov.ph/agencies/susc/,SUC
+Partido State University,https://www.foi.gov.ph/agencies/parsu/,SUC
+Kalinga State University,https://www.foi.gov.ph/agencies/ksu/,SUC
+Southern Luzon State University,https://www.foi.gov.ph/agencies/slstu/,SUC
+Jose Rizal Memorial State University,https://www.foi.gov.ph/agencies/jrmsu/,SUC
+Visayas State University,https://www.foi.gov.ph/agencies/vsu/,SUC
+Capiz State University,https://www.foi.gov.ph/agencies/capsu/,SUC
+Western Mindanao State University,https://www.foi.gov.ph/agencies/wmsu/,SUC
+Leyte Normal University,https://www.foi.gov.ph/agencies/lnu/,SUC
+Eulogio Amang Rodriguez Institute of Science and Technology,https://www.foi.gov.ph/agencies/earist/,SUC
+Davao Del Norte State College,https://www.foi.gov.ph/agencies/ddnsc/,SUC
+Don Mariano Marcos Memorial State University,https://www.foi.gov.ph/agencies/dmmmsu/,SUC
+Cebu Technological University,https://www.foi.gov.ph/agencies/ctu/,SUC
+CENTRAL MINDANAO UNIVERSITY,https://www.foi.gov.ph/agencies/cmu/,SUC
+Bohol Island State University,https://www.foi.gov.ph/agencies/bisu/,SUC
+Bukidnon State University,https://www.foi.gov.ph/agencies/buksu/,SUC
+Aklan State University,https://www.foi.gov.ph/agencies/asu/,SUC
+Occidental Mindoro State University,https://www.foi.gov.ph/agencies/omsc/,SUC
+Bulacan State University,https://www.foi.gov.ph/agencies/bulsu/,SUC
+Basilan State College,https://www.foi.gov.ph/agencies/bassc/,SUC
+Southern Leyte State University,https://www.foi.gov.ph/agencies/slsu/,SUC
+Davao del Sur State College,https://www.foi.gov.ph/agencies/dssc/,SUC
+Batanes State College,https://www.foi.gov.ph/agencies/bsc/,SUC
+Mountain Province State University,https://www.foi.gov.ph/agencies/mpspc/,SUC
+Iloilo State University of Fisheries Science and Technology,https://www.foi.gov.ph/agencies/iscof/,SUC
+University of the Cordilleras(formerly Baguio Colleges Foundation),https://www.foi.gov.ph/agencies/ucbcf/,SUC
+University of Eastern Philippines,https://www.foi.gov.ph/agencies/uep/,SUC
+Northwest Samar State University,https://www.foi.gov.ph/agencies/nwssu/,SUC
+Camarines Sur Polytechnic Colleges,https://www.foi.gov.ph/agencies/cspc/,SUC
+Tawi-Tawi Regional Agricultural College,https://www.foi.gov.ph/agencies/ttrac/,SUC
+Carlos Hilado Memorial State University,https://www.foi.gov.ph/agencies/chmsc/,SUC
+University of the Philippines Manila,https://www.foi.gov.ph/agencies/upm/,SUC
+Adiong Memorial State College,https://www.foi.gov.ph/agencies/amsc/,SUC
+Kings College of the Philippines,https://www.foi.gov.ph/agencies/kcp/,SUC
+Isabela State University,https://www.foi.gov.ph/agencies/isu/,SUC
+Ifugao State University,https://www.foi.gov.ph/agencies/ifsu/,SUC
+Guimaras State University,https://www.foi.gov.ph/agencies/gsu/,SUC
+Davao de Oro State College,https://www.foi.gov.ph/agencies/ddosc/,SUC
+University of Science and Technology of Southern Philippines,https://www.foi.gov.ph/agencies/ustsp/,SUC
+Ilocos Sur Polytechnic State College,https://www.foi.gov.ph/agencies/ispsc/,SUC
+Sultan Kudarat State University,https://www.foi.gov.ph/agencies/sksu/,SUC
+Southern Philippines Agri-Business and Marine and Aquatic School of Technology,https://www.foi.gov.ph/agencies/spamast/,SUC
+Don Honorio Ventura State University,https://www.foi.gov.ph/agencies/dhvsu/,SUC
+Cagayan State University,https://www.foi.gov.ph/agencies/cagsu/,SUC
+Tarlac State University,https://www.foi.gov.ph/agencies/tsu/,SUC
+Central Philippines State University,https://www.foi.gov.ph/agencies/cpsu/,SUC
+Central Bicol State University of Agriculture,https://www.foi.gov.ph/agencies/cbsua/,SUC
+Surigao Del Norte State University,https://www.foi.gov.ph/agencies/ssct/,SUC
+Tarlac Agricultural University,https://www.foi.gov.ph/agencies/tau/,SUC
+Abra State Institute of Science and Technology,https://www.foi.gov.ph/agencies/asist/,SUC
+Davao Oriental State University,https://www.foi.gov.ph/agencies/doscst/,SUC
+Romblon State University,https://www.foi.gov.ph/agencies/rsu/,SUC
+Philippine Normal University,https://www.foi.gov.ph/agencies/pnu/,SUC
+Nueva Vizcaya State University,https://www.foi.gov.ph/agencies/nvsu/,SUC
+Batangas State University,https://www.foi.gov.ph/agencies/batsu/,SUC
+University of the Philippines Cebu,https://www.foi.gov.ph/agencies/upc/,SUC
+Mindanao State University-General Santos,https://www.foi.gov.ph/agencies/msugs/,SUC
+Apayao State College,https://www.foi.gov.ph/agencies/asc/,SUC
+University of the Philippines Los Banos,https://www.foi.gov.ph/agencies/uplb/,SUC
+Quirino State University,https://www.foi.gov.ph/agencies/qsu/,SUC
+University of the Philippines Open University,https://www.foi.gov.ph/agencies/upou/,SUC
+West Visayas State University,https://www.foi.gov.ph/agencies/wvsu/,SUC
+Benguet State University,https://www.foi.gov.ph/agencies/bsu/,SUC
+Palompon Institute of Technology,https://www.foi.gov.ph/agencies/pit/,SUC
+Catanduanes State University,https://www.foi.gov.ph/agencies/csu/,SUC
+Central Luzon State University,https://www.foi.gov.ph/agencies/clsu/,SUC
+Cavite State University,https://www.foi.gov.ph/agencies/cvsu/,SUC
+Caraga State University,https://www.foi.gov.ph/agencies/carsu/,SUC
+Sorsogon State University,https://www.foi.gov.ph/agencies/srsc/,SUC
+University of the Philippines System,https://www.foi.gov.ph/agencies/up/,SUC
+PH Merchant Marine Academy,https://www.foi.gov.ph/agencies/pmma/,SUC
+Polytechnic University of the Philippines,https://www.foi.gov.ph/agencies/pup/,SUC
+Rizal Technological University,https://www.foi.gov.ph/agencies/rtu/,SUC
+Baganga Water District,https://www.foi.gov.ph/agencies/bagawd/,WATER-DISTRICT
+Sablayan Water District,https://www.foi.gov.ph/agencies/sabwd/,WATER-DISTRICT
+TUY WATER DISTRICT,https://www.foi.gov.ph/agencies/tuywd/,WATER-DISTRICT
+Siniloan Water District,https://www.foi.gov.ph/agencies/siwadi/,WATER-DISTRICT
+Dasmariñas Water District,https://www.foi.gov.ph/agencies/dasmawd/,WATER-DISTRICT
+Bacolod City Water District,https://www.foi.gov.ph/agencies/bacowd/,WATER-DISTRICT
+Plaridel Water District,https://www.foi.gov.ph/agencies/plawd/,WATER-DISTRICT
+Isabel Water District,https://www.foi.gov.ph/agencies/iswd/,WATER-DISTRICT
+Candaba Water District,https://www.foi.gov.ph/agencies/canwd/,WATER-DISTRICT
+Amulung Water District,https://www.foi.gov.ph/agencies/amwadi/,WATER-DISTRICT
+Carmona Water District,https://www.foi.gov.ph/agencies/carwd/,WATER-DISTRICT
+Victorias City Water District,https://www.foi.gov.ph/agencies/vcwd/,WATER-DISTRICT
+La Trinidad Water District,https://www.foi.gov.ph/agencies/ltwd/,WATER-DISTRICT
+Murcia Water District,https://www.foi.gov.ph/agencies/murwd/,WATER-DISTRICT
+San Jose (Occidental Mindoro) Water District,https://www.foi.gov.ph/agencies/sjomwd/,WATER-DISTRICT
+Lemery Water District,https://www.foi.gov.ph/agencies/lewad/,WATER-DISTRICT
+Metro Lipa Water District,https://www.foi.gov.ph/agencies/mlwd/,WATER-DISTRICT
+San Francisco Water District,https://www.foi.gov.ph/agencies/sfwd/,WATER-DISTRICT
+Santiago Water District,https://www.foi.gov.ph/agencies/sanwad/,WATER-DISTRICT
+STA. IGNACIA WATER DISTRICT,https://www.foi.gov.ph/agencies/siwad/,WATER-DISTRICT
+Tandag City Water District,https://www.foi.gov.ph/agencies/tcwd/,WATER-DISTRICT
+Dapitan City Water District,https://www.foi.gov.ph/agencies/dapwd/,WATER-DISTRICT
+Paniqui Water District,https://www.foi.gov.ph/agencies/paniwd/,WATER-DISTRICT
+Limay Water District,https://www.foi.gov.ph/agencies/limwd/,WATER-DISTRICT
+Subic Water District,https://www.foi.gov.ph/agencies/swd/,WATER-DISTRICT
+Binmaley Water District,https://www.foi.gov.ph/agencies/binwd/,WATER-DISTRICT
+Malungon Water District,https://www.foi.gov.ph/agencies/malwd/,WATER-DISTRICT
+TALISAY WATER DISTRICT,https://www.foi.gov.ph/agencies/talwd/,WATER-DISTRICT
+San Juan Water District,https://www.foi.gov.ph/agencies/sjwd/,WATER-DISTRICT
+Basista Water District,https://www.foi.gov.ph/agencies/baswad/,WATER-DISTRICT
+Maragondon Water District,https://www.foi.gov.ph/agencies/marwad/,WATER-DISTRICT
+Metro Kalibo Water District,https://www.foi.gov.ph/agencies/metkalwd/,WATER-DISTRICT
+Tagaytay City Water District,https://www.foi.gov.ph/agencies/tagcwd/,WATER-DISTRICT
+Licab Water District,https://www.foi.gov.ph/agencies/licwd/,WATER-DISTRICT
+San Guillermo Water District,https://www.foi.gov.ph/agencies/saguiwad/,WATER-DISTRICT
+Casiguran Water District,https://www.foi.gov.ph/agencies/casiwd/,WATER-DISTRICT
+Pikit Water District,https://www.foi.gov.ph/agencies/pikwd/,WATER-DISTRICT
+Bustos Water District,https://www.foi.gov.ph/agencies/buswd/,WATER-DISTRICT
+San Marcelino Water District,https://www.foi.gov.ph/agencies/sanmarwd/,WATER-DISTRICT
+Sorsogon City Water District,https://www.foi.gov.ph/agencies/sorcwd/,WATER-DISTRICT
+Angat Water District,https://www.foi.gov.ph/agencies/angwd/,WATER-DISTRICT
+SAN NICOLAS (PANGASINAN) WATER DISTRICT,https://www.foi.gov.ph/agencies/saniwad/,WATER-DISTRICT
+Bongabon Water District,https://www.foi.gov.ph/agencies/bongwd/,WATER-DISTRICT
+Glan Water District,https://www.foi.gov.ph/agencies/glanwd/,WATER-DISTRICT
+General Mariano Alvarez Water District,https://www.foi.gov.ph/agencies/gmawd/,WATER-DISTRICT
+Mangaldan Water District,https://www.foi.gov.ph/agencies/mangwd/,WATER-DISTRICT
+ISABELA CITY WATER DISTRICT,https://www.foi.gov.ph/agencies/isawad/,WATER-DISTRICT
+Camalig Water District,https://www.foi.gov.ph/agencies/camwd/,WATER-DISTRICT
+San Felipe Water District,https://www.foi.gov.ph/agencies/sanfewd/,WATER-DISTRICT
+Escalante Water District,https://www.foi.gov.ph/agencies/escwd/,WATER-DISTRICT
+Kabankalan City Water District,https://www.foi.gov.ph/agencies/kcwd/,WATER-DISTRICT
+Tanay Water District,https://www.foi.gov.ph/agencies/tanaywd/,WATER-DISTRICT
+Maramag Water District,https://www.foi.gov.ph/agencies/marwd/,WATER-DISTRICT
+Pili Water District,https://www.foi.gov.ph/agencies/pilwd/,WATER-DISTRICT
+Castillejos Water District,https://www.foi.gov.ph/agencies/caswd/,WATER-DISTRICT
+Tagoloan Water District,https://www.foi.gov.ph/agencies/tagwd/,WATER-DISTRICT
+Santa Cruz (Laguna) Water District,https://www.foi.gov.ph/agencies/scwd/,WATER-DISTRICT
+Metro Roxas Water District,https://www.foi.gov.ph/agencies/mrwd/,WATER-DISTRICT
+Baguio Water District,https://www.foi.gov.ph/agencies/bagwd/,WATER-DISTRICT
+Bulan Water District,https://www.foi.gov.ph/agencies/bulanwd/,WATER-DISTRICT
+Calabanga Water District,https://www.foi.gov.ph/agencies/cawadi/,WATER-DISTRICT
+Hermosa Water District,https://www.foi.gov.ph/agencies/hwd/,WATER-DISTRICT
+Valencia City Water District,https://www.foi.gov.ph/agencies/valcwd/,WATER-DISTRICT
+Pandan Water District,https://www.foi.gov.ph/agencies/pandanwd/,WATER-DISTRICT
+Ligao City Water District,https://www.foi.gov.ph/agencies/ligaowd/,WATER-DISTRICT
+Metro Bangued Water District,https://www.foi.gov.ph/agencies/metbwd/,WATER-DISTRICT
+Cuyapo Water District,https://www.foi.gov.ph/agencies/cuywd/,WATER-DISTRICT
+Metro Cotabato Water District,https://www.foi.gov.ph/agencies/metcwd/,WATER-DISTRICT
+Antipas Water District,https://www.foi.gov.ph/agencies/antiwd/,WATER-DISTRICT
+Balingasag Water District,https://www.foi.gov.ph/agencies/baliwd/,WATER-DISTRICT
+DOLORES WATER DISTRICT,https://www.foi.gov.ph/agencies/dolwd/,WATER-DISTRICT
+Lubao Water District,https://www.foi.gov.ph/agencies/lubwd/,WATER-DISTRICT
+Ilocos Norte Water District,https://www.foi.gov.ph/agencies/inwd/,WATER-DISTRICT
+Sanchez Mira Water District,https://www.foi.gov.ph/agencies/samiwad/,WATER-DISTRICT
+Tanza Water District,https://www.foi.gov.ph/agencies/tanzwd/,WATER-DISTRICT
+M lang Water District,https://www.foi.gov.ph/agencies/mlawd/,WATER-DISTRICT
+METRO VIGAN WATER DISTRICT,https://www.foi.gov.ph/agencies/mvwd/,WATER-DISTRICT
+Buenavista Water District,https://www.foi.gov.ph/agencies/buewd/,WATER-DISTRICT
+Cabuyao Water District,https://www.foi.gov.ph/agencies/cabuwd/,WATER-DISTRICT
+Leyte Metropolitan Water District,https://www.foi.gov.ph/agencies/lmwd/,WATER-DISTRICT
+SAN MANUEL WATER DISTRICT,https://www.foi.gov.ph/agencies/sanmanuelwd/,WATER-DISTRICT
+Botolan Water District,https://www.foi.gov.ph/agencies/botwd/,WATER-DISTRICT
+Lupon Water District,https://www.foi.gov.ph/agencies/luwd/,WATER-DISTRICT
+Ramos Water District,https://www.foi.gov.ph/agencies/ramwd/,WATER-DISTRICT
+Hinatuan Water District,https://www.foi.gov.ph/agencies/hinwd/,WATER-DISTRICT
+JAEN WATER DISTRICT,https://www.foi.gov.ph/agencies/jwd/,WATER-DISTRICT
+Mapandan Water District,https://www.foi.gov.ph/agencies/mawadi/,WATER-DISTRICT
+Mabalacat City Water District,https://www.foi.gov.ph/agencies/mabwd/,WATER-DISTRICT
+Tagbina Water District,https://www.foi.gov.ph/agencies/tagbinawd/,WATER-DISTRICT
+Quezon (Bukidnon) Water District,https://www.foi.gov.ph/agencies/qbwd/,WATER-DISTRICT
+Kapatagan Water District,https://www.foi.gov.ph/agencies/kapwd/,WATER-DISTRICT
+Donsol Water District,https://www.foi.gov.ph/agencies/donwd/,WATER-DISTRICT
+Tarlac City Water District,https://www.foi.gov.ph/agencies/tarcwd/,WATER-DISTRICT
+Metropolitan Cebu Water District,https://www.foi.gov.ph/agencies/metcebwd/,WATER-DISTRICT
+PARACALE WATER DISTRICT,https://www.foi.gov.ph/agencies/parwd/,WATER-DISTRICT
+Hagonoy Water District,https://www.foi.gov.ph/agencies/hagwd/,WATER-DISTRICT
+Quezon Metropolitan Water District,https://www.foi.gov.ph/agencies/qmwd/,WATER-DISTRICT
+Muñoz Water District,https://www.foi.gov.ph/agencies/munwd/,WATER-DISTRICT
+Metro Kidapawan Water District,https://www.foi.gov.ph/agencies/mkwd/,WATER-DISTRICT
+CALBAYOG CITY WATER DISTRICT,https://www.foi.gov.ph/agencies/calcwd/,WATER-DISTRICT
+Carmen Water District,https://www.foi.gov.ph/agencies/carmwd/,WATER-DISTRICT
+Polomolok Water District,https://www.foi.gov.ph/agencies/polwd/,WATER-DISTRICT
+Mambajao Water District,https://www.foi.gov.ph/agencies/mamwd/,WATER-DISTRICT
+Lupao Water District,https://www.foi.gov.ph/agencies/lwd/,WATER-DISTRICT
+Baybay City Water District,https://www.foi.gov.ph/agencies/baycwd/,WATER-DISTRICT
+BINALONAN WATER DISTRICT,https://www.foi.gov.ph/agencies/biwad/,WATER-DISTRICT
+STA. LUCIA WATER DISTRICT,https://www.foi.gov.ph/agencies/slwd/,WATER-DISTRICT
+Kabacan Water District,https://www.foi.gov.ph/agencies/kabwad/,WATER-DISTRICT
+ALAMINOS (LAGUNA) WATER DISTRICT,https://www.foi.gov.ph/agencies/alwd/,WATER-DISTRICT
+Metro Midsayap Water District,https://www.foi.gov.ph/agencies/mmwd/,WATER-DISTRICT
+LAS NIEVES WATER DISTRICT,https://www.foi.gov.ph/agencies/lnwd/,WATER-DISTRICT
+Guinayangan Water District,https://www.foi.gov.ph/agencies/guinwd/,WATER-DISTRICT
+BOCAUE WATER DISTRICT,https://www.foi.gov.ph/agencies/bocwd/,WATER-DISTRICT
+Romblon Water District,https://www.foi.gov.ph/agencies/romwd/,WATER-DISTRICT
+Silay City Water District,https://www.foi.gov.ph/agencies/siciwa/,WATER-DISTRICT
+Gen. Tinio Water District,https://www.foi.gov.ph/agencies/gtwd/,WATER-DISTRICT
+Barobo Water District,https://www.foi.gov.ph/agencies/barwd/,WATER-DISTRICT
+Pandi Water District,https://www.foi.gov.ph/agencies/panwd/,WATER-DISTRICT
+Carcar Water District,https://www.foi.gov.ph/agencies/carcarwd/,WATER-DISTRICT
+Asingan Water District,https://www.foi.gov.ph/agencies/asiwd/,WATER-DISTRICT
+Sultan Kudarat Water District,https://www.foi.gov.ph/agencies/skwd/,WATER-DISTRICT
+NASUGBU WATER DISTRICT,https://www.foi.gov.ph/agencies/nawad/,WATER-DISTRICT
+Zamboanga City Water District,https://www.foi.gov.ph/agencies/zcwd/,WATER-DISTRICT
+Balanga Water District,https://www.foi.gov.ph/agencies/blwd/,WATER-DISTRICT
+Metro Iloilo Water District,https://www.foi.gov.ph/agencies/miwd/,WATER-DISTRICT
+Davao City Water District,https://www.foi.gov.ph/agencies/dcwd/,WATER-DISTRICT
+Digos Water District,https://www.foi.gov.ph/agencies/dwd/,WATER-DISTRICT
+Nasipit Water District,https://www.foi.gov.ph/agencies/naswd/,WATER-DISTRICT
+Macabebe Water District,https://www.foi.gov.ph/agencies/mbwd/,WATER-DISTRICT
+Morong Water District,https://www.foi.gov.ph/agencies/mordwd/,WATER-DISTRICT
+Bayawan Water District,https://www.foi.gov.ph/agencies/baywd/,WATER-DISTRICT
+Penaranda Water District,https://www.foi.gov.ph/agencies/penwd/,WATER-DISTRICT
+MARILAO WATER DISTRICT,https://www.foi.gov.ph/agencies/marwadis/,WATER-DISTRICT
+Sipalay Water District,https://www.foi.gov.ph/agencies/sipwd/,WATER-DISTRICT
+Camiling Water District,https://www.foi.gov.ph/agencies/camiwd/,WATER-DISTRICT
+Gonzaga Water District,https://www.foi.gov.ph/agencies/gonwd/,WATER-DISTRICT
+Metropolitan Naga Water District,https://www.foi.gov.ph/agencies/mnwd/,WATER-DISTRICT
+IPIL-TITAY WATER DISTRICT,https://www.foi.gov.ph/agencies/itwd/,WATER-DISTRICT
+Tumauini Water District,https://www.foi.gov.ph/agencies/tumwd/,WATER-DISTRICT
+City of Malolos Water District,https://www.foi.gov.ph/agencies/cmwd/,WATER-DISTRICT
+Pulupandan Water District,https://www.foi.gov.ph/agencies/pulwd/,WATER-DISTRICT
+Baliwag Water District,https://www.foi.gov.ph/agencies/balwad/,WATER-DISTRICT
+Tubod-Baroy Water District,https://www.foi.gov.ph/agencies/tbwd/,WATER-DISTRICT
+Camarines Norte Water District,https://www.foi.gov.ph/agencies/cnwd/,WATER-DISTRICT
+Agoncillo Water District,https://www.foi.gov.ph/agencies/agowd/,WATER-DISTRICT
+Alicia Water District,https://www.foi.gov.ph/agencies/alwad/,WATER-DISTRICT
+Dumalag Water District,https://www.foi.gov.ph/agencies/dumwd/,WATER-DISTRICT
+General Santos City Water District,https://www.foi.gov.ph/agencies/gscwd/,WATER-DISTRICT
+Amadeo Water District,https://www.foi.gov.ph/agencies/awd/,WATER-DISTRICT
+Abulug Water District,https://www.foi.gov.ph/agencies/abuwd/,WATER-DISTRICT
+Roxas Water District,https://www.foi.gov.ph/agencies/roxaswd/,WATER-DISTRICT
+Kolambugan Water District,https://www.foi.gov.ph/agencies/kolwd/,WATER-DISTRICT
+Catarman Water District,https://www.foi.gov.ph/agencies/catarmanwd/,WATER-DISTRICT
+Dagupan City Water District,https://www.foi.gov.ph/agencies/dagcwd/,WATER-DISTRICT
+Pililla Water District,https://www.foi.gov.ph/agencies/piwad/,WATER-DISTRICT
+Irosin Water District,https://www.foi.gov.ph/agencies/irowd/,WATER-DISTRICT
+Banaue Water District,https://www.foi.gov.ph/agencies/bawadi/,WATER-DISTRICT
+Benito Soliven Water District,https://www.foi.gov.ph/agencies/bswd/,WATER-DISTRICT
+Lebak Water District,https://www.foi.gov.ph/agencies/lewadi/,WATER-DISTRICT
+Sibalom Water District,https://www.foi.gov.ph/agencies/sibwd/,WATER-DISTRICT
+City of San Fernando Water District,https://www.foi.gov.ph/agencies/csfwd/,WATER-DISTRICT
+Belison Water District,https://www.foi.gov.ph/agencies/bewd/,WATER-DISTRICT
+Bacolor Water District,https://www.foi.gov.ph/agencies/bacolorwd/,WATER-DISTRICT
+Silang Water District,https://www.foi.gov.ph/agencies/silwd/,WATER-DISTRICT
+Claveria (Cag) Water District,https://www.foi.gov.ph/agencies/clawd/,WATER-DISTRICT
+Hagonoy (Davao Del Sur) Water District,https://www.foi.gov.ph/agencies/hdwd/,WATER-DISTRICT
+Bugasong Water District,https://www.foi.gov.ph/agencies/buwd/,WATER-DISTRICT
+Metropolitan Tuguegarao Water District,https://www.foi.gov.ph/agencies/mtwd/,WATER-DISTRICT
+Candelaria Water District,https://www.foi.gov.ph/agencies/candwd/,WATER-DISTRICT
+Tupi Water District,https://www.foi.gov.ph/agencies/tupwd/,WATER-DISTRICT
+Norzagaray Water District,https://www.foi.gov.ph/agencies/norwd/,WATER-DISTRICT
+Candon City Water District,https://www.foi.gov.ph/agencies/candonwd/,WATER-DISTRICT
+Santa Ana (Cagayan) Water District,https://www.foi.gov.ph/agencies/sawd/,WATER-DISTRICT
+Alitagtag Water District,https://www.foi.gov.ph/agencies/aliwd/,WATER-DISTRICT
+Infanta (Quezon) Water District,https://www.foi.gov.ph/agencies/iqwd/,WATER-DISTRICT
+Catbalogan Water District,https://www.foi.gov.ph/agencies/catwd/,WATER-DISTRICT
+MAUBAN WATER DISTRICT,https://www.foi.gov.ph/agencies/mauwad/,WATER-DISTRICT
+Indang Water District,https://www.foi.gov.ph/agencies/indwd/,WATER-DISTRICT
+MERIDA WATER DISTRICT,https://www.foi.gov.ph/agencies/merwd/,WATER-DISTRICT
+CALBIGA WATER DISTRICT,https://www.foi.gov.ph/agencies/calwad/,WATER-DISTRICT
+MABINI WATER DISTRICT,https://www.foi.gov.ph/agencies/mabwad/,WATER-DISTRICT
+Don Carlos Water District,https://www.foi.gov.ph/agencies/doncwd/,WATER-DISTRICT
+Bombon Water District,https://www.foi.gov.ph/agencies/bowadi/,WATER-DISTRICT
+Borongan Water District,https://www.foi.gov.ph/agencies/borwd/,WATER-DISTRICT
+Sogod Water District,https://www.foi.gov.ph/agencies/sogwd/,WATER-DISTRICT
+Baao Water District,https://www.foi.gov.ph/agencies/baaowd/,WATER-DISTRICT
+San Nicolas (I.N.) Water District,https://www.foi.gov.ph/agencies/sanicwd/,WATER-DISTRICT
+Balaoan Water District,https://www.foi.gov.ph/agencies/balawd/,WATER-DISTRICT
+Villasis Water District,https://www.foi.gov.ph/agencies/vilwd/,WATER-DISTRICT
+Bislig City Water District,https://www.foi.gov.ph/agencies/bcwd1/,WATER-DISTRICT
+Cabanatuan City Water District,https://www.foi.gov.ph/agencies/cabcwd/,WATER-DISTRICT
+Surallah Water District,https://www.foi.gov.ph/agencies/srwd/,WATER-DISTRICT
+Sipocot Water District,https://www.foi.gov.ph/agencies/sipwadi/,WATER-DISTRICT
+Santa Rosa (N.E.) Water District,https://www.foi.gov.ph/agencies/srwd2/,WATER-DISTRICT
+General Natividad Water District,https://www.foi.gov.ph/agencies/gnwd/,WATER-DISTRICT
+Calauag Water District,https://www.foi.gov.ph/agencies/calwd/,WATER-DISTRICT
+Lal-lo Water District,https://www.foi.gov.ph/agencies/lalwd/,WATER-DISTRICT
+Tagum Water District,https://www.foi.gov.ph/agencies/twd/,WATER-DISTRICT
+Guimba Water District,https://www.foi.gov.ph/agencies/gwd/,WATER-DISTRICT
+Batac Water District,https://www.foi.gov.ph/agencies/batwd/,WATER-DISTRICT
+Legazpi City Water District,https://www.foi.gov.ph/agencies/lcwd/,WATER-DISTRICT
+Talavera Water District,https://www.foi.gov.ph/agencies/twd1/,WATER-DISTRICT
+Orion Water District,https://www.foi.gov.ph/agencies/oriwad/,WATER-DISTRICT
+Aparri Water District,https://www.foi.gov.ph/agencies/apawd/,WATER-DISTRICT
+Manapla Water District,https://www.foi.gov.ph/agencies/manwd/,WATER-DISTRICT
+Tiaong Water District,https://www.foi.gov.ph/agencies/tiawd/,WATER-DISTRICT
+Binalbagan Water District,https://www.foi.gov.ph/agencies/binawd/,WATER-DISTRICT
+Dinalupihan Water District,https://www.foi.gov.ph/agencies/dinwd/,WATER-DISTRICT
+Sagay Water District,https://www.foi.gov.ph/agencies/sagwd/,WATER-DISTRICT
+Bayugan Water District,https://www.foi.gov.ph/agencies/bwd/,WATER-DISTRICT
+Tabaco City Water District,https://www.foi.gov.ph/agencies/tawad/,WATER-DISTRICT
+Concepcion Water District,https://www.foi.gov.ph/agencies/conwd/,WATER-DISTRICT
+San Pablo City Water District,https://www.foi.gov.ph/agencies/spcwd/,WATER-DISTRICT
+Santa Maria Water District,https://www.foi.gov.ph/agencies/smwd/,WATER-DISTRICT
+Nabunturan Water District,https://www.foi.gov.ph/agencies/nabwd/,WATER-DISTRICT
+Norala Water District,https://www.foi.gov.ph/agencies/nwd/,WATER-DISTRICT
+DUMAGUETE CITY WATER DISTRICT,https://www.foi.gov.ph/agencies/dumcwd/,WATER-DISTRICT
+Tagkawayan Water District,https://www.foi.gov.ph/agencies/tagwad/,WATER-DISTRICT
+Iriga City Water District,https://www.foi.gov.ph/agencies/irwd/,WATER-DISTRICT
+Gingoog City Water District,https://www.foi.gov.ph/agencies/gingwad/,WATER-DISTRICT
+Calamba Water District,https://www.foi.gov.ph/agencies/clwd/,WATER-DISTRICT
+Moncada Water District,https://www.foi.gov.ph/agencies/mwd/,WATER-DISTRICT
+Mendez Water District,https://www.foi.gov.ph/agencies/menwd/,WATER-DISTRICT
+Himamaylan Water District,https://www.foi.gov.ph/agencies/himwd/,WATER-DISTRICT
+Pinamungajan Water District,https://www.foi.gov.ph/agencies/pinamwd/,WATER-DISTRICT
+Wao Water District,https://www.foi.gov.ph/agencies/wwd/,WATER-DISTRICT
+Tanauan Water District,https://www.foi.gov.ph/agencies/tanwd/,WATER-DISTRICT
+Palayan City Water District,https://www.foi.gov.ph/agencies/palwd/,WATER-DISTRICT
+San Miguel Bulacan Water District,https://www.foi.gov.ph/agencies/sanbwd/,WATER-DISTRICT
+Bacacay Water District,https://www.foi.gov.ph/agencies/bacwd/,WATER-DISTRICT
+Malaybalay City Water District,https://www.foi.gov.ph/agencies/mcwd/,WATER-DISTRICT
+Lamitan City Water District,https://www.foi.gov.ph/agencies/lamcwd/,WATER-DISTRICT
+Gapan City Water District,https://www.foi.gov.ph/agencies/gapwd/,WATER-DISTRICT
+Diffun Water District,https://www.foi.gov.ph/agencies/difwd/,WATER-DISTRICT
+Puerto Princesa City Water District,https://www.foi.gov.ph/agencies/ppcwd/,WATER-DISTRICT
+La Carlota City Water District,https://www.foi.gov.ph/agencies/carwater/,WATER-DISTRICT
+City of Koronadal Water District,https://www.foi.gov.ph/agencies/ckwd/,WATER-DISTRICT
+Cabagan Water District,https://www.foi.gov.ph/agencies/cabwd/,WATER-DISTRICT
+Patnongon Water District,https://www.foi.gov.ph/agencies/patwd/,WATER-DISTRICT
+Obando Water District,https://www.foi.gov.ph/agencies/obwd/,WATER-DISTRICT
+Bato Water District,https://www.foi.gov.ph/agencies/batowd/,WATER-DISTRICT
+Jordan Water District,https://www.foi.gov.ph/agencies/jowd/,WATER-DISTRICT
+Sto. Nino Water District,https://www.foi.gov.ph/agencies/snwd/,WATER-DISTRICT
+Dipolog City Water District,https://www.foi.gov.ph/agencies/dipwd/,WATER-DISTRICT
+Virac Water District,https://www.foi.gov.ph/agencies/vwd/,WATER-DISTRICT
+Maluso Water District,https://www.foi.gov.ph/agencies/maluwad/,WATER-DISTRICT
+Cauayan City Water District,https://www.foi.gov.ph/agencies/ccwd/,WATER-DISTRICT
+Cabangan Water District,https://www.foi.gov.ph/agencies/cabwadi/,WATER-DISTRICT
+Alaminos City Water District,https://www.foi.gov.ph/agencies/acwd/,WATER-DISTRICT
+"Bacolod Water District, Lanao del Norte",https://www.foi.gov.ph/agencies/bacolwd/,WATER-DISTRICT
+SAN PEDRO WATER DISTRICT,https://www.foi.gov.ph/agencies/spwd/,WATER-DISTRICT
+Bayambang Water District,https://www.foi.gov.ph/agencies/baywad/,WATER-DISTRICT
+PIGCAWAYAN WATER DISTRICT,https://www.foi.gov.ph/agencies/pigcawad/,WATER-DISTRICT
+Taysan Water District,https://www.foi.gov.ph/agencies/taywd/,WATER-DISTRICT
+Calumpit Water District,https://www.foi.gov.ph/agencies/cwd/,WATER-DISTRICT
+Oroquieta City Water District,https://www.foi.gov.ph/agencies/ocwd/,WATER-DISTRICT
+Odiongan Water District,https://www.foi.gov.ph/agencies/odiwdf/,WATER-DISTRICT
+Metro Siargao Water District,https://www.foi.gov.ph/agencies/mswd/,WATER-DISTRICT
+SAN JOSE (DINAGAT ISLAND) WATER DISTRICT,https://www.foi.gov.ph/agencies/sjdiwd/,WATER-DISTRICT
+Manaoag Water District,https://www.foi.gov.ph/agencies/manwad/,WATER-DISTRICT
+Panabo Water District,https://www.foi.gov.ph/agencies/panawd/,WATER-DISTRICT
+Trece Martires City Water District,https://www.foi.gov.ph/agencies/tmcwd/,WATER-DISTRICT
+Libmanan Water District,https://www.foi.gov.ph/agencies/libwad/,WATER-DISTRICT
+San Jose Water District,https://www.foi.gov.ph/agencies/sanjosewd/,WATER-DISTRICT
+Cagayan de Oro City Water District,https://www.foi.gov.ph/agencies/cowd/,WATER-DISTRICT
+Butuan City Water District,https://www.foi.gov.ph/agencies/bcwd/,WATER-DISTRICT
+City of Ilagan Water District,https://www.foi.gov.ph/agencies/ciwd/,WATER-DISTRICT
+Mariveles Water District,https://www.foi.gov.ph/agencies/mariwad/,WATER-DISTRICT
+MAYANTOC WATER DISTRICT,https://www.foi.gov.ph/agencies/maywad/,WATER-DISTRICT
+Compostela Water District,https://www.foi.gov.ph/agencies/compwd/,WATER-DISTRICT
+Orani Water District,https://www.foi.gov.ph/agencies/owd/,WATER-DISTRICT
+Culasi Water District,https://www.foi.gov.ph/agencies/culwd/,WATER-DISTRICT
+Bulacan Water District,https://www.foi.gov.ph/agencies/bulwd/,WATER-DISTRICT
+Manolo Fortich Water District,https://www.foi.gov.ph/agencies/mfwd/,WATER-DISTRICT
+Dinagat Water District,https://www.foi.gov.ph/agencies/dinawd/,WATER-DISTRICT
+Batangas City Water District,https://www.foi.gov.ph/agencies/baciwd/,WATER-DISTRICT
+Porac Water District,https://www.foi.gov.ph/agencies/pwd/,WATER-DISTRICT
+Penablanca Water District,https://www.foi.gov.ph/agencies/penawd/,WATER-DISTRICT
+Madrid Water District,https://www.foi.gov.ph/agencies/madwd/,WATER-DISTRICT
+Pozorrubio Water District,https://www.foi.gov.ph/agencies/powad/,WATER-DISTRICT
+TABUELAN WATER DISTRICT,https://www.foi.gov.ph/agencies/tawd/,WATER-DISTRICT
+Toledo City Water District,https://www.foi.gov.ph/agencies/tolwd/,WATER-DISTRICT
+GERONA WATER DISTRICT,https://www.foi.gov.ph/agencies/gerwd/,WATER-DISTRICT
+Lianga Water District,https://www.foi.gov.ph/agencies/liawd/,WATER-DISTRICT
+"City of Antipolo, Region IV-A",https://www.foi.gov.ph/agencies/cga/,LGU
+Municipality of Cavinti,https://www.foi.gov.ph/agencies/cavinti/,LGU
+Provincial Government of Bataan,https://www.foi.gov.ph/agencies/pgb/,LGU
+"City Government of Isabela, Basilan",https://www.foi.gov.ph/agencies/cgi/,LGU
+"City of Pasig, NCR",https://www.foi.gov.ph/agencies/usap/,LGU
+"Municipality of Pakil, Laguna, Region IV-A",https://www.foi.gov.ph/agencies/pakil/,LGU
+"Municipality of Pura, Tarlac, Region III",https://www.foi.gov.ph/agencies/pura/,LGU
+Sangguniang Bayan of Pilar Sorsogon,https://www.foi.gov.ph/agencies/sbps/,LGU
+"Province of La Union, Region I",https://www.foi.gov.ph/agencies/pglu/,LGU
+CITY GOVERNMENT OF BATANGAS,https://www.foi.gov.ph/agencies/cgb/,LGU
+"Municipality of Bantay, Ilocos Sur",https://www.foi.gov.ph/agencies/lgubantay/,LGU
+"Province of Benguet, CAR",https://www.foi.gov.ph/agencies/plgub/,LGU
+City Government of Balanga,https://www.foi.gov.ph/agencies/cob/,LGU
+Municipality Government of Taytay Province of Rizal,https://www.foi.gov.ph/agencies/lgutaytay/,LGU
+"Local Government Unit of San Manuel, Isabela",https://www.foi.gov.ph/agencies/lgu-smi/,LGU
+Provincial Government of Isabela,https://www.foi.gov.ph/agencies/pgi/,LGU
+"City of Legazpi, Region V",https://www.foi.gov.ph/agencies/legazpi/,LGU
+"Province of South Cotabato, Region XII",https://www.foi.gov.ph/agencies/pgo-pio/,LGU
+"Municipality of Lingayen, Pangasinan",https://www.foi.gov.ph/agencies/lgulingayen/,LGU
+"Municipality of San Roque, Northern Samar, Region VIII",https://www.foi.gov.ph/agencies/msrns/,LGU
+"Municipality of Paniqui, Tarlac, Region III",https://www.foi.gov.ph/agencies/mgpt/,LGU
+Cebu Provincial Government,https://www.foi.gov.ph/agencies/cpg/,LGU
+Provincial Government of Bukidnon,https://www.foi.gov.ph/agencies/pgbukidnon/,LGU
+Philippine National Police - Directorate for Integrated Police Operation Northern Luzon,https://www.foi.gov.ph/agencies/pnpdiponl/,LEA
+Philippine National Police,https://www.foi.gov.ph/agencies/pnp/,LEA
+Philippine National Police - Directorate for Logistics,https://www.foi.gov.ph/agencies/pnpdl/,LEA
+Philippine National Police - Directorate for Police Community Relations,https://www.foi.gov.ph/agencies/pnpdpcr/,LEA
+Philippine National Police - Directorate for Investigation and Detective Management,https://www.foi.gov.ph/agencies/pnpdidm/,LEA
+Philippine National Police - Directorate for Research and Development,https://www.foi.gov.ph/agencies/pnpdrd/,LEA
+Philippine National Police - Directorate for Plans,https://www.foi.gov.ph/agencies/pnpdpl/,LEA
+Philippine National Police - Directorate for Human Resource and Doctrine Development,https://www.foi.gov.ph/agencies/pnpdhrdd/,LEA
+Philippine National Police - Directorate for Information and Communications Technology Management,https://www.foi.gov.ph/agencies/pnpdictm/,LEA
+Philippine National Police - Directorate for Operations,https://www.foi.gov.ph/agencies/pnpdo/,LEA
+Philippine National Police - Directorate for Intelligence,https://www.foi.gov.ph/agencies/pnpdi/,LEA

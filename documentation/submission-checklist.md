@@ -1,33 +1,19 @@
 # Data repository submission checklist
 
-## Research and data
+## Data
 
-- [x] Project title, team and SDG appear on the portfolio.
-- [x] Three research questions, hypotheses and objectives are described.
-- [x] Initial background and proposed analytical solution are described with sources.
-- [ ] Expand background research as needed; distinguish evidence from motivation.
-- [ ] Collect the proposed 1,000+ unique 2025 requests (course minimum: 100).
-- [ ] Confirm source permissions and actual period coverage.
-- [ ] Document actual collection dates, source, sampling method and size.
-- [ ] Complete and cite the outcome/closure mapping.
-- [ ] Resolve validation errors and report exclusions, duplicates and missingness.
-- [ ] Check 100 collected rows against source pages and document corrections.
-- [ ] Replace planned methods on the portfolio with what was actually done.
-- [ ] Create the Google Sheet containing reviewed data, separate tabs per source.
-- [ ] Add its real link to the portfolio and test access while signed out.
-- [ ] Confirm all published data and free-text fields are appropriate to share.
+- [x] Scraper works through the Cloudflare check (browser-based)
+- [x] Full 2025 listing scraped → `frame_2025.csv` (14,668 requests)
+- [x] Sample drawn → detail pages scraped → `efoi_2025.csv` (1,641 rows)
+- [x] Failed pages checked: 22 no longer public (20 not found, 2 login-only), excluded
+- [ ] Team checks the 100 rows in `validation_100.csv` against the live pages
+- [ ] Skim titles/purposes for personal names before publishing
+- [ ] Google Sheet with tabs: `efoi_2025` (study dataset), `frame_2025` (all 2025 requests), `agencies`
 
-## Portfolio and submission
+## Portfolio (`docs/index.html`)
 
-- [ ] Verify the public GitHub Pages link.
-- [ ] Fill in section and group number on the portfolio.
-- [ ] Remove the scaffold notice only when all required content is complete.
-- [ ] Print the complete portfolio to PDF and inspect all pages and links.
-- [ ] Save as `[Section-Group#] CS 132 Portfolio Page.pdf`.
-- [ ] Each member submits the PDF and portfolio URL in UVLE.
-- [ ] Record the submission commit and freeze the portfolio until checking.
-
-The supplied guidelines contain inconsistent legacy year references in the
-deductions table. The collection notes specify 2025/2026 and allow 2024 only when
-shown to be the latest available. This proposal's 2025 scope meets the main rule.
-No submission deadline was inferred from the example screenshots.
+- [x] Replace placeholder numbers with actual counts (frame size, sample size, dates)
+- [ ] Add the Google Sheet link
+- [ ] Fill in section and group number
+- [ ] Enable GitHub Pages (Settings → Pages → main, `/docs`) and check the public link
+- [ ] Print to PDF as `[Section-Group#] CS 132 Portfolio Page.pdf`; each member submits it on UVLE with the portfolio link
