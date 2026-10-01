@@ -8,3 +8,4 @@ __pycache__/
 # Chrome profile used by the scraper, and scrape logs
 .chrome-profile/
 .scrape_*.log
+*.swp
