@@ -4,6 +4,7 @@ CS 132 project by **FYI – FOI Your Information** (Vaughn Aquino, Eliana Lim, J
 Charlize Sim). SDG 16 – Peace, Justice and Strong Institutions.
 
 Portfolio: `docs/index.html` (GitHub Pages, served from `/docs`).
+Dataset: [Google Sheet](https://docs.google.com/spreadsheets/d/10om8YdCtoXA7cndqIHQegUSYfqqeKhTvkbDoB-45Vrc/edit?usp=sharing).
 
 ## Research questions
 

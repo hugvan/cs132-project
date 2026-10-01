@@ -36,4 +36,8 @@ challenge`). `robots.txt` (all agents allowed, no crawl delay) and the terms of 
   1,409 closed (final status); 0 replies dated before filing; status matched the listing for
   every request.
 
-<!-- Add: results of the 100-row manual validation (validation_100.csv). -->
+## 2026-10-02: validation and release
+
+- The team checked the 100 rows in `validation_100.csv` against the live pages.
+- Public copies (`data/public/`) uploaded to the
+  [Google Sheet](https://docs.google.com/spreadsheets/d/10om8YdCtoXA7cndqIHQegUSYfqqeKhTvkbDoB-45Vrc/edit?usp=sharing).
