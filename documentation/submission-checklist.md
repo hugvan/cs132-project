@@ -16,6 +16,6 @@
 - [x] Replace placeholder numbers with actual counts (frame size, sample size, dates)
 - [x] Add the Google Sheet link
 - [x] Background research with cited sources (EO No. 2, s. 2016)
-- [ ] Fill in section and group number
+- [x] Fill in section and group number (WFX, Group 1)
 - [ ] Enable GitHub Pages (Settings → Pages → main, `/docs`) and check the public link
 - [ ] Print to PDF as `[Section-Group#] CS 132 Portfolio Page.pdf`; each member submits it on UVLE with the portfolio link
