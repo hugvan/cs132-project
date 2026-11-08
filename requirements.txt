@@ -2,3 +2,8 @@ playwright
 beautifulsoup4
 pandas
 numpy
+matplotlib
+scipy
+pillow
+ipykernel
+nbclient
