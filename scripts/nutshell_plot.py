@@ -1,276 +1,194 @@
-"""Nutshell plot for the EDA submission.
+"""Render an outcome-colored request swarm at 1920×1080 pixels.
 
-Follows the PilipiNuts 2024 guidebook: Roboto, dark background #1B181C,
-white text, the guidebook palette, no grid, and no tick marks.
-The export is 1920 by 1080 pixels. Roboto is Apache 2.0; see assets/fonts/LICENSE.
+Each equal-sized point is one sampled request, without sampling weights.
+Horizontal positions preserve observed reply times on a logarithmic scale;
+vertical offsets prevent overlap and have no quantitative meaning.
+Run from any directory: python scripts/nutshell_plot.py.
 """
-
 from pathlib import Path
 
 import matplotlib
-
 matplotlib.use("Agg")
 import matplotlib.font_manager as fm
 import matplotlib.pyplot as plt
+from matplotlib.lines import Line2D
+import numpy as np
 import pandas as pd
 from PIL import Image
-from scipy.stats import mannwhitneyu
 
-from analysis import (
-    CLOSED_OUTCOMES,
-    GROUP_ORDER,
-    LABELS,
-    SUCCESSFUL_OUTCOMES,
-    collected_weights,
-    weighted_mannwhitney,
-    weighted_mean,
-    weighted_median,
-)
+from analysis import GROUP_ORDER, LABELS, SUCCESSFUL_OUTCOMES
 
 ROOT = Path(__file__).resolve().parents[1]
-FONT_DIR = ROOT / "assets" / "fonts"
-OUT_DIR = ROOT / "reports" / "figures"
-ALPHA = 0.05
-
-BG = "#1B181C"
-TEXT = "#FFFFFF"
-MUTED = "#C8C4CC"
-BLUE = "#648FFF"
-MAGENTA = "#DC267F"
-AMBER = "#FFB000"
-
-POINT_COLOR = {
-    "WATER-DISTRICT": MAGENTA,
-    "LGU": AMBER,
-}
-
-
-def font(name):
-    path = FONT_DIR / name
-    fm.fontManager.addfont(str(path))
-    return fm.FontProperties(fname=str(path))
+OUT_DIR = ROOT / "reports/figures"
+BG, TEXT, MUTED = "#1B181C", "#FFFFFF", "#C8C4CC"
+COLORS = {"successful": "#648FFF", "unsuccessful": "#DC267F", "other": "#A9A3AE"}
+HEADLINE = "eFOI Response Times and Request Outcomes, 2025"
+WIDTH, HEIGHT = 1920, 1080
+# Positions are in export pixels, so the packing matches the visible dot size.
+TIME_LEFT, TIME_RIGHT = 365, 1520
+NO_REPLY_X = 1715
+GRAPH_RAISE = 45
+TIME_MIN, TIME_MAX = 1 / 1440, 730  # one minute through two years, in days
+DOT_DIAMETER, SEPARATION = 5.4, 6.2
 
 
 def load():
-    frame = pd.read_csv(ROOT / "data" / "processed" / "frame_2025.csv")
-    sample = pd.read_csv(ROOT / "data" / "processed" / "efoi_2025.csv")
-    sample["first_response_days"] = pd.to_numeric(sample["first_response_days"], errors="coerce")
-    sample["sampling_weight"] = collected_weights(sample)
-    return frame, sample
+    sample = pd.read_csv(ROOT / "data/processed/efoi_2025.csv")
+    sample["first_response_days"] = pd.to_numeric(sample["first_response_days"], errors="raise")
+    if sample["tracking_number"].duplicated().any():
+        raise ValueError("Each point must represent a unique request")
+    times = sample["first_response_days"].dropna()
+    if not times.between(TIME_MIN, TIME_MAX).all():
+        raise ValueError("Response times fall outside the displayed time scale")
+    if not sample["outcome"].isin([*SUCCESSFUL_OUTCOMES, "unsuccessful", "open", "referred"]).all():
+        raise ValueError("An outcome is missing from the color key")
+    return sample
 
 
-def group_summary(frame, sample):
-    rows = []
-    for group in GROUP_ORDER:
-        group_frame = frame.loc[frame["agency_group"] == group]
-        group_sample = sample.loc[sample["agency_group"] == group]
-        replied = group_sample.loc[group_sample["first_response_days"].notna()]
-        rows.append({
-            "agency_group": group,
-            "success_rate": group_frame["outcome"].isin(SUCCESSFUL_OUTCOMES).mean(),
-            "median_days": weighted_median(replied["first_response_days"], replied["sampling_weight"]),
-            "no_reply_share": weighted_mean(
-                group_sample["first_response_days"].isna().astype(float),
-                group_sample["sampling_weight"],
-            ),
-            "n": len(group_frame),
-        })
-    return pd.DataFrame(rows).set_index("agency_group")
+def time_position(days):
+    fraction = (np.log10(days) - np.log10(TIME_MIN)) / np.log10(TIME_MAX / TIME_MIN)
+    return TIME_LEFT + fraction * (TIME_RIGHT - TIME_LEFT)
 
 
-def reply_comparison(sample):
-    """Weighted comparison of first-response time for closed requests that got a reply."""
-    closed = sample.loc[
-        sample["outcome"].isin(CLOSED_OUTCOMES) & sample["first_response_days"].notna()
-    ].copy()
-    success = closed["outcome"].isin(SUCCESSFUL_OUTCOMES).to_numpy()
-    probability, p_value = weighted_mannwhitney(
-        closed["first_response_days"], closed["sampling_weight"], success
-    )
-    succeeded = closed.loc[success]
-    failed = closed.loc[~success]
-    within_p = {}
-    for group in GROUP_ORDER:
-        part = closed.loc[closed["agency_group"] == group]
-        part_success = part["outcome"].isin(SUCCESSFUL_OUTCOMES)
-        result = mannwhitneyu(
-            part.loc[part_success, "first_response_days"],
-            part.loc[~part_success, "first_response_days"],
-            alternative="two-sided",
-        )
-        within_p[group] = result.pvalue
-    return {
-        "n": len(closed),
-        "success_median": weighted_median(succeeded["first_response_days"], succeeded["sampling_weight"]),
-        "failure_median": weighted_median(failed["first_response_days"], failed["sampling_weight"]),
-        "probability": probability,
-        "p_value": p_value,
-        "within_p": within_p,
-    }
+def swarm_offsets(x):
+    """Pack points without moving their x coordinates; return original row order."""
+    offsets = np.zeros(len(x))
+    placed = []
+    for index in np.argsort(x, kind="stable"):
+        current = x[index]
+        placed = [(px, py) for px, py in placed if current - px < SEPARATION]
+        candidates = [0.0]
+        for px, py in placed:
+            dy = np.sqrt(max(0, SEPARATION**2 - (current - px)**2)) + 1e-6
+            candidates.extend([py + dy, py - dy])
+        # Alternate the tie preference to avoid a persistent bias above a row.
+        candidates.sort(key=lambda y: (abs(y), y if index % 2 else -y))
+        for y in candidates:
+            if all((current - px)**2 + (y - py)**2 >= SEPARATION**2 - 1e-7
+                   for px, py in placed):
+                offsets[index] = y
+                placed.append((current, y))
+                break
+        else:
+            raise RuntimeError("Could not place a request in the swarm")
+    return offsets
 
 
-def caption(summary, comparison):
-    lea, lgu, water, nga = (summary.loc[group] for group in ("LEA", "LGU", "WATER-DISTRICT", "NGA"))
-    within = (
-        "Inside every agency group that comparison stays above 0.05."
-        if all(p >= ALPHA for p in comparison["within_p"].values())
-        else "Inside at least one agency group that comparison is below 0.05."
-    )
-    text = (
-        "A fast first reply does not mean an eFOI request succeeds. Among "
-        f"{comparison['n']:,} closed requests with a reply, the weighted median wait was "
-        f"{comparison['success_median']:.1f} days for a success and "
-        f"{comparison['failure_median']:.1f} days for a failure. A weighted Mann–Whitney test "
-        f"found no evidence of a link (p = {comparison['p_value']:.2f}). {within} The office still "
-        f"matters. Law enforcement replies in {lea['median_days']:.1f} days, and "
-        f"{lea['success_rate']:.0%} of its requests succeed. Local governments take "
-        f"{lgu['median_days']:.1f} days, and {lgu['success_rate']:.0%} succeed. Water districts "
-        f"reply in {water['median_days']:.1f} days when they reply, but "
-        f"{water['no_reply_share']:.0%} get no reply, and {water['success_rate']:.0%} succeed. "
-        f"National agencies, most of the record, succeed {nga['success_rate']:.0%} of the time. "
-        "Success includes a partial success and counts every public 2025 request, including "
-        "those still open. The first agency message may be only an acknowledgment. Status was "
-        "observed on 29 September 2026, so later requests have had less time to close."
-    )
-    return text
+def missing_positions(n):
+    """A compact hexagonal cluster in a categorical column, not on the time scale."""
+    if not n:
+        return np.empty((0, 2))
+    radius = int(np.ceil(np.sqrt(n))) + 1
+    candidates = []
+    for row in range(-radius, radius + 1):
+        for col in range(-radius, radius + 1):
+            x = (col + .5 * (row % 2)) * SEPARATION
+            y = row * SEPARATION * np.sqrt(3) / 2
+            candidates.append((x, y))
+    candidates.sort(key=lambda p: (p[0]**2 + p[1]**2, p[1], p[0]))
+    result = np.array(candidates[:n])
+    return result - result.mean(axis=0)
 
 
-def draw(summary):
-    regular = font("Roboto-Regular.ttf")
-    medium = font("Roboto-Medium.ttf")
-    bold = font("Roboto-Bold.ttf")
-    light = font("Roboto-Light.ttf")
+def outcome_colors(part):
+    return [COLORS["successful"] if value in SUCCESSFUL_OUTCOMES else
+            COLORS["unsuccessful"] if value == "unsuccessful" else COLORS["other"]
+            for value in part["outcome"]]
 
-    fig, ax = plt.subplots(figsize=(19.2, 10.8), dpi=100)
-    fig.patch.set_facecolor(BG)
-    ax.set_facecolor(BG)
 
-    for group, row in summary.iterrows():
-        ax.scatter(
-            row["median_days"],
-            row["success_rate"] * 100,
-            s=420,
-            color=POINT_COLOR.get(group, BLUE),
-            linewidths=0,
-            zorder=3,
-        )
-
-    offsets = {
-        "LEA": (14, -36),
-        "WATER-DISTRICT": (18, -18),
-        "NGA": (14, 28),
-        "GOCC": (16, 14),
-        "SUC": (16, -24),
-        "LGU": (-16, 12),
-    }
-    align = {"LGU": "right"}
-    for group, row in summary.iterrows():
-        ax.annotate(
-            f"{LABELS[group]}\n{row['median_days']:.1f} days  ·  {row['success_rate']:.0%}",
-            (row["median_days"], row["success_rate"] * 100),
-            xytext=offsets[group],
-            textcoords="offset points",
-            ha=align.get(group, "left"),
-            va="center",
-            color=TEXT,
-            fontproperties=medium,
-            fontsize=16,
-            linespacing=1.35,
-            zorder=4,
-        )
-
-    ax.set_xlim(0, 6.4)
-    ax.set_ylim(0, 100)
-    ax.set_xlabel("Median days to first reply", fontproperties=regular, fontsize=20, color=TEXT, labelpad=14)
-    ax.set_ylabel("Success rate", fontproperties=regular, fontsize=20, color=TEXT, labelpad=14)
-    ax.set_xticks([0, 1, 2, 3, 4, 5, 6])
-    ax.set_yticks([0, 25, 50, 75, 100])
-    ax.set_yticklabels(["0%", "25%", "50%", "75%", "100%"])
-    ax.tick_params(axis="both", which="both", length=0, labelsize=16, colors=TEXT, pad=8)
-    for label in ax.get_xticklabels() + ax.get_yticklabels():
-        label.set_fontproperties(regular)
-        label.set_fontsize(16)
-    ax.spines["top"].set_visible(False)
-    ax.spines["right"].set_visible(False)
-    ax.spines["left"].set_color(TEXT)
-    ax.spines["bottom"].set_color(TEXT)
-    ax.grid(False)
-
-    fig.suptitle("A fast reply is not a yes", fontproperties=bold, fontsize=48, color=TEXT, x=0.08, ha="left", y=0.94)
-    fig.text(
-        0.08,
-        0.835,
-        "How fast a group replies says little about whether its requests succeed.",
-        fontproperties=regular,
-        fontsize=20,
-        color=MUTED,
-        ha="left",
-    )
-    fig.text(
-        0.08,
-        0.058,
-        "Source: eFOI portal, public requests filed in 2025, collected 29 September 2026.",
-        fontproperties=light,
-        fontsize=15,
-        color=MUTED,
-        ha="left",
-    )
-    fig.text(
-        0.08,
-        0.032,
-        "Success rate is the share of all requests that succeeded or partly succeeded, including those still open. Median wait is weighted.",
-        fontproperties=light,
-        fontsize=15,
-        color=MUTED,
-        ha="left",
+def caption(sample):
+    return (
+        f"Response times and observed outcomes for {len(sample):,} sampled public eFOI requests filed in 2025. "
+        "Each equal-sized point represents one request. Horizontal positions indicate elapsed time to the first "
+        "agency reply on a logarithmic scale; vertical offsets prevent overlap and have no numerical meaning. "
+        "Requests without an agency reply occupy a separate categorical column. Blue includes successful "
+        "and partially successful requests; pink indicates unsuccessful requests; gray includes open and "
+        "referred requests. The sample is stratified by agency group and filing quarter; points are unweighted "
+        "and do not represent population proportions. Statuses were observed on 29 September 2026. "
+        "A first reply may be an acknowledgment."
     )
 
-    fig.subplots_adjust(left=0.08, right=0.94, top=0.78, bottom=0.16)
+
+def draw(sample):
+    for path in (ROOT / "assets/fonts").glob("*.ttf"):
+        fm.fontManager.addfont(str(path))
+    plt.rcParams.update({"font.family": "Roboto", "text.color": TEXT, "pdf.fonttype": 42})
+    fig = plt.figure(figsize=(WIDTH / 100, HEIGHT / 100), dpi=100, facecolor=BG)
+    ax = fig.add_axes([0, 0, 1, 1], facecolor=BG)
+    ax.set(xlim=(0, WIDTH), ylim=(HEIGHT, 0))
+    ax.set_axis_off()
+
+    def text(x, y, label, size=14, color=TEXT, **kwargs):
+        ax.text(x, y, label, fontsize=size, color=color, va="center", **kwargs)
+
+    text(WIDTH / 2, 85, HEADLINE, 32, weight="bold", ha="center")
+    text((TIME_LEFT + TIME_RIGHT) / 2, 220 - GRAPH_RAISE, "Time to first agency reply", 17, ha="center")
+    text(NO_REPLY_X, 220 - GRAPH_RAISE, "No reply", 17, ha="center")
+    # A categorical break prevents the no-reply column from implying elapsed time.
+    ax.plot([1605, 1605], [255 - GRAPH_RAISE, 900 - GRAPH_RAISE], color="#514B55", lw=1, ls=(0, (3, 6)))
+    dot_size = (DOT_DIAMETER * 72 / 100)**2
+    total = 0
+    max_offset = 0
+    rng = np.random.default_rng(132)
+    for i, group in enumerate(GROUP_ORDER):
+        center = [290, 390, 490, 620, 750, 850][i] - GRAPH_RAISE
+        part = sample.loc[sample["agency_group"] == group]
+        replied = part.dropna(subset=["first_response_days"])
+        missing = part.loc[part["first_response_days"].isna()]
+        label = LABELS[group].replace("National government agencies", "National agencies")
+        text(320, center - 9, label, 15, ha="right")
+        text(320, center + 17, f"n = {len(part):,}", 12, MUTED, ha="right")
+        x = time_position(replied["first_response_days"].to_numpy())
+        y = swarm_offsets(x)
+        max_offset = max(max_offset, float(np.abs(y).max()))
+        if np.abs(y).max() > (96 if group == "WATER-DISTRICT" else 46):
+            raise ValueError(f"Swarm exceeds its row height: {group}")
+        ax.scatter(x, center + y, s=dot_size, c=outcome_colors(replied), linewidths=0, zorder=3)
+        positions = missing_positions(len(missing))
+        # Mix outcomes spatially without assigning quantitative meaning to position.
+        positions = positions[rng.permutation(len(positions))]
+        ax.scatter(NO_REPLY_X + positions[:, 0], center + positions[:, 1],
+                   s=dot_size, c=outcome_colors(missing), linewidths=0, zorder=3)
+        total += len(x) + len(positions)
+    if total != len(sample):
+        raise AssertionError("Some requests were not plotted")
+
+    ax.plot([TIME_LEFT, TIME_RIGHT], [900 - GRAPH_RAISE, 900 - GRAPH_RAISE], color=MUTED, lw=.8)
+    ticks = [(5 / 1440, "5 min"), (1 / 24, "1 hour"), (.25, "6 hours"),
+             (1, "1 day"), (7, "7 days"), (30, "30 days"), (90, "90 days"), (365, "1 year")]
+    for days, label in ticks:
+        text(time_position(days), 925 - GRAPH_RAISE, label, 12, MUTED, ha="center")
+    text((TIME_LEFT + TIME_RIGHT) / 2, 956 - GRAPH_RAISE, "Logarithmic time scale", 11, MUTED, ha="center")
+
+    legend_items = [("Successful / partially successful", COLORS["successful"]),
+                    ("Unsuccessful", COLORS["unsuccessful"]), ("Open / referred", COLORS["other"])]
+    handles = [Line2D([], [], marker="o", color=color, linestyle="none", markersize=7, label=label)
+               for label, color in legend_items]
+    ax.legend(handles=handles, loc="center", bbox_to_anchor=(.53, .065 + GRAPH_RAISE / HEIGHT), ncol=3,
+              frameon=False, labelcolor=TEXT, fontsize=13, handletextpad=.5, columnspacing=2.5)
+    text(WIDTH - 85, 1050, "Source: eFOI portal · Statuses observed 29 September 2026 · Stratified sample; points are unweighted", 11, MUTED, ha="right")
+    print(f"Plotted {total:,} requests; largest vertical swarm offset: {max_offset:.1f} px")
     return fig
 
 
 def main():
-    frame, sample = load()
-    summary = group_summary(frame, sample)
-    comparison = reply_comparison(sample)
-    headline = "A fast reply is not a yes"
-    text = caption(summary, comparison)
-    headline_words = len(headline.split())
-    caption_words = len(text.split())
-    if headline_words > 10:
-        raise SystemExit(f"Headline is {headline_words} words")
-    if caption_words > 150:
-        raise SystemExit(f"Caption is {caption_words} words")
-
-    fig = draw(summary)
+    sample = load()
+    fig = draw(sample)
     OUT_DIR.mkdir(parents=True, exist_ok=True)
-    png_path = OUT_DIR / "nutshell.png"
-    pdf_path = OUT_DIR / "nutshell.pdf"
-    fig.savefig(png_path, dpi=100)
+    png = OUT_DIR / "nutshell.png"
+    fig.savefig(png, dpi=100, facecolor=BG)
+    fig.savefig(OUT_DIR / "nutshell.pdf", facecolor=BG)
     plt.close(fig)
-
-    image = Image.open(png_path).convert("RGB")
-    if image.size != (1920, 1080):
-        raise SystemExit(f"Expected 1920x1080, got {image.size}")
-    image.save(pdf_path, "PDF", resolution=72.0)
-
-    notes_path = ROOT / "reports" / "nutshell.md"
-    notes_path.write_text(
-        f"# Nutshell\n\n"
-        f"**Headline** ({headline_words} words)\n\n"
-        f"{headline}\n\n"
-        f"**Caption** ({caption_words} words)\n\n"
-        f"{text}\n"
+    with Image.open(png) as image:
+        assert image.size == (WIDTH, HEIGHT), image.size
+    description = caption(sample)
+    assert len(HEADLINE.split()) <= 10
+    assert len(description.split()) <= 150
+    (ROOT / "reports/nutshell.md").write_text(
+        f"# Nutshell\n\n**Headline** ({len(HEADLINE.split())} words)\n\n{HEADLINE}\n\n"
+        f"**Caption** ({len(description.split())} words)\n\n{description}\n"
     )
-    print(summary.round(3).to_string())
-    print(
-        f"weighted medians {comparison['success_median']:.3f} vs {comparison['failure_median']:.3f}, "
-        f"P = {comparison['probability']:.3f}, p = {comparison['p_value']:.3f}, n = {comparison['n']}"
-    )
-    print(f"headline {headline_words} words")
-    print(f"caption {caption_words} words")
-    print(png_path)
-    print(pdf_path)
+    print(f"Rendered {png} and nutshell.pdf; caption: {len(description.split())} words")
 
 
 if __name__ == "__main__":
