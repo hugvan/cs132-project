@@ -1,107 +1,153 @@
 ---
 name: FYI — Who Gets an Answer?
-description: Public Dossier and Government Queue Ticket visual system for the CS 132 Philippine eFOI 2025 research portfolio.
+description: Public Dossier + Editorial Scrollytelling visual system for the CS 132 Philippine eFOI 2025 research portfolio.
+colors:
+  bond-paper: "#FFFFFF"
+  paper-tint: "#F7F7F5"
+  stone-band: "#ECECE8"
+  hairline-rule: "#D2D4CF"
+  audit-ink: "#0E0E0E"
+  muted-slate: "#4B5058"
+  cobalt-blue: "#1D4ED8"
+  cobalt-hover: "#1E40AF"
+  cobalt-tint: "#EFF4FD"
+  signal-orange: "#F46201"
+  orange-hover: "#e45b00"
+  orange-tint: "#FFF4EC"
+  category-teal: "#155E63"
+  category-steel: "#3B82A6"
+  category-gold: "#D49B2A"
+  category-gray: "#6B7280"
+  darkroom-ground: "#0B0D10"
+typography:
+  display:
+    fontFamily: "Source Serif 4, Iowan Old Style, Georgia, Times New Roman, serif"
+    fontSize: "clamp(2.65rem, 5.4vw, 4.35rem)"
+    fontWeight: 700
+    lineHeight: 0.96
+    letterSpacing: "-0.03em"
+  headline:
+    fontFamily: "Source Serif 4, Iowan Old Style, Georgia, Times New Roman, serif"
+    fontSize: "clamp(1.45rem, 2.5vw, 1.95rem)"
+    fontWeight: 700
+    lineHeight: 1.18
+    letterSpacing: "-0.02em"
+  title:
+    fontFamily: "Source Serif 4, Iowan Old Style, Georgia, Times New Roman, serif"
+    fontSize: "1.35rem"
+    fontWeight: 700
+    lineHeight: 1.22
+  body:
+    fontFamily: "Public Sans, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
+    fontSize: "1rem"
+    fontWeight: 400
+    lineHeight: 1.45
+  label:
+    fontFamily: "JetBrains Mono, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace"
+    fontSize: "0.75rem"
+    fontWeight: 700
+    letterSpacing: "0.06em"
+    fontFeature: "\"kern\" 1, \"onum\" 0, \"liga\" 0, \"tnum\" 1"
+rounded:
+  subtle: "3px"
+spacing:
+  xs: "8px"
+  sm: "12px"
+  md: "18px"
+  lg: "24px"
+  xl: "36px"
+components:
+  button-primary:
+    backgroundColor: "{colors.signal-orange}"
+    textColor: "{colors.bond-paper}"
+    rounded: "{rounded.subtle}"
+    padding: "0.75rem 1.25rem"
+  button-primary-hover:
+    backgroundColor: "{colors.orange-hover}"
+    textColor: "{colors.bond-paper}"
+  selector-tile:
+    backgroundColor: "{colors.cobalt-tint}"
+    textColor: "{colors.audit-ink}"
+    rounded: "{rounded.subtle}"
+    padding: "0.78rem 0.85rem"
+  stamp-alert:
+    backgroundColor: "{colors.orange-tint}"
+    textColor: "{colors.signal-orange}"
+    rounded: "{rounded.subtle}"
+    padding: "0.3rem 0.65rem"
+  stamp-neutral:
+    backgroundColor: "{colors.cobalt-tint}"
+    textColor: "{colors.cobalt-blue}"
+    rounded: "{rounded.subtle}"
+    padding: "0.3rem 0.65rem"
+  agency-panel:
+    backgroundColor: "{colors.paper-tint}"
+    textColor: "{colors.audit-ink}"
+    rounded: "{rounded.subtle}"
+    padding: "1.45rem 1.35rem"
 ---
-
-<!-- SEED: established with the user before implementation; re-run $impeccable document once there's code to capture the actual tokens and components. -->
 
 # Design System: FYI — Who Gets an Answer?
 
 ## Overview
 
-**Creative North Star: "The Public Dossier & Queue Ticket"**
+**Creative North Star: "Editorial Civic Scrollytelling × The Public Dossier"**
 
-This visual system replaces generic warm-cream/forest-green editorial styling with the material authority of an official Philippine public-records audit: crisp bond-paper white sheets, dense ink-black typography, 1px hairline ledger rules, tabular monospace timestamps, and rectangular ink rubber stamps. Every surface reads like a verifiable civic filing rather than a marketing showcase, balancing interactive browser exploration with complete, high-contrast A4 Print-to-PDF fidelity.
+This visual system pairs crisp public-audit contrast — bond-paper white (`#FFFFFF` / `#F7F7F5`) and audit-ink black (`#0E0E0E`) with **Verification Cobalt** (`#1D4ED8`) and **Signal Orange** (`#F46201`, `#e45b00` hover from the reference) — across an uncluttered editorial scrollytelling layout (`#intro` → `#pick` → `#dashboard` → `#methodology`). Clean Google Fonts typography (`Source Serif 4` serif headings without italic slant on `#title`, `Public Sans` interface/analytical prose, and `JetBrains Mono` lining tabular numerals) replaces hotlinked third-party fonts while preserving generous tonal surfaces, borderless structural separation, SVG `stroke-dashoffset` routing animations, interactive agency comparison (`#pick`), completion tracking, interactive RQ1–RQ3 SVG charts, and native browser A4 `@media print` support without cluttering the masthead with an extra button.
 
-Depth comes from ruled structure, ink weight, and intentional contrast inversions (such as framing the dark PilipiNuts 2026 exhibit inside an ink-black specimen panel) rather than soft shadows or decorative gradients. Motion is sequential, mechanical, and restrained—mirroring a queue counter advancing, an SVG `stroke-dashoffset` routing path drawing along the paper trail, and an audit stamp landing—governed by a `--1s` duration multiplier (`1ms` by default; `1s` only under `prefers-reduced-motion: no-preference`) so every state snaps cleanly to its final resting state in reduced-motion and print output.
+Every factual statistical claim, sample caveat, calendar-vs-working-day qualifier, and A4 Print-to-PDF layout discipline from our audit remains intact. Motion continues to be governed by `--1s` (`1ms` by default; `1s` under `@media screen and (prefers-reduced-motion: no-preference)`), ensuring reduced-motion parity and instant static A4 print snapshots.
 
 **Key Characteristics:**
-- Bond-paper white ground with crisp ink-black type and 1px ledger rules replacing tinted cream/green chrome.
-- Restrained palette: neutral paper and ink carry structure, while semantic stamp and chart inks signal verdicts and outcomes sparingly.
-- Tabular monospace numerals and timestamps paired with authoritative civic editorial prose.
-- Ink-black darkroom specimen framing for pre-rendered dark-ground exhibits (`nutshell.png`).
-- Sequential mechanical motion (ticket counter, scroll-drawn routing line, verdict stamps) with full static parity in `@media print` and `prefers-reduced-motion`.
+- Bond-paper canvas (`#FFFFFF` / `#F7F7F5`) paired with audit-ink typography (`#0E0E0E`), muted slate secondary copy (`#4B5058`), and stone structural banding (`#ECECE8`).
+- Masthead wordmark (`FYI.`) styled in cobalt blue (`#1D4ED8`) with an orange period (`#F46201`) beside spacious single-row desktop navigation links.
+- Clean Google Fonts stack: `Source Serif 4` headings + `Public Sans` body copy + `JetBrains Mono` lining tabular numerals (`"kern" 1, "onum" 0, "liga" 0, "tnum" 1`).
+- Verification Cobalt (`#1D4ED8` / hover `#1E40AF` / tint `#EFF4FD`) for SVG routing progress, selector states, and neutral completion badges; Signal Orange (`#F46201` / hover `#e45b00` / surface `#FFF4EC`) for primary CTAs, alert metrics, EO No. 2 15-day benchmark line, Water District silence alerts (`26.1%`), and rejected-hypothesis stamps.
+- Print-safe chart palette (`#155E63` teal successful, `#3B82A6` steel partial, `#F46201` orange unsuccessful, `#D49B2A` gold referred, `#6B7280` slate open) for crisp stacked and strip-chart discrimination in SVG exhibits.
 
 ## Colors
 
-A **Restrained** paper-and-ink palette where crisp neutrals govern layout and structure, and saturated signal inks are reserved strictly for rubber-stamp verdicts, EO No. 2 compliance indicators, and data encodings. Exact hex/OKLCH values are `[to be resolved during implementation]`.
-
 ### Primary
-- **Audit Ink (Black)** (`[to be resolved during implementation]`): Primary typography, 1px ledger rules, active tab/control states, and the ink-black Exhibit A specimen container that anchors `nutshell.png`.
-- **Stamp Signal Ink (Verdict / Alert)** (`[to be resolved during implementation]`): Reserved strictly for rectangular rubber-stamp verdicts (`H0 REJECTED`), EO No. 2 15-working-day threshold warnings, and non-response/silence emphasis (e.g., Water District 26.1% no-reply share).
+- **Audit Ink** (`#0E0E0E`): Primary typography, structural rules, 3px table header bottoms, median reply bars, and inverted footer ground.
+- **Bond Paper** (`#FFFFFF` / `#F7F7F5`): Primary canvas (`#FFFFFF`) and borderless tonal panel/card surface (`#F7F7F5`).
+- **Verification Cobalt** (`#1D4ED8`, hover `#1E40AF`, tint `#EFF4FD`): `.brand-mark` (`FYI`), SVG routing stroke, active toggle buttons, inspected cards, and audit verification stamps.
+- **Signal Orange** (`#F46201`, hover `#e45b00`, tint `#FFF4EC`): `.brand-mark` accent dot (`.`), primary action CTA (`Inspect an Agency Group`), EO No. 2 15-day reference line, `Replay` button, silence alerts, and rejected-hypothesis stamps.
 
-### Secondary
-- **Verification / Neutral Verdict Ink** (`[to be resolved during implementation]`): Used for null/retained-hypothesis stamps (`NO LINK FOUND · p = 0.99`) and secondary statistical annotations where red/alert framing would falsely imply failure.
-- **Outcome Chart Encodings** (`[to be resolved during implementation]`): Distinct, colorblind-safe, print-legible series colors differentiating `Successful`, `Partially successful`, `Unsuccessful`, `Open`, and `Referred` states across SVG charts.
+### Neutral Surfaces & Structural Banding
+- **Stone Band** (`#ECECE8`): Sticky completion tracker bar (`.tracker-bar`) and archival `#methodology` band.
+- **Paper Tint** (`#F7F7F5`): Scoped panels, chart bar tracks, and tabular summary cards.
+- **Hairline Rule** (`#D2D4CF`): Subtle SVG gridlines, row separators, and unreached routing track.
+- **Muted Slate** (`#4B5058`): Secondary metadata, links (`border-bottom: 2px solid currentColor`), axis labels, and captions.
 
-### Neutral
-- **Bond Paper White** (`[to be resolved during implementation]`): Primary page and card ground across screen and A4 print.
-- **Tinted Ledger Paper** (`[to be resolved during implementation]`): Subtle off-white/cool-gray surface reserved for ticket stubs, `<details>` appendix summaries, and table header bands.
-- **Muted Slate Ink** (`[to be resolved during implementation]`): Secondary captions, methodological footnotes, and axis labels while maintaining strong contrast on paper white.
-- **Ledger Hairline Rule** (`[to be resolved during implementation]`): 1px structural dividers, table rules, and ticket perforation/stub boundaries.
-
-### Named Rules
-**The Paper-First Rule.** Bond-paper white and ink black own at least 85% of the visual field; semantic stamp and chart colors earn attention through scarcity and never bleed into decorative page chrome.
-
-**The Print-Safe Contrast Rule.** Every interactive chart series, stamp, and muted label must remain legible both on screen and when printed in color or grayscale onto A4 paper.
+### Chart Semantics & Exhibit A
+- **RQ1 / RQ2 / RQ3 Series Palette**:
+  - Successful / quartile fill: `#155E63`
+  - Partially successful: `#3B82A6`
+  - Unsuccessful / 15 d ref.: `#F46201`
+  - Referred: `#D49B2A`
+  - Open: `#6B7280`
+- **Darkroom Specimen Bezel (`#nutshell`)**: `#0B0D10` dark frame with `#FFFFFF` / `#E2E8F0` / `#93C5FD` contrast around `assets/figures/nutshell.png` (`PilipiNuts 2026`), collapsing to white/black outline in `@media print`.
 
 ## Typography
 
-**Display Font:** `[to be resolved during implementation]` (authoritative civic/editorial display face, avoiding overused defaults)
-**Body Font:** `[to be resolved during implementation]` (high-legibility workhorse sans or serif suited to dense reading and A4 print)
-**Label / Data Font:** `[to be resolved during implementation]` (crisp monospace with `tabular-nums` for tracking numbers, elapsed-day counters, p-values, and ledger columns)
+- **Display / Editorial Serif (`--serif`):** `"Source Serif 4", Iowan Old Style, Georgia, "Times New Roman", serif` — upright (non-italic) `#title`, numbered section `<h2>` headings, card titles, and team names.
+- **Body / Interface Sans (`--sans`):** `"Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif` — analytical prose, nav items, bold underlined links, buttons, and labels.
+- **Monospace Data (`--mono`):** `"JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace` — forced lining tabular numerals (`"kern" 1, "onum" 0, "liga" 0, "tnum" 1`) for timestamps, sample counts, p-values, IQRs, and SVG axis readouts.
 
-**Character:** Clinical civic clarity—combining crisp headline authority with strict tabular alignment so statistical comparisons, timestamps, and ticket counters scan vertically without digit jitter.
+## Layout & Components
 
-### Hierarchy
-- **Display** (`[to be resolved during implementation]`): Dossier cover headline only.
-- **Headline** (`[to be resolved during implementation]`): Major numbered dossier section headers (`01`–`06`).
-- **Title** (`[to be resolved during implementation]`): Research question cards, queue ticket header, and exhibit titles.
-- **Body** (`[to be resolved during implementation]`): Narrative prose, methodology explanations, and caveats, constrained to a comfortable reading measure.
-- **Label / Tabular Data** (`[to be resolved during implementation]`): Uppercase tracked section stamps, queue ticket counters, statistical ledger cells, axis ticks, and timestamps.
-
-### Named Rules
-**The Tabular Numerals Rule.** Every numerical column, queue counter, elapsed-day readout, and statistical table cell enforces lining tabular numerals (`"tnum" 1, "onum" 0`) so figures align vertically across interactive states and A4 print pages.
-
-## Layout
-
-An asymmetric yet disciplined dossier ledger grid built around continuous 1px structural rules, generous reading margins, and clear numbered sections that translate cleanly from responsive web viewports down to A4 page widths.
-
-- **Web container & rhythm:** Full-width masthead and cover-sheet ledger followed by a sticky-right / scrolling-left scrollytelling sequence (`svh`-height sticky routing diagram paired with spaced narrative steps), a centered Queue Ticket spotlight selector, a completion-tracked 6-group agency dashboard grid with a sticky sort/jump toolbar, and balanced two-column ledger splits for exhibits and archival methodology. Exact container widths, breakpoints, and spacing scale are `[to be resolved during implementation]`.
-- **Collapsible density management:** Detailed verification tables (Shapiro–Wilk tests, 15 Bonferroni pairwise comparisons, sensitivity checks) live inside semantic disclosure containers (`<details>`) so the web reading flow stays scannable without losing completeness.
-- **A4 Print pagination (`@media print`):** Single-column/print-tuned flow on A4 (`@page { size: A4 }`), hiding web-only navigation, sticky toolbars, and print triggers; collapsing all sticky `svh` containers and tall `vh` scrollytelling step margins into static, compact stacked blocks (`position: static; height: auto`); rendering the SVG paper-trail routing line at full `stroke-dashoffset: 0`; auto-revealing all `<details>` statistical appendices; locking interactive charts, completion grids, and stamped verdicts into complete static snapshots; and preventing mid-element page breaks across cards, stamps, figures, and tables.
-
-### Named Rules
-**The Complete-Snapshot Print Rule.** Nothing essential to grading or research verification may stay hidden behind an unexpanded toggle, unclicked simulator state, or incomplete scroll animation in `@media print`.
-
-## Elevation & Depth
-
-**Flat paper and ink hierarchy.** Surfaces sit on the same bond-paper plane and never use soft drop shadows, blurs, or floating glass panels. Hierarchy is established exclusively through 1px ledger rules, thicker structural top bars, ink-weight contrast, and deliberate dark-canvas inversion for `nutshell.png` Exhibit A.
-
-### Named Rules
-**The Zero-Shadow Ledger Rule.** Depth comes from ruled lines, ink density, and crisp 1px borders—never diffused drop shadows or decorative elevation.
-
-## Shapes
-
-Sharp, rectilinear government-form and queue-ticket geometry: square or near-square corners, crisp 1px rectangular borders, perforated/notched ticket dividers where functional, and rectangular ink rubber-stamp frames angled slightly only on verdict stamps.
-
-- **Buttons & selectors:** Rectilinear control geometry with clear 1px borders and unambiguous inverted active states.
-- **Rubber stamps:** Rectangular double- or heavy-bordered ink frames in uppercase monospace, appearing cleanly in final resting position in print and reduced-motion modes.
-- **No pill clutter:** Avoid rounded pill badges and soft bubbly cards across the entire system.
+- **Measure & Surfaces:** `--measure: 1120px`, borderless editorial cards/steps/panels using tonal fills (`#F7F7F5`, `#ECECE8`, `#EFF4FD`) and generous whitespace; uncluttered single-row desktop `.masthead` featuring blue `.brand-mark` with orange dot (`FYI.`) and 7 uppercase navigation links (`Request Lifecycle`, `Agency Explorer`, `Analysis`, `Nutshell`, `Methodology`, `Action`, `Team`).
+- **Border Radius:** Unified `3px` (`--border-radius: 3px`) across buttons, tiles, stamps, and cards.
+- **Copy Discipline:** Paperwork, clock, and comparison metaphors are communicated through visual styling, SVG routing, and numeric transitions rather than literal meta-labels in navigation, buttons, or record headers.
 
 ## Do's and Don'ts
 
 ### Do:
-- **Do** enforce crisp bond-paper white, ink-black type, and 1px ledger rules across all sections and controls.
-- **Do** isolate the dark-background `nutshell.png` inside a high-contrast ink-black Exhibit A frame so it reads as an intentional photographic/data plate rather than an unstyled mismatch.
-- **Do** keep every animation (queue ticket counter, SVG `stroke-dashoffset` paper-trail routing line, rubber-stamp verdicts) sequential, purposeful, and immediately settled via `--1s: 1ms` under reduced-motion and in `@media print`.
-- **Do** collapse tall `vh`/`svh` scrollytelling spacers and `position: sticky` panels into static, compact print flow under `@media print` so A4 PDFs contain zero blank vertical gaps.
-- **Do** format all dates, durations, counts, and test statistics in `tabular-nums` monospace or aligned numeric columns.
+- **Do** keep navigation links single-row on desktop `>960px` (`flex-wrap: nowrap`) so `.masthead` never overlaps `.tracker-bar`, and wrap gracefully on narrower viewports.
+- **Do** enforce `"kern" 1, "onum" 0, "liga" 0, "tnum" 1` across numbers, tables, counters, and stamps.
+- **Do** settle all `stroke-dashoffset`, animated counters, stamps, and `<details>` tables in `@media print` and `beforeprint`.
+- **Do** preserve every factual statistical qualifier (calendar days vs. EO No. 2 working days, 90-day Q2 gap, 22 vanished pages, exploratory permutation caveats).
 
 ### Don't:
-- **Don't** retain warm-cream paper tints, forest-green brand fills, or generic editorial card drop-shadows from the prior template.
-- **Don't** gate methodology, sources, or later sections behind `display: none` until scroll completion; keep all dossier sections accessible on initial load and in print.
-- **Don't** use saturated colors as large decorative backgrounds or non-semantic accents; reserve signal inks for stamps, thresholds, and data encodings.
-- **Don't** hide statistical appendices, stamped verdicts, or simulator outputs when printing to A4 PDF.
-- **Don't** load external JS/CSS frameworks or charting libraries that break static GitHub Pages delivery or print rendering.
-
+- **Don't** hotlink proprietary external fonts (`pudding.cool`) or leave development live-reload scripts in `docs/index.html`.
+- **Don't** gate methodology, sources, or sensitivity tables behind required clicks.
+- **Don't** uppercase Greek symbols (`α = 0.05`).

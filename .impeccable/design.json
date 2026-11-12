@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-12T21:00:00+08:00",
+  "title": "Design System: FYI — Who Gets an Answer?",
+  "extensions": {
+    "colorMeta": {
+      "bond-paper": {
+        "role": "neutral",
+        "displayName": "Bond Paper",
+        "canonical": "#FFFFFF",
+        "tonalRamp": ["#ECECE8", "#F7F7F5", "#FFFFFF"]
+      },
+      "audit-ink": {
+        "role": "primary",
+        "displayName": "Audit Ink",
+        "canonical": "#0E0E0E",
+        "tonalRamp": ["#0E0E0E", "#26292E", "#4B5058", "#6B7280"]
+      },
+      "cobalt-blue": {
+        "role": "primary",
+        "displayName": "Verification Cobalt",
+        "canonical": "#1D4ED8",
+        "tonalRamp": ["#1E40AF", "#1D4ED8", "#3B82A6", "#EFF4FD"]
+      },
+      "signal-orange": {
+        "role": "primary",
+        "displayName": "Signal Orange",
+        "canonical": "#F46201",
+        "tonalRamp": ["#e45b00", "#F46201", "#ff8438", "#FFF4EC"]
+      },
+      "stone-band": {
+        "role": "neutral",
+        "displayName": "Stone Band",
+        "canonical": "#ECECE8",
+        "tonalRamp": ["#4B5058", "#D2D4CF", "#ECECE8", "#F7F7F5"]
+      },
+      "series-outcomes": {
+        "role": "secondary",
+        "displayName": "Outcome Series Palette",
+        "canonical": "#155E63",
+        "tonalRamp": ["#155E63", "#3B82A6", "#F46201", "#D49B2A", "#6B7280"]
+      }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Source Serif 4", "purpose": "Cover title, numbered headings, card headers, team names." },
+      "body": { "displayName": "Public Sans", "purpose": "Body prose, bold underlined links, labels, controls." },
+      "label": { "displayName": "JetBrains Mono", "purpose": "Tabular timestamps, sample badges, p-values, stamps, axes." }
+    },
+    "shadows": [],
+    "motion": [
+      { "name": "duration-multiplier", "value": "1ms (reduced) / 1s (no-preference)", "purpose": "Governs scrolly SVG stroke-dashoffset, stamp landings, and button transitions." },
+      { "name": "ease-mechanical", "value": "cubic-bezier(0.22, 1, 0.36, 1)", "purpose": "Crisp deceleration for routing line draw and stamp lock-in." }
+    ],
+    "breakpoints": [
+      { "name": "compact-toolbar", "value": "1020px" },
+      { "name": "masthead-wrap", "value": "960px" },
+      { "name": "mobile", "value": "760px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Orange CTA Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Rounded-3px Signal Orange primary button on bond-paper ground.",
+      "html": "<a href=\"#pick\" class=\"ds-btn-primary\">Inspect an Agency Group</a>",
+      "css": ".ds-btn-primary { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.25rem; background: #F46201; color: #FFFFFF; border: 1px solid #F46201; border-radius: 3px; font-family: 'Public Sans', sans-serif; font-size: 0.875rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; }"
+    },
+    {
+      "name": "Cobalt Tint Selector Tile",
+      "kind": "button",
+      "refersTo": "selector-tile",
+      "description": "Agency selector button in cobalt tint transitioning to deep cobalt hover/active.",
+      "html": "<button class=\"ds-tile\">WD · Water districts</button>",
+      "css": ".ds-tile { padding: 0.78rem 0.85rem; background: #EFF4FD; color: #0E0E0E; border: 1px solid transparent; border-radius: 3px; font-family: 'Source Serif 4', serif; font-weight: 700; }"
+    }
+  ]
+}
