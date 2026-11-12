@@ -166,7 +166,13 @@ def draw(sample):
                for label, color in legend_items]
     ax.legend(handles=handles, loc="center", bbox_to_anchor=(.53, .065 + GRAPH_RAISE / HEIGHT), ncol=3,
               frameon=False, labelcolor=TEXT, fontsize=13, handletextpad=.5, columnspacing=2.5)
-    text(WIDTH - 85, 1050, "Source: eFOI portal · Statuses observed 29 September 2026 · Stratified sample; points are unweighted", 11, MUTED, ha="right")
+    footer_font = fm.FontProperties(fname=str(ROOT / "assets/fonts/Roboto-CondensedRegular.ttf"))
+    footer_lines = [
+        "Data: eFOI portal, 2025 requests · Observed 29 September 2026 · Unweighted stratified sample",
+        "Chart: V. Aquino, E. Lim, J. Mayuyu, C. Sim, PILIPINUTS 2026",
+    ]
+    for y, line in zip((1028, 1050), footer_lines):
+        text(WIDTH - 85, y, line, 11, TEXT, ha="right", fontproperties=footer_font)
     print(f"Plotted {total:,} requests; largest vertical swarm offset: {max_offset:.1f} px")
     return fig
 
