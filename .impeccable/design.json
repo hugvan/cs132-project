@@ -10,11 +10,11 @@
         "canonical": "#FFFFFF",
         "tonalRamp": ["#ECECE8", "#F7F7F5", "#FFFFFF"]
       },
-      "audit-ink": {
+      "indigo-ink": {
         "role": "primary",
-        "displayName": "Audit Ink",
-        "canonical": "#0E0E0E",
-        "tonalRamp": ["#0E0E0E", "#26292E", "#4B5058", "#6B7280"]
+        "displayName": "Deep Indigo Ink",
+        "canonical": "#1c1246",
+        "tonalRamp": ["#1c1246", "#2b1d63", "#40307d", "#5a4999"]
       },
       "cobalt-blue": {
         "role": "primary",
@@ -72,7 +72,7 @@
       "refersTo": "selector-tile",
       "description": "Agency selector button in cobalt tint transitioning to deep cobalt hover/active.",
       "html": "<button class=\"ds-tile\">WD · Water districts</button>",
-      "css": ".ds-tile { padding: 0.78rem 0.85rem; background: #EFF4FD; color: #0E0E0E; border: 1px solid transparent; border-radius: 3px; font-family: 'Source Serif 4', serif; font-weight: 700; }"
+      "css": ".ds-tile { padding: 0.78rem 0.85rem; background: #EFF4FD; color: #1c1246; border: 1px solid transparent; border-radius: 3px; font-family: 'Source Serif 4', serif; font-weight: 700; }"
     }
   ]
 }

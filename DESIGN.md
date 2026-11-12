@@ -6,7 +6,7 @@ colors:
   paper-tint: "#F7F7F5"
   stone-band: "#ECECE8"
   hairline-rule: "#D2D4CF"
-  audit-ink: "#0E0E0E"
+  indigo-ink: "#1c1246"
   muted-slate: "#4B5058"
   cobalt-blue: "#1D4ED8"
   cobalt-hover: "#1E40AF"
@@ -67,7 +67,7 @@ components:
     textColor: "{colors.bond-paper}"
   selector-tile:
     backgroundColor: "{colors.cobalt-tint}"
-    textColor: "{colors.audit-ink}"
+    textColor: "{colors.indigo-ink}"
     rounded: "{rounded.subtle}"
     padding: "0.78rem 0.85rem"
   stamp-alert:
@@ -82,7 +82,7 @@ components:
     padding: "0.3rem 0.65rem"
   agency-panel:
     backgroundColor: "{colors.paper-tint}"
-    textColor: "{colors.audit-ink}"
+    textColor: "{colors.indigo-ink}"
     rounded: "{rounded.subtle}"
     padding: "1.45rem 1.35rem"
 ---
@@ -93,12 +93,12 @@ components:
 
 **Creative North Star: "Editorial Civic Scrollytelling × The Public Dossier"**
 
-This visual system pairs crisp public-audit contrast — bond-paper white (`#FFFFFF` / `#F7F7F5`) and audit-ink black (`#0E0E0E`) with **Verification Cobalt** (`#1D4ED8`) and **Signal Orange** (`#F46201`, `#e45b00` hover from the reference) — across an uncluttered editorial scrollytelling layout (`#intro` → `#pick` → `#dashboard` → `#methodology`). Clean Google Fonts typography (`Source Serif 4` serif headings without italic slant on `#title`, `Public Sans` interface/analytical prose, and `JetBrains Mono` lining tabular numerals) replaces hotlinked third-party fonts while preserving generous tonal surfaces, borderless structural separation, SVG `stroke-dashoffset` routing animations, interactive agency comparison (`#pick`), completion tracking, interactive RQ1–RQ3 SVG charts, and native browser A4 `@media print` support without cluttering the masthead with an extra button.
+This visual system pairs crisp public-audit contrast — bond-paper white (`#FFFFFF` / `#F7F7F5`) and deep indigo-blue ink (`#1c1246` from *The United States of Abortion Mazes*) with **Verification Cobalt** (`#1D4ED8`) and **Signal Orange** (`#F46201`, `#e45b00` hover from the reference) — across an uncluttered editorial scrollytelling layout (`#intro` → `#pick` → `#dashboard` → `#methodology`). Clean Google Fonts typography (`Source Serif 4` serif headings without italic slant on `#title`, `Public Sans` interface/analytical prose, and `JetBrains Mono` lining tabular numerals) replaces hotlinked third-party fonts while preserving generous tonal surfaces, borderless structural separation, SVG `stroke-dashoffset` routing animations, interactive agency comparison (`#pick`), completion tracking, interactive RQ1–RQ3 SVG charts, and native browser A4 `@media print` support without cluttering the masthead with an extra button.
 
 Every factual statistical claim, sample caveat, calendar-vs-working-day qualifier, and A4 Print-to-PDF layout discipline from our audit remains intact. Motion continues to be governed by `--1s` (`1ms` by default; `1s` under `@media screen and (prefers-reduced-motion: no-preference)`), ensuring reduced-motion parity and instant static A4 print snapshots.
 
 **Key Characteristics:**
-- Bond-paper canvas (`#FFFFFF` / `#F7F7F5`) paired with audit-ink typography (`#0E0E0E`), muted slate secondary copy (`#4B5058`), and stone structural banding (`#ECECE8`).
+- Bond-paper canvas (`#FFFFFF` / `#F7F7F5`) paired with deep indigo-blue typography (`#1c1246`), muted slate secondary copy (`#4B5058`), and stone structural banding (`#ECECE8`).
 - Masthead wordmark (`FYI.`) styled in cobalt blue (`#1D4ED8`) with an orange period (`#F46201`) beside spacious single-row desktop navigation links.
 - Clean Google Fonts stack: `Source Serif 4` headings + `Public Sans` body copy + `JetBrains Mono` lining tabular numerals (`"kern" 1, "onum" 0, "liga" 0, "tnum" 1`).
 - Verification Cobalt (`#1D4ED8` / hover `#1E40AF` / tint `#EFF4FD`) for SVG routing progress, selector states, and neutral completion badges; Signal Orange (`#F46201` / hover `#e45b00` / surface `#FFF4EC`) for primary CTAs, alert metrics, EO No. 2 15-day benchmark line, Water District silence alerts (`26.1%`), and rejected-hypothesis stamps.
@@ -107,7 +107,7 @@ Every factual statistical claim, sample caveat, calendar-vs-working-day qualifie
 ## Colors
 
 ### Primary
-- **Audit Ink** (`#0E0E0E`): Primary typography, structural rules, 3px table header bottoms, median reply bars, and inverted footer ground.
+- **Indigo Ink** (`#1c1246`): Primary typography, structural rules, 3px table header bottoms, median reply bars, and inverted footer ground.
 - **Bond Paper** (`#FFFFFF` / `#F7F7F5`): Primary canvas (`#FFFFFF`) and borderless tonal panel/card surface (`#F7F7F5`).
 - **Verification Cobalt** (`#1D4ED8`, hover `#1E40AF`, tint `#EFF4FD`): `.brand-mark` (`FYI`), SVG routing stroke, active toggle buttons, inspected cards, and audit verification stamps.
 - **Signal Orange** (`#F46201`, hover `#e45b00`, tint `#FFF4EC`): `.brand-mark` accent dot (`.`), primary action CTA (`Inspect an Agency Group`), EO No. 2 15-day reference line, `Replay` button, silence alerts, and rejected-hypothesis stamps.

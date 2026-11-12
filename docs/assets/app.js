@@ -215,6 +215,20 @@
 
   const GROUP_MAP = Object.fromEntries(GROUPS.map((g) => [g.id, g]));
 
+  /* Unweighted sample counts for the "Now serving" queue exhibit.
+     succ / unsucc: closed requests with a recorded reply (Exhibit 03 within-group table).
+     notClosed: replied requests that were not closed (replied − succ − unsucc).
+     silentClosed: closed requests with no recorded reply (all unsuccessful; Exhibit 03 table).
+     silentOpen: remaining requests with no recorded reply (noReplyCount − silentClosed). */
+  const QUEUE_COUNTS = {
+    LEA: { succ: 186, unsucc: 92, notClosed: 0, silentClosed: 0, silentOpen: 2 },
+    'WATER-DISTRICT': { succ: 95, unsucc: 105, notClosed: 12, silentClosed: 20, silentOpen: 55 },
+    NGA: { succ: 196, unsucc: 80, notClosed: 5, silentClosed: 0, silentOpen: 17 },
+    GOCC: { succ: 195, unsucc: 55, notClosed: 10, silentClosed: 2, silentOpen: 38 },
+    SUC: { succ: 165, unsucc: 74, notClosed: 21, silentClosed: 0, silentOpen: 41 },
+    LGU: { succ: 131, unsucc: 13, notClosed: 1, silentClosed: 0, silentOpen: 30 }
+  };
+
   const RQ3_BANDS = [
     { label: '0.0 – 0.6 d', n: 362, pct: 71.9 },
     { label: '0.6 – 1.3 d', n: 314, pct: 67.7 },
@@ -315,7 +329,8 @@
     rq2View: 'all',
     rq3View: 'bands',
     rq1FocusId: 'WATER-DISTRICT',
-    clockRaf: null
+    clockRaf: null,
+    ticketAnims: null
   };
 
   function updateTrackerBar() {
@@ -368,55 +383,97 @@
 
     if (!stub || !clockNum || !fillEl) return;
 
-    serial.textContent = g.serial;
-    nameEl.textContent = g.fullName;
-    noteEl.textContent = g.note;
-    iqrEl.textContent = `${g.p25.toFixed(2)} – ${g.p75.toFixed(2)} d`;
-    noReplyEl.textContent = `${g.noReplyPct.toFixed(1)}%`;
-    noReplyCountEl.textContent = `${g.noReplyCount} of ${g.sample} sampled`;
-    succAllEl.textContent = `${g.allSucc.toFixed(1)}%`;
-    frameCountEl.textContent = `${formatInt(g.allSuccCount)} of ${formatInt(g.frame)} in frame`;
-    succClosedEl.textContent = `${g.closedSucc.toFixed(1)}%`;
-    openShareEl.textContent = `${g.open.toFixed(1)}% still open on Sept 29`;
-
-    stampEl.textContent = g.stamp;
-    stampEl.className = `stamp ${g.stampTone === 'alert' ? 'stamp-alert' : 'stamp-neutral'}`;
-
+    const body = stub.querySelector('.ticket-body');
+    if (state.ticketAnims) {
+      state.ticketAnims.forEach((a) => a.cancel());
+      state.ticketAnims = null;
+    }
     if (state.clockRaf) {
       cancelAnimationFrame(state.clockRaf);
       state.clockRaf = null;
     }
 
     const targetWidth = Math.min(100, (g.wMedian / 15) * 100);
+    const canAnimate = animate && !prefersReducedMotion() && body && typeof body.animate === 'function';
 
-    if (!animate || prefersReducedMotion()) {
-      clockNum.textContent = g.wMedian.toFixed(2);
-      fillEl.style.width = `${targetWidth.toFixed(1)}%`;
-      stub.classList.add('is-stamped');
+    // Tear the current stub off along the perforation, then print the new one out of the slot.
+    if (canAnimate && stub.dataset.rendered === 'true') {
+      stub.classList.remove('is-stamped');
+      const tear = body.animate(
+        [
+          { transform: 'none', opacity: 1 },
+          { transform: 'translateY(22px) rotate(1.2deg)', opacity: 0 }
+        ],
+        { duration: 180, easing: 'cubic-bezier(0.55, 0, 1, 0.45)', fill: 'forwards' }
+      );
+      state.ticketAnims = [tear];
+      tear.onfinish = () => {
+        tear.cancel();
+        fillTicket();
+        const printOut = body.animate(
+          [
+            { clipPath: 'inset(0 0 100% 0)', transform: 'translateY(-14px)' },
+            { clipPath: 'inset(0 0 0% 0)', transform: 'none' }
+          ],
+          { duration: 460, easing: 'cubic-bezier(0.16, 1, 0.3, 1)' }
+        );
+        state.ticketAnims = [printOut];
+        runCountUp();
+      };
       return;
     }
 
-    stub.classList.remove('is-stamped');
-    const duration = 420;
-    const start = performance.now();
-
-    function step(now) {
-      const t = Math.min(1, (now - start) / duration);
-      const eased = 1 - Math.pow(1 - t, 3);
-      clockNum.textContent = (g.wMedian * eased).toFixed(2);
-      fillEl.style.width = `${(targetWidth * eased).toFixed(1)}%`;
-
-      if (t < 1) {
-        state.clockRaf = requestAnimationFrame(step);
-      } else {
-        clockNum.textContent = g.wMedian.toFixed(2);
-        fillEl.style.width = `${targetWidth.toFixed(1)}%`;
-        stub.classList.add('is-stamped');
-        state.clockRaf = null;
-      }
+    fillTicket();
+    stub.dataset.rendered = 'true';
+    if (canAnimate) {
+      runCountUp();
+    } else {
+      finishStatic();
     }
 
-    state.clockRaf = requestAnimationFrame(step);
+    function fillTicket() {
+      serial.textContent = g.serial;
+      nameEl.textContent = g.fullName;
+      noteEl.textContent = g.note;
+      iqrEl.textContent = `${g.p25.toFixed(2)} – ${g.p75.toFixed(2)} d`;
+      noReplyEl.textContent = `${g.noReplyPct.toFixed(1)}%`;
+      noReplyCountEl.textContent = `${g.noReplyCount} of ${g.sample} sampled`;
+      succAllEl.textContent = `${g.allSucc.toFixed(1)}%`;
+      frameCountEl.textContent = `${formatInt(g.allSuccCount)} of ${formatInt(g.frame)} in frame`;
+      succClosedEl.textContent = `${g.closedSucc.toFixed(1)}%`;
+      openShareEl.textContent = `${g.open.toFixed(1)}% still open on Sept 29`;
+
+      stampEl.textContent = g.stamp;
+      stampEl.className = `stamp ${g.stampTone === 'alert' ? 'stamp-alert' : 'stamp-neutral'}`;
+    }
+
+    function finishStatic() {
+      clockNum.textContent = g.wMedian.toFixed(2);
+      fillEl.style.width = `${targetWidth.toFixed(1)}%`;
+      stub.classList.add('is-stamped');
+    }
+
+    function runCountUp() {
+      stub.classList.remove('is-stamped');
+      const duration = 420;
+      const start = performance.now();
+
+      function step(now) {
+        const t = Math.min(1, (now - start) / duration);
+        const eased = 1 - Math.pow(1 - t, 3);
+        clockNum.textContent = (g.wMedian * eased).toFixed(2);
+        fillEl.style.width = `${(targetWidth * eased).toFixed(1)}%`;
+
+        if (t < 1) {
+          state.clockRaf = requestAnimationFrame(step);
+        } else {
+          finishStatic();
+          state.clockRaf = null;
+        }
+      }
+
+      state.clockRaf = requestAnimationFrame(step);
+    }
   }
 
   function renderGroupGrid() {
@@ -529,6 +586,205 @@
   }
 
   /* --------------------------------------------------------------------------
+     2b. "Now Serving" Queue Exhibit (#queue-board)
+     Final (completed) frame is the base DOM state; motion plays from .is-queued.
+     -------------------------------------------------------------------------- */
+  const QUEUE_TICKETS = 20;
+  const QUEUE_WAIT_SLOTS = 5;
+  const QUEUE_CLOCK = { offset: 0.3, scale: 0.62 }; // seconds = offset + scale·log2(1 + days)
+  const QUEUE_STAGGER = 0.028;
+  const QUEUE_TRAVEL = 0.45;
+  const QUEUE_STAMP_LAG = 0.3;
+
+  const MARK_SVG = {
+    succ: '<svg class="q-mark" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.2 8.6l3 3 6.6-7"/></svg>',
+    unsucc: '<svg class="q-mark" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8"/></svg>',
+    open: '<svg class="q-mark" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="3.4"/></svg>'
+  };
+
+  const laneOpenAt = (days) => QUEUE_CLOCK.offset + QUEUE_CLOCK.scale * Math.log2(1 + days);
+
+  // Largest-remainder rounding so every lane shows exactly QUEUE_TICKETS tickets.
+  function allocateTickets(counts, total) {
+    const keys = Object.keys(counts);
+    const n = keys.reduce((s, k) => s + counts[k], 0);
+    const raw = keys.map((k) => (counts[k] * total) / n);
+    const out = raw.map(Math.floor);
+    let left = total - out.reduce((s, v) => s + v, 0);
+    raw
+      .map((v, i) => ({ i, rem: v - Math.floor(v) }))
+      .sort((a, b) => b.rem - a.rem || a.i - b.i)
+      .forEach(({ i }) => {
+        if (left > 0) {
+          out[i] += 1;
+          left -= 1;
+        }
+      });
+    return Object.fromEntries(keys.map((k, i) => [k, out[i]]));
+  }
+
+  function initQueueExhibit() {
+    const board = document.getElementById('queue-board');
+    const clockEl = document.getElementById('queue-clock-val');
+    const replayBtn = document.getElementById('queue-replay-btn');
+    if (!board) return null;
+
+    const lanes = [...GROUPS].sort((a, b) => a.wMedian - b.wMedian);
+    const lastOpen = laneOpenAt(lanes[lanes.length - 1].wMedian);
+    const maxMedian = lanes[lanes.length - 1].wMedian;
+    let silenceAt = 0;
+
+    const laneHtml = lanes.map((g) => {
+      const c = QUEUE_COUNTS[g.id];
+      if (c.succ + c.unsucc + c.notClosed !== g.replied || c.silentClosed + c.silentOpen !== g.noReplyCount) {
+        console.warn(`Queue counts for ${g.id} do not reconcile with GROUP_MAP.`);
+      }
+      const t = allocateTickets(c, QUEUE_TICKETS);
+      const open = laneOpenAt(g.wMedian);
+
+      const served = [
+        ...Array(t.succ).fill('succ'),
+        ...Array(t.unsucc).fill('unsucc'),
+        ...Array(t.notClosed).fill('open')
+      ];
+      const servedHtml = served
+        .map((kind, i) => {
+          const d = open + i * QUEUE_STAGGER;
+          silenceAt = Math.max(silenceAt, d + QUEUE_TRAVEL + QUEUE_STAMP_LAG);
+          return `<span class="q-ticket q-${kind}" style="--i:${i};--d:${d.toFixed(3)};--s:${(d + QUEUE_STAMP_LAG).toFixed(3)}">${MARK_SVG[kind]}</span>`;
+        })
+        .join('');
+
+      const waiting = [...Array(t.silentClosed).fill(true), ...Array(t.silentOpen).fill(false)];
+      const waitHtml = waiting
+        .map((closed, j) => {
+          const col = QUEUE_WAIT_SLOTS - waiting.length + j + 1;
+          return `<span class="q-ticket q-wait${closed ? ' q-silent-closed' : ''}" style="grid-column:${col}">${closed ? MARK_SVG.unsucc : ''}</span>`;
+        })
+        .join('');
+
+      const label =
+        `${g.shortName}: weighted median first reply ${g.wMedian.toFixed(2)} days. ` +
+        `Of ${g.sample} sampled requests, ${c.succ} closed successful and ${c.unsucc} closed unsuccessful after a reply, ` +
+        `${c.notClosed} replied but not closed, and ${g.noReplyCount} never received a recorded reply` +
+        (c.silentClosed ? ` (${c.silentClosed} of them closed unsuccessful).` : '.') +
+        ` Shown as ${t.succ} successful, ${t.unsucc} unsuccessful, ${t.notClosed} not closed and ${t.silentClosed + t.silentOpen} no-reply tickets out of 20.`;
+
+      return `
+        <div class="queue-lane" role="img" aria-label="${label}">
+          <div class="lane-label">
+            <span class="lane-code mono">${g.code}</span>
+            <span class="lane-name">${g.shortName}</span>
+            <span class="lane-median mono">median ${g.wMedian.toFixed(2)} d</span>
+          </div>
+          <div class="lane-track" aria-hidden="true">
+            <div class="lane-wait">${waitHtml}</div>
+            <div class="lane-window"></div>
+            <div class="lane-served">${servedHtml}</div>
+          </div>
+          <div class="lane-count mono" aria-hidden="true">
+            <span>n = ${g.sample}</span>
+            <span>${g.noReplyCount} no reply</span>
+          </div>
+        </div>`;
+    });
+
+    board.innerHTML = `
+      <div class="queue-board-head" aria-hidden="true">
+        <span></span>
+        <div class="lane-track">
+          <span class="qb-wait">Awaiting first reply</span>
+          <span class="lane-window"></span>
+          <span class="qb-served">Replied · stamped with outcome</span>
+        </div>
+        <span class="qb-count">Sample</span>
+      </div>
+      ${laneHtml.join('')}`;
+    board.style.setProperty('--silence', silenceAt.toFixed(3));
+
+    let clockRaf = null;
+    let observer = null;
+    const finalClock = `${maxMedian.toFixed(2)} d`;
+
+    const stopClock = () => {
+      if (clockRaf) cancelAnimationFrame(clockRaf);
+      clockRaf = null;
+    };
+
+    const runClock = () => {
+      stopClock();
+      if (!clockEl) return;
+      const start = performance.now();
+      const tick = (now) => {
+        const t = (now - start) / 1000;
+        if (t >= lastOpen) {
+          clockEl.textContent = finalClock;
+          clockRaf = null;
+          return;
+        }
+        const days = Math.max(0, Math.pow(2, (t - QUEUE_CLOCK.offset) / QUEUE_CLOCK.scale) - 1);
+        clockEl.textContent = `${days.toFixed(2)} d`;
+        clockRaf = requestAnimationFrame(tick);
+      };
+      clockRaf = requestAnimationFrame(tick);
+    };
+
+    const reset = () => {
+      stopClock();
+      board.classList.add('no-anim', 'is-queued');
+      if (clockEl) clockEl.textContent = '0.00 d';
+      void board.offsetWidth;
+      board.classList.remove('no-anim');
+    };
+
+    const play = () => {
+      void board.offsetWidth;
+      board.classList.remove('is-queued');
+      runClock();
+    };
+
+    const lockComplete = () => {
+      if (observer) observer.disconnect();
+      observer = null;
+      stopClock();
+      board.classList.add('no-anim');
+      board.classList.remove('is-queued');
+      if (clockEl) clockEl.textContent = finalClock;
+    };
+
+    if (prefersReducedMotion() || !('IntersectionObserver' in window)) {
+      lockComplete();
+      return { lockComplete };
+    }
+
+    reset();
+    observer = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((e) => e.isIntersecting)) {
+          observer.disconnect();
+          observer = null;
+          play();
+        }
+      },
+      { threshold: 0.35 }
+    );
+    observer.observe(board);
+
+    if (replayBtn) {
+      replayBtn.addEventListener('click', () => {
+        if (observer) {
+          observer.disconnect();
+          observer = null;
+        }
+        reset();
+        play();
+      });
+    }
+
+    return { lockComplete };
+  }
+
+  /* --------------------------------------------------------------------------
      3. Scroll-Triggered Verdict Rubber Stamps (#research)
      -------------------------------------------------------------------------- */
   function initStampObserver() {
@@ -593,8 +849,8 @@
       return `
         <line x1="${eo15x}" y1="${topPad - 4}" x2="${eo15x}" y2="${H - 22}" stroke="#F46201" stroke-width="1.25" stroke-dasharray="3 3" />
         <rect x="${labelX}" y="${y + 10}" width="${medBarMax}" height="18" fill="#F7F7F5" />
-        <rect x="${labelX}" y="${y + 10}" width="${barW.toFixed(1)}" height="18" fill="#0E0E0E" />
-        <text x="${(labelX + barW + 8).toFixed(1)}" y="${y + 23}" font-family="JetBrains Mono, monospace" font-size="11.5" font-weight="700" fill="#0E0E0E">${g.wMedian.toFixed(2)} d</text>
+        <rect x="${labelX}" y="${y + 10}" width="${barW.toFixed(1)}" height="18" fill="#1c1246" />
+        <text x="${(labelX + barW + 8).toFixed(1)}" y="${y + 23}" font-family="JetBrains Mono, monospace" font-size="11.5" font-weight="700" fill="#1c1246">${g.wMedian.toFixed(2)} d</text>
       `;
     };
 
@@ -625,7 +881,7 @@
         return `
           <g class="rq1-row" data-group="${g.id}" tabindex="0" role="button" aria-label="${g.shortName}: median ${g.wMedian.toFixed(2)} days, no reply ${g.noReplyPct.toFixed(1)}%">
             <rect class="row-bg" x="0" y="${y}" width="${W}" height="${rowH - 4}" fill="transparent" />
-            <text x="8" y="${y + 23}" font-family="'Public Sans', sans-serif" font-size="13" font-weight="700" fill="#0E0E0E">${g.shortName}</text>
+            <text x="8" y="${y + 23}" font-family="'Public Sans', sans-serif" font-size="13" font-weight="700" fill="#1c1246">${g.shortName}</text>
             ${medSvgBars(g, y)}
             ${nrSvgBars(g, y)}
             <line x1="0" y1="${y + rowH - 2}" x2="${W}" y2="${y + rowH - 2}" stroke="#D2D4CF" stroke-width="1" />
@@ -724,10 +980,10 @@
 
         return `
           <g>
-            <text x="8" y="${y + 22}" font-family="'Public Sans', sans-serif" font-size="13" font-weight="700" fill="#0E0E0E">${g.shortName}</text>
+            <text x="8" y="${y + 22}" font-family="'Public Sans', sans-serif" font-size="13" font-weight="700" fill="#1c1246">${g.shortName}</text>
             ${rects}
-            <rect x="${barX}" y="${y + 8}" width="${barW}" height="20" fill="none" stroke="#0E0E0E" stroke-width="0.9" />
-            <text x="${barX + barW + 10}" y="${y + 22}" font-family="JetBrains Mono, monospace" font-size="11.5" font-weight="700" fill="#0E0E0E">${nLabel}</text>
+            <rect x="${barX}" y="${y + 8}" width="${barW}" height="20" fill="none" stroke="#1c1246" stroke-width="0.9" />
+            <text x="${barX + barW + 10}" y="${y + 22}" font-family="JetBrains Mono, monospace" font-size="11.5" font-weight="700" fill="#1c1246">${nLabel}</text>
             <title>${g.shortName}: combined success ${totalSucc.toFixed(1)}%</title>
           </g>
         `;
@@ -783,9 +1039,9 @@
         const by = plotB - bh;
         return `
           <g>
-            <rect x="${bx.toFixed(1)}" y="${by.toFixed(1)}" width="${bw}" height="${bh.toFixed(1)}" fill="#155E63" stroke="#0E0E0E" stroke-width="1.25" />
-            <text x="${cx.toFixed(1)}" y="${(by - 8).toFixed(1)}" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="12" font-weight="700" fill="#0E0E0E">${b.pct.toFixed(1)}%</text>
-            <text x="${cx.toFixed(1)}" y="${plotB + 19}" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" font-weight="700" fill="#0E0E0E">${b.label}</text>
+            <rect x="${bx.toFixed(1)}" y="${by.toFixed(1)}" width="${bw}" height="${bh.toFixed(1)}" fill="#155E63" stroke="#1c1246" stroke-width="1.25" />
+            <text x="${cx.toFixed(1)}" y="${(by - 8).toFixed(1)}" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="12" font-weight="700" fill="#1c1246">${b.pct.toFixed(1)}%</text>
+            <text x="${cx.toFixed(1)}" y="${plotB + 19}" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" font-weight="700" fill="#1c1246">${b.label}</text>
             <text x="${cx.toFixed(1)}" y="${plotB + 35}" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="#4B5058">n = ${b.n}</text>
           </g>
         `;
@@ -799,7 +1055,7 @@
         <svg class="chart-svg" viewBox="0 0 ${W} ${H}" role="img" aria-label="Success proportions across four weighted quartile response-time bands">
           ${gridLines}
           ${bars}
-          <line x1="${plotL}" y1="${plotB}" x2="${plotR}" y2="${plotB}" stroke="#0E0E0E" stroke-width="1.5" />
+          <line x1="${plotL}" y1="${plotB}" x2="${plotR}" y2="${plotB}" stroke="#1c1246" stroke-width="1.5" />
           <line x1="${plotL}" y1="${refY.toFixed(1)}" x2="${plotR}" y2="${refY.toFixed(1)}" stroke="#F46201" stroke-width="1.75" stroke-dasharray="5 4" />
         </svg>
       `;
@@ -828,11 +1084,11 @@
             : `p = ${g.mwP}`;
         return `
           <g>
-            <text x="8" y="${y + 22}" font-family="'Public Sans', sans-serif" font-size="13" font-weight="700" fill="#0E0E0E">${g.shortName}</text>
+            <text x="8" y="${y + 22}" font-family="'Public Sans', sans-serif" font-size="13" font-weight="700" fill="#1c1246">${g.shortName}</text>
             <line x1="${scaleL}" y1="${y + 18}" x2="${scaleL + scaleW}" y2="${y + 18}" stroke="#D2D4CF" stroke-width="1" />
-            <line x1="${Math.min(sx, ux).toFixed(1)}" y1="${y + 18}" x2="${Math.max(sx, ux).toFixed(1)}" y2="${y + 18}" stroke="#0E0E0E" stroke-width="2" />
-            <circle cx="${sx.toFixed(1)}" cy="${y + 18}" r="5.5" fill="#155E63" stroke="#0E0E0E" stroke-width="1" />
-            <rect x="${(ux - 5).toFixed(1)}" y="${y + 13}" width="10" height="10" fill="#F46201" stroke="#0E0E0E" stroke-width="1" />
+            <line x1="${Math.min(sx, ux).toFixed(1)}" y1="${y + 18}" x2="${Math.max(sx, ux).toFixed(1)}" y2="${y + 18}" stroke="#1c1246" stroke-width="2" />
+            <circle cx="${sx.toFixed(1)}" cy="${y + 18}" r="5.5" fill="#155E63" stroke="#1c1246" stroke-width="1" />
+            <rect x="${(ux - 5).toFixed(1)}" y="${y + 13}" width="10" height="10" fill="#F46201" stroke="#1c1246" stroke-width="1" />
             <text x="${scaleL + scaleW + 14}" y="${y + 22}" font-family="JetBrains Mono, monospace" font-size="10.8" font-weight="700" fill="${pColor}">${pNote}</text>
             <title>${g.shortName}: median successful ${g.mwSuccMed.toFixed(2)} d vs unsuccessful ${g.mwUnsuccMed.toFixed(2)} d</title>
           </g>
@@ -886,7 +1142,7 @@
   /* --------------------------------------------------------------------------
      5. A4 Print Preparation
      -------------------------------------------------------------------------- */
-  function initPrintControls(scrollyCtrl, stampCtrl) {
+  function initPrintControls(scrollyCtrl, stampCtrl, queueCtrl) {
     const printBtn = document.getElementById('print-btn');
     if (printBtn) {
       printBtn.addEventListener('click', () => window.print());
@@ -910,6 +1166,7 @@
       renderRQ3();
       if (scrollyCtrl) scrollyCtrl.lockComplete();
       if (stampCtrl) stampCtrl.lockComplete();
+      if (queueCtrl) queueCtrl.lockComplete();
       renderTicket(state.selectedId, false);
     });
 
@@ -936,7 +1193,8 @@
     const scrollyCtrl = initScrollytelling();
     initQueueAndDashboard();
     const stampCtrl = initStampObserver();
+    const queueCtrl = initQueueExhibit();
     initCharts();
-    initPrintControls(scrollyCtrl, stampCtrl);
+    initPrintControls(scrollyCtrl, stampCtrl, queueCtrl);
   });
 })();

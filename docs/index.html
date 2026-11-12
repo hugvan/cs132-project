@@ -154,14 +154,14 @@
 
               <g class="route-node is-reached" data-node="0">
                 <circle cx="76" cy="58" r="8" fill="#FFFFFF" stroke="#1D4ED8" stroke-width="3"></circle>
-                <rect x="108" y="32" width="424" height="54" rx="3" fill="#FFFFFF"></rect>
+                <rect x="108" y="32" width="424" height="54" rx="3" fill="#FFFFFF" stroke="#1c1246" stroke-width="1.25"></rect>
                 <text x="122" y="53" class="svg-mono-label">01 · REQUEST FILED (t = 0.00 d)</text>
                 <text x="122" y="73" class="svg-body-label">14,668 public 2025 filings · EO No. 2 (524 agencies)</text>
               </g>
 
               <g class="route-node" data-node="1">
                 <circle cx="210" cy="140" r="8" fill="#FFFFFF" stroke="#1D4ED8" stroke-width="3"></circle>
-                <rect x="234" y="114" width="298" height="54" rx="3" fill="#FFFFFF"></rect>
+                <rect x="234" y="114" width="298" height="54" rx="3" fill="#FFFFFF" stroke="#1c1246" stroke-width="1.25"></rect>
                 <text x="248" y="135" class="svg-mono-label">02 · STRATIFIED AUDIT SAMPLE</text>
                 <text x="248" y="155" class="svg-body-label">1,663 drawn (seed 132) → 1,641 collected</text>
               </g>
@@ -175,14 +175,14 @@
 
               <g class="route-node" data-node="3">
                 <circle cx="76" cy="318" r="8" fill="#FFFFFF" stroke="#1D4ED8" stroke-width="3"></circle>
-                <rect x="108" y="292" width="424" height="56" rx="3" fill="#FFFFFF"></rect>
+                <rect x="108" y="292" width="424" height="56" rx="3" fill="#FFFFFF" stroke="#1c1246" stroke-width="1.25"></rect>
                 <text x="122" y="314" class="svg-mono-label">04 · FIRST AGENCY REPLY (n = 1,436)</text>
                 <text x="122" y="334" class="svg-body-label">Median 1.58 cal. days · 205 silent (blank, never 0)</text>
               </g>
 
               <g class="route-node" data-node="4">
-                <circle cx="210" cy="426" r="8" fill="#0E0E0E" stroke="#1D4ED8" stroke-width="3"></circle>
-                <rect x="234" y="396" width="298" height="62" rx="3" fill="#0E0E0E"></rect>
+                <circle cx="210" cy="426" r="8" fill="#1c1246" stroke="#1D4ED8" stroke-width="3"></circle>
+                <rect x="234" y="396" width="298" height="62" rx="3" fill="#1c1246"></rect>
                 <text x="248" y="419" class="svg-mono-inv">05 · OBSERVED OUTCOME (29 SEPT)</text>
                 <text x="248" y="440" class="svg-body-inv">Speed vs. success: p = 0.989 (no link found)</text>
               </g>
@@ -339,6 +339,34 @@
       </div>
 
       <div id="group-grid" class="group-grid" aria-label="Six agency group audit cards"></div>
+
+      <article class="exhibit-panel queue-exhibit" aria-labelledby="queue-title">
+        <div class="exhibit-head">
+          <div>
+            <span class="exhibit-code mono">NOW SERVING · 1,641 SAMPLED REQUESTS</span>
+            <h3 id="queue-title">Who reached the counter, and what came back</h3>
+          </div>
+          <div class="queue-controls">
+            <div class="queue-clock" aria-hidden="true">
+              <span class="ticket-field-label">Counter clock</span>
+              <span id="queue-clock-val" class="mono">4.68 d</span>
+            </div>
+            <button type="button" id="queue-replay-btn" class="btn-replay" aria-controls="queue-board">Replay</button>
+          </div>
+        </div>
+
+        <ul class="queue-key" aria-label="Ticket key">
+          <li><span class="q-ticket q-succ is-key" aria-hidden="true"><svg class="q-mark" viewBox="0 0 16 16"><path d="M3.2 8.6l3 3 6.6-7"/></svg></span>Successful (incl. partial)</li>
+          <li><span class="q-ticket q-unsucc is-key" aria-hidden="true"><svg class="q-mark" viewBox="0 0 16 16"><path d="M4 4l8 8M12 4l-8 8"/></svg></span>Unsuccessful</li>
+          <li><span class="q-ticket q-open is-key" aria-hidden="true"><svg class="q-mark" viewBox="0 0 16 16"><circle cx="8" cy="8" r="3.4"/></svg></span>Replied · not closed</li>
+          <li><span class="q-ticket q-wait is-key" aria-hidden="true"></span>No recorded reply</li>
+          <li><span class="q-ticket q-wait q-silent-closed is-key" aria-hidden="true"><svg class="q-mark" viewBox="0 0 16 16"><path d="M4 4l8 8M12 4l-8 8"/></svg></span>No reply · closed unsuccessful</li>
+        </ul>
+
+        <div id="queue-board" class="queue-board"></div>
+
+        <p class="chart-caption">Each lane holds 20 tickets; one ticket ≈ 5% of that group’s sampled requests (largest-remainder rounding; exact sample sizes and no-reply counts at right). Lanes open in order of weighted median first reply on a log-compressed clock. Tickets are unweighted sample counts, like the nutshell figure, and do not represent population proportions. A first reply may be an acknowledgment.</p>
+      </article>
 
       <div class="research-block" id="research" aria-labelledby="research-title">
         <div class="section-ledger-head">
