@@ -16,7 +16,7 @@
   <header class="masthead">
     <a class="brand" href="#"><strong>FYI<span>.</span></strong><span>FOI Your Information</span></a>
     <nav aria-label="Main navigation">
-      <a href="#research">The research</a><a href="#data">The data</a><a href="#methods">Our process</a><a href="#team">The team</a>
+      <a href="#research">The research</a><a href="#data">The data</a><a href="#methods">Our process</a><a href="#eda">Analysis</a><a href="#nutshell">Nutshell</a><a href="#team">The team</a>
     </nav>
   </header>
   <main id="main">
@@ -43,7 +43,7 @@
       <div><strong>524</strong><span>Agencies with 2025 requests</span></div>
     </div>
 
-    <aside class="status-notice"><strong>Data repository stage.</strong> Data collected from the public eFOI portal on September 29, 2026. Exploratory analysis and results will follow.</aside>
+    <aside class="status-notice"><strong>Exploratory analysis.</strong> Response-time plots, observed outcomes and hypothesis comparisons are now available below. Data were collected on September 29, 2026.</aside>
 
     <section class="section section-grid" id="background" aria-labelledby="background-title">
       <div><p class="eyebrow">01 / The context</p><h2 id="background-title">Access begins<br>with an answer.</h2></div>
@@ -52,12 +52,12 @@
         <p>The order sets a clear service standard. An agency must respond "as soon as practicable but not exceeding fifteen (15) working days" from receipt, extendable to at most twenty working days when records need extensive search. A requester whose request is denied, or not answered in time, may appeal within fifteen working days.</p>
         <p>Requests are filed and answered in public on the <a href="https://www.foi.gov.ph/">eFOI portal</a>, which listed 271,232 requests across 739 agencies when we collected our data. Each request shows when it was filed, when the agency replied and how it ended. That makes it possible to measure responsiveness from the record itself, rather than from surveys or perceptions. Because coverage differs by type of office, and LGUs are not bound by the order, we compare the portal's official agency groups.</p>
         <p>This work relates to <a href="https://sdgs.un.org/goals/goal16">SDG 16</a>: effective, accountable institutions (target 16.6) and public access to information (target 16.10).</p>
-        <div class="callout"><h3>Our proposed solution</h3><p>Build a documented, request-level dataset of 2025 eFOI requests and use it to measure how quickly each agency group first responds, how often requests succeed, and whether faster responses go with success. The results can show where the FOI program falls short of its 15-working-day standard, and which kinds of offices need support.</p></div>
+        <div class="callout"><h3>Our proposed solution</h3><p>Build a documented, request-level dataset of 2025 eFOI requests and use it to measure how quickly each agency group first responds, how often requests succeed, and whether faster responses go with success. The results describe differences in first-response times and observed outcomes across agency groups. First-message calendar times do not directly measure compliance with the order’s working-day deadline.</p></div>
       </div>
     </section>
 
     <section class="section" id="research" aria-labelledby="research-title">
-      <div class="section-heading"><div><p class="eyebrow">02 / The research</p><h2 id="research-title">Three questions. One public record.</h2></div><p>Proposed hypotheses.<br>Results will follow analysis.</p></div>
+      <div class="section-heading"><div><p class="eyebrow">02 / The research</p><h2 id="research-title">Three questions. One public record.</h2></div><p>Research hypotheses.<br><a href="#eda">View the analysis ↓</a></p></div>
       <div class="question-grid">
         <article class="question"><span class="number">01</span><p class="eyebrow">Response time</p><h3>How long does each agency group take to post its first response to an eFOI request?</h3><p><strong>H₀</strong> First-response time is the same across agency groups.</p><p><strong>H₁</strong> At least one agency group has a different first-response time.</p></article>
         <article class="question"><span class="number">02</span><p class="eyebrow">Request outcomes</p><h3>Do the shares of successful and unsuccessful requests differ by agency group?</h3><p><strong>H₀</strong> The success rate is the same across agency groups.</p><p><strong>H₁</strong> The success rate differs across agency groups.</p></article>
@@ -94,17 +94,87 @@
     </section>
 
     <section class="principles" aria-labelledby="interpretation-title">
-      <div><p class="eyebrow">Reading the evidence</p><h2 id="interpretation-title">A reply is a starting point.</h2><p>We will measure time to the first agency reply, not time to complete fulfillment. A quick acknowledgment does not itself establish a successful outcome.</p></div>
+      <div><p class="eyebrow">Reading the evidence</p><h2 id="interpretation-title">A reply is a starting point.</h2><p>We measure time to the first agency reply, rather than time to complete fulfillment. A quick acknowledgment does not itself establish a successful outcome.</p></div>
       <div><h3>Definitions to keep explicit</h3><ul><li>Response time is measured to the minute, in fractional days.</li><li>Pending, referred and open cases are not counted as unsuccessful; status is observed on the collection date.</li><li>Closed requests are those successful, partially successful, denied or closed; RQ3 uses these.</li><li>Use sampling weights for population estimates; agency groups were sampled unequally.</li><li>The March 20 – June 18, 2025 gap in the portal limits quarter comparisons.</li><li>An association between speed and success is not evidence of causation.</li></ul></div>
     </section>
 
+    <section class="section" id="eda" aria-labelledby="eda-title">
+      <div class="section-heading"><div><p class="eyebrow">05 / Exploratory analysis</p><h2 id="eda-title">Response times and outcomes.</h2></div><p>Public requests filed in 2025.<br>Status observed September 29, 2026.</p></div>
+      <div class="analysis-intro prose"><p>Response-time analysis uses 1,641 sampled request timelines. Outcome proportions use all 14,668 requests in the observed listing frame. A first reply may be an acknowledgment; it does not necessarily provide the requested information.</p></div>
+
+      <details class="analysis-details">
+        <summary>Sampling weights and outcome definitions</summary>
+        <div class="prose">
+          <p>The sample gives smaller agency groups a larger share than they have in the full frame. Weighted estimates adjust for this: each request receives a weight equal to its agency-group × quarter frame count divided by the number collected in that stratum. Unweighted displays count each sampled request equally.</p>
+          <p>Successful outcomes include successful and partially successful requests. Unsuccessful outcomes are statuses DENIED or CLOSED. Open and referred requests remain separate categories. “No recorded agency reply” means no agency message was found in the public conversation; a request can still have a CLOSED status without such a message.</p>
+          <p>Hypothesis comparisons use α = 0.05. Shapiro–Wilk tests reject normality in all six agency groups, both for raw response times and after a log transformation. The response-time comparisons therefore use rank-based tests. Full checks and calculations are in the <a href="https://github.com/hugvan/cs132-project/tree/main/notebooks">analysis notebooks</a>.</p>
+        </div>
+      </details>
+
+      <article class="analysis-question" aria-labelledby="rq1-results">
+        <div class="analysis-heading"><span class="analysis-number" aria-hidden="true">01</span><div><p class="eyebrow">Response time</p><h3 id="rq1-results">First agency responses by agency group</h3></div></div>
+        <figure class="analysis-figure">
+          <a href="assets/figures/rq1_median_and_noreply.png" target="_blank" rel="noopener" aria-label="Open the response-time and nonresponse figure at full size">
+            <img src="assets/figures/rq1_median_and_noreply.png" width="2340" height="1152" loading="lazy" decoding="async" alt="Weighted median reply times range from 0.6 days for law enforcement to 4.7 days for local governments. The weighted share with no recorded reply ranges from 0.7% for law enforcement to 26.1% for water districts.">
+          </a>
+          <figcaption>Median times include requests with a recorded reply; nonresponse shares include all sampled requests. Both measures use sampling weights. Select a figure to view it at full size.</figcaption>
+        </figure>
+        <div class="analysis-result"><p><strong>Hypothesis comparison.</strong> Response-time ranks differ across agency groups: Kruskal–Wallis H = 218.71, p = 2.80 × 10<sup>−45</sup>, ε² = 0.152. Reject H₀. Eleven of the fifteen pairwise comparisons remain significant after Bonferroni adjustment.</p><p>The omnibus test and pairwise tests use unweighted sampled requests with recorded replies. The plotted medians are weighted; the tests compare distributions rather than medians alone.</p></div>
+        <details class="analysis-details">
+          <summary>View the response-time distributions</summary>
+          <figure class="analysis-figure">
+            <a href="assets/figures/rq1_response_time_distribution.png" target="_blank" rel="noopener" aria-label="Open the response-time distribution figure at full size">
+              <img src="assets/figures/rq1_response_time_distribution.png" width="2340" height="1152" loading="lazy" decoding="async" alt="Horizontal boxplots of unweighted response times for six agency groups on a logarithmic time scale, with individual outliers extending beyond one year.">
+            </a>
+            <figcaption>Unweighted distributions among the 1,436 sampled requests with a recorded reply. Boxes span the middle 50%; the time axis is logarithmic.</figcaption>
+          </figure>
+        </details>
+      </article>
+
+      <article class="analysis-question" aria-labelledby="rq2-results">
+        <div class="analysis-heading"><span class="analysis-number" aria-hidden="true">02</span><div><p class="eyebrow">Request outcomes</p><h3 id="rq2-results">Observed outcomes by agency group</h3></div></div>
+        <figure class="analysis-figure">
+          <a href="assets/figures/rq2_outcome_shares.png" target="_blank" rel="noopener" aria-label="Open the request-outcome figure at full size">
+            <img src="assets/figures/rq2_outcome_shares.png" width="2340" height="1224" loading="lazy" decoding="async" alt="Stacked bars showing successful, partially successful, unsuccessful, open and referred requests. Combined success shares range from 33.1% for water districts to 74.9% for local governments.">
+          </a>
+          <figcaption>Proportions use every request in the observed 2025 listing frame. Combined success includes partial success; open and referred requests remain in the denominator.</figcaption>
+        </figure>
+        <div class="analysis-result"><p><strong>Hypothesis comparison.</strong> The success-versus-other-outcomes chi-square comparison gives χ² = 134.77, df = 5, p = 2.32 × 10<sup>−27</sup>. Reject H₀ under the test model. Cramér’s V = 0.096 indicates a weak overall association.</p><p>These are all requests in the observed frame, so the proportions directly describe that frame. The p-value depends on a model extending beyond these observed records. Restricting the comparison to closed requests also gives a small effect size (V = 0.098).</p></div>
+      </article>
+
+      <article class="analysis-question" aria-labelledby="rq3-results">
+        <div class="analysis-heading"><span class="analysis-number" aria-hidden="true">03</span><div><p class="eyebrow">Speed &amp; success</p><h3 id="rq3-results">Success proportions by first-response time</h3></div></div>
+        <figure class="analysis-figure">
+          <a href="assets/figures/rq3_speed_and_success.png" target="_blank" rel="noopener" aria-label="Open the response-speed and success figure at full size">
+            <img src="assets/figures/rq3_speed_and_success.png" width="2070" height="1152" loading="lazy" decoding="async" alt="Weighted success proportions of 71.9%, 67.7%, 78.3% and 67.1% across four progressively longer response-time bands. The overall weighted proportion is 71.3%.">
+          </a>
+          <figcaption>Includes 1,387 closed sampled requests with recorded replies. Each band contains approximately one quarter of their total sampling weight; sample counts therefore differ between bands. Boundaries are rounded in the figure.</figcaption>
+        </figure>
+        <div class="analysis-result"><p><strong>Hypothesis comparison.</strong> The weighted Mann–Whitney permutation comparison gives a two-sided p = 0.989. Fail to reject H₀: this comparison does not provide evidence that successful requests receive faster first replies. This does not establish that no relationship exists.</p><p>The test uses the underlying response-time ranks, rather than the four chart bands. The result describes closed requests with recorded replies; it does not establish causation.</p></div>
+        <details class="analysis-details">
+          <summary>How the response-time bands and test should be read</summary>
+          <div class="prose"><p>The weighted quartile boundaries are approximately 0.56, 1.26 and 3.93 days. They divide the estimated distribution of closed requests with recorded replies into four roughly equal-weight groups. These are data-derived boundaries, not service deadlines.</p><p>The pooled permutation test shuffles outcome labels across the sampled requests. Its interpretation depends on that exchangeability assumption; it does not explicitly account for within-agency clustering or the full stratified sampling design. We report it as an exploratory comparison.</p><p>A sensitivity check ranks the 22 closed requests without a recorded reply after all observed reply times. The pooled p-value is 0.914. A water-district subgroup result from that check is exploratory and unadjusted for multiple comparisons.</p></div>
+        </details>
+      </article>
+    </section>
+
+    <section class="section" id="nutshell" aria-labelledby="nutshell-title">
+      <div class="section-heading"><div><p class="eyebrow">06 / The nutshell</p><h2 id="nutshell-title">The sampled requests.</h2></div><a class="text-link" href="assets/figures/nutshell.pdf" download>Download the nutshell PDF ↗</a></div>
+      <figure class="analysis-figure nutshell-figure">
+        <a href="assets/figures/nutshell.png" target="_blank" rel="noopener" aria-label="Open the nutshell figure at full size">
+          <img src="assets/figures/nutshell.png" width="1920" height="1080" loading="lazy" decoding="async" alt="A beeswarm plot with one dot per sampled request, arranged by agency group and time to first agency reply. Color indicates outcome; a separate column contains requests without recorded replies.">
+        </a>
+        <figcaption>Each dot represents one sampled request. Horizontal position shows elapsed time on a logarithmic scale; vertical offsets prevent overlap. The separate “No reply” column indicates no recorded agency message. Points are unweighted and do not represent population proportions.</figcaption>
+      </figure>
+    </section>
+
     <section class="section section-grid" id="next" aria-labelledby="next-title">
-      <div><p class="eyebrow">05 / Next milestones</p><h2 id="next-title">The story is<br>still being built.</h2></div>
-      <div class="prose"><h3>Data repository · done</h3><p>Dataset collected, documented and shared in the Google Sheet.</p><h3>Exploratory analysis · next</h3><p>Visualize the research questions, choose appropriate hypothesis tests and create a nutshell plot.</p><h3>Modeling · later</h3><p>Follows the course requirements and what the data can support.</p></div>
+      <div><p class="eyebrow">07 / Next milestones</p><h2 id="next-title">The story is<br>still being built.</h2></div>
+      <div class="prose"><h3>Data repository · done</h3><p>Dataset collected, documented and shared in the Google Sheet.</p><h3>Exploratory analysis · available</h3><p>Figures and exploratory hypothesis comparisons are presented above, with calculations in the analysis notebooks.</p><h3>Interpretation and optional modeling · next</h3><p>Develop the discussion and recommendations, and assess whether a predictive model would support the research questions.</p></div>
     </section>
 
     <section class="section" id="team" aria-labelledby="team-title">
-      <p class="eyebrow">06 / About us</p><div class="section-heading"><h2 id="team-title">FYI. FOI Your Information.</h2><p>CS 132 · AY 2026–2027, Semester 1<br>Section WFX · Group 1</p></div>
+      <p class="eyebrow">08 / About us</p><div class="section-heading"><h2 id="team-title">FYI. FOI Your Information.</h2><p>CS 132 · AY 2026–2027, Semester 1<br>Section WFX · Group 1</p></div>
       <ul class="team-list"><li>Vaughn Aquino</li><li>Eliana Lim</li><li>Jon Mayuyu</li><li>Charlize Sim</li></ul>
     </section>
 

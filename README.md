@@ -53,3 +53,16 @@ Page numbers move as new requests are filed, so re-run `range` before a fresh li
 
 `data/raw/requests_index.csv` is an earlier index scraped by a teammate (2024–2026, 42,765 rows).
 Its 2025 rows are all contained in `listing.csv`, which is a newer, complete pass.
+
+## Portfolio figures
+
+After regenerating the reviewed plots, run:
+
+```bash
+python scripts/sync_site_figures.py
+```
+
+This copies the four EDA figures and the nutshell PNG/PDF into `docs/assets/figures/`,
+so the GitHub Pages site works entirely from `/docs`. The portfolio includes the
+figures, their definitions, and exploratory hypothesis comparisons. Select a figure
+to open it at full resolution; the nutshell PDF is also available to download.
