@@ -21,7 +21,8 @@ from analysis import GROUP_ORDER, LABELS, SUCCESSFUL_OUTCOMES
 ROOT = Path(__file__).resolve().parents[1]
 OUT_DIR = ROOT / "reports/figures"
 BG, TEXT, MUTED = "#1B181C", "#FFFFFF", "#C8C4CC"
-COLORS = {"successful": "#648FFF", "unsuccessful": "#DC267F", "other": "#A9A3AE"}
+COLORS = {"successful": "#648FFF", "partial": "#A3BCFF", "denied": "#DC267F", "closed": "#F08EBB", "other": "#A9A3AE"}
+REFERENCE_DAYS = 15  # Calendar-time reference, not a working-day compliance cutoff.
 HEADLINE = "eFOI Response Times and Request Outcomes, 2025"
 WIDTH, HEIGHT = 1920, 1080
 # Positions are in export pixels, so the packing matches the visible dot size.
@@ -42,6 +43,11 @@ def load():
         raise ValueError("Response times fall outside the displayed time scale")
     if not sample["outcome"].isin([*SUCCESSFUL_OUTCOMES, "unsuccessful", "open", "referred"]).all():
         raise ValueError("An outcome is missing from the color key")
+    if not sample["status"].isin([
+        "SUCCESSFUL", "PARTIALLY SUCCESSFUL", "DENIED", "CLOSED", "PENDING",
+        "ACCEPTED", "PROCESSING", "AWAITING CLARIFICATION", "REFERRED",
+    ]).all():
+        raise ValueError("A portal status is missing from the color key")
     return sample
 
 
@@ -91,9 +97,11 @@ def missing_positions(n):
 
 
 def outcome_colors(part):
-    return [COLORS["successful"] if value in SUCCESSFUL_OUTCOMES else
-            COLORS["unsuccessful"] if value == "unsuccessful" else COLORS["other"]
-            for value in part["outcome"]]
+    return [COLORS["denied"] if status == "DENIED" else
+            COLORS["closed"] if status == "CLOSED" else
+            COLORS["successful"] if status == "SUCCESSFUL" else
+            COLORS["partial"] if status == "PARTIALLY SUCCESSFUL" else
+            COLORS["other"] for status in part["status"]]
 
 
 def caption(sample):
@@ -101,11 +109,12 @@ def caption(sample):
         f"Response times and observed outcomes for {len(sample):,} sampled public eFOI requests filed in 2025. "
         "Each equal-sized point represents one request. Horizontal positions indicate elapsed time to the first "
         "agency reply on a logarithmic scale; vertical offsets prevent overlap and have no numerical meaning. "
-        "Requests without an agency reply occupy a separate categorical column. Blue includes successful "
-        "and partially successful requests; pink indicates unsuccessful requests; gray includes open and "
+        "Requests without an agency reply occupy a separate categorical column. Blue indicates successful "
+        "requests; light blue indicates partially successful requests; dark pink indicates denied requests; light pink indicates closed requests; gray includes open and "
         "referred requests. The sample is stratified by agency group and filing quarter; points are unweighted "
         "and do not represent population proportions. Statuses were observed on 29 September 2026. "
-        "A first reply may be an acknowledgment."
+        "A first reply may be an acknowledgment. The line marks 15 calendar days, not legal compliance: "
+        "EO No. 2 specifies 15 working days for access decisions, with extensions possible."
     )
 
 
@@ -122,8 +131,12 @@ def draw(sample):
         ax.text(x, y, label, fontsize=size, color=color, va="center", **kwargs)
 
     text(WIDTH / 2, 85, HEADLINE, 32, weight="bold", ha="center")
-    text((TIME_LEFT + TIME_RIGHT) / 2, 220 - GRAPH_RAISE, "Time to first agency reply", 17, ha="center")
+    text((TIME_LEFT + TIME_RIGHT) / 2, 220 - GRAPH_RAISE, "Time to first agency reply · calendar time", 17, ha="center")
     text(NO_REPLY_X, 220 - GRAPH_RAISE, "No reply", 17, ha="center")
+    reference_x = time_position(REFERENCE_DAYS)
+    ax.plot([reference_x, reference_x], [255 - GRAPH_RAISE, 900 - GRAPH_RAISE],
+            color="#FFB000", linewidth=1, linestyle=(0, (5, 5)), alpha=.85, zorder=1)
+    text(reference_x, 242 - GRAPH_RAISE, "15 calendar days", 10, "#FFB000", ha="center")
     # A categorical break prevents the no-reply column from implying elapsed time.
     ax.plot([1605, 1605], [255 - GRAPH_RAISE, 900 - GRAPH_RAISE], color="#514B55", lw=1, ls=(0, (3, 6)))
     dot_size = (DOT_DIAMETER * 72 / 100)**2
@@ -160,11 +173,12 @@ def draw(sample):
         text(time_position(days), 925 - GRAPH_RAISE, label, 12, MUTED, ha="center")
     text((TIME_LEFT + TIME_RIGHT) / 2, 956 - GRAPH_RAISE, "Logarithmic time scale", 11, MUTED, ha="center")
 
-    legend_items = [("Successful / partially successful", COLORS["successful"]),
-                    ("Unsuccessful", COLORS["unsuccessful"]), ("Open / referred", COLORS["other"])]
+    legend_items = [("Successful", COLORS["successful"]), ("Partially successful", COLORS["partial"]),
+                    ("Denied", COLORS["denied"]), ("Closed", COLORS["closed"]),
+                    ("Open / referred", COLORS["other"])]
     handles = [Line2D([], [], marker="o", color=color, linestyle="none", markersize=7, label=label)
                for label, color in legend_items]
-    ax.legend(handles=handles, loc="center", bbox_to_anchor=(.53, .065 + GRAPH_RAISE / HEIGHT), ncol=3,
+    ax.legend(handles=handles, loc="center", bbox_to_anchor=(.53, .065 + GRAPH_RAISE / HEIGHT), ncol=5,
               frameon=False, labelcolor=TEXT, fontsize=13, handletextpad=.5, columnspacing=2.5)
     footer_font = fm.FontProperties(fname=str(ROOT / "assets/fonts/Roboto-CondensedRegular.ttf"))
     footer_lines = [
