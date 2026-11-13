@@ -12,8 +12,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,400;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,700;1,8..60,400&display=swap">
-  <link rel="stylesheet" href="assets/styles.css">
-  <script src="assets/app.js" defer></script>
+  <link rel="stylesheet" href="assets/styles.css?v=20261113q">
+  <script src="assets/app.js?v=20261113q" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to main content</a>
@@ -56,18 +56,7 @@
           </div>
         </div>
 
-        <aside class="filing-summary" aria-label="Case filing summary">
-          <div class="filing-summary-head">
-            <span>Record audit brief</span>
-            <span class="stamp stamp-inline stamp-neutral">EDA COMPLETE</span>
-          </div>
-          <dl class="filing-dl">
-            <div><dt>Legal anchor</dt><dd><a href="https://lawphil.net/executive/execord/eo2016/eo_2_2016.html">Executive Order No. 2, s. 2016</a> (15 working days; LGUs voluntary)</dd></div>
-            <div><dt>Portal scope</dt><dd>271,232 listed requests across 739 directory agencies on collection day</dd></div>
-            <div><dt>Core qualifier</dt><dd>First-message calendar times do not directly measure working-day compliance; an early reply may be an acknowledgment.</dd></div>
-            <div><dt>Public dataset</dt><dd><a href="https://docs.google.com/spreadsheets/d/10om8YdCtoXA7cndqIHQegUSYfqqeKhTvkbDoB-45Vrc/edit?usp=sharing">Google Sheet (3 tabs)</a>, <a href="https://github.com/hugvan/cs132-project">GitHub Repo</a></dd></div>
-          </dl>
-        </aside>
+        <div class="ticket-rain" id="ticket-rain" aria-hidden="true"></div>
       </div>
 
       <div class="scope-ledger" aria-label="Study scope counts">
@@ -596,15 +585,26 @@
           <div>
                         <h2 id="nutshell-title">eFOI Response Times and Request Outcomes, 2025</h2>
           </div>
-          <a class="btn-download-pdf" href="assets/figures/nutshell.pdf" download>
+          <a class="btn-download-pdf" href="assets/figures/nutshell.pdf?v=20261113" download>
             <span>Download the nutshell PDF</span>
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
           </a>
         </div>
 
-        <figure class="exhibit-a-figure">
-          <a href="assets/figures/nutshell.png" target="_blank" rel="noopener" aria-label="Open the nutshell figure at full size">
-            <img src="assets/figures/nutshell.png" width="1920" height="1080" decoding="async" alt="A beeswarm plot with one dot per sampled request, arranged by agency group and time to first agency reply. Separate colors distinguish successful, partially successful, denied, closed, and open or referred requests. A dashed line marks 15 calendar days; a separate column contains requests without recorded replies.">
+        <figure class="exhibit-a-figure" id="nutshell-figure">
+          <div class="nutshell-live" id="nutshell-live" hidden>
+            <div class="nutshell-legend" role="group" aria-label="Highlight outcomes">
+              <span class="nutshell-legend-label">Highlight</span>
+            </div>
+            <div class="nutshell-stage">
+              <svg class="nutshell-svg" id="nutshell-svg" role="img" aria-label="Interactive version of the nutshell figure. Hover or tap a dot to see one request's agency group, time to first reply, and outcome."></svg>
+              <div class="nutshell-tip" id="nutshell-tip" aria-hidden="true"></div>
+            </div>
+            <p class="nutshell-readout" id="nutshell-readout" aria-live="polite"></p>
+            <p class="nutshell-credit">Data: eFOI portal, 2025 requests. Observed 29 September 2026. Unweighted stratified sample.<br>Chart: V. Aquino, E. Lim, J. Mayuyu, C. Sim, PILIPINUTS 2026<br>Hover topics are approximate, tagged from keywords in each request title; the titles themselves are not published. Requests titled “Test request” are shown as their own topic.</p>
+          </div>
+          <a class="nutshell-static" href="assets/figures/nutshell.png?v=20261113" target="_blank" rel="noopener" aria-label="Open the nutshell figure at full size">
+            <img src="assets/figures/nutshell.png?v=20261113" width="1920" height="1080" decoding="async" alt="A beeswarm plot with one dot per sampled request, one row per agency group, positioned by time to first agency reply on a logarithmic scale. Dot color shows the observed outcome: successful, partially successful, denied, closed, or open and referred. A dashed line marks 15 calendar days, and a separate column on the right holds requests with no recorded reply.">
           </a>
           <figcaption>Response times and observed outcomes for 1,641 sampled public eFOI requests filed in 2025. Each equal-sized point represents one request. Horizontal positions indicate elapsed time to the first agency reply on a logarithmic scale; vertical offsets prevent overlap and have no numerical meaning. Requests without an agency reply occupy a separate categorical column. Blue indicates successful requests; light blue indicates partially successful requests; dark pink indicates denied requests; light pink indicates closed requests; gray includes open and referred requests. The sample is stratified by agency group and filing quarter; points are unweighted and do not represent population proportions. Statuses were observed on 29 September 2026. A first reply may be an acknowledgment. The line marks 15 calendar days, not legal compliance: EO No. 2 specifies 15 working days for access decisions, with extensions possible.</figcaption>
         </figure>
@@ -770,8 +770,5 @@
     <span><span class="fyi-mark fyi-mark-inverse">FYI<span>.</span></span> FOI Your Information, CS 132 Section WFX Group 1</span>
     <a href="#title">Back to top ↑</a>
   </footer>
-<!-- impeccable-live-start -->
-<script src="http://localhost:8400/live.js?token=5503f22e-17cc-48ab-b3c3-20e41a109c11"></script>
-<!-- impeccable-live-end -->
 </body>
 </html>

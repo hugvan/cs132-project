@@ -1196,9 +1196,633 @@
   }
 
   /* --------------------------------------------------------------------------
+     Cover: request tickets that drop in, then fall as you scroll (decorative)
+     -------------------------------------------------------------------------- */
+  function initTicketRain() {
+    const box = document.getElementById('ticket-rain');
+    if (!box) return;
+
+    // Deterministic pseudo-random so the layout is the same on every load.
+    let seed = 132;
+    const rand = () => {
+      seed = (seed * 16807) % 2147483647;
+      return (seed - 1) / 2147483646;
+    };
+
+    // Roughly the sample's mix: mostly successful, then unsuccessful, open, no reply.
+    const KINDS = ['succ', 'succ', 'succ', 'succ', 'unsucc', 'unsucc', 'open', 'wait'];
+    const COUNT = 18;
+    const drops = [];
+
+    for (let i = 0; i < COUNT; i++) {
+      const kind = KINDS[Math.floor(rand() * KINDS.length)];
+      const depth = 0.55 + rand() * 0.6; // smaller tickets read as farther away
+      const lane = (i + rand() * 0.9) / COUNT;
+      const r0 = Math.round(-22 + rand() * 44);
+      const el = document.createElement('span');
+      el.className = 'rain-drop';
+      el.style.cssText = [
+        `--x:${(lane * 88).toFixed(1)}%`,
+        `--yf:${rand().toFixed(3)}`,
+        `--s:${depth.toFixed(2)}`,
+        `--o:${(0.4 + depth * 0.55).toFixed(2)}`,
+        `--r0:${r0}deg`,
+        `z-index:${Math.round(depth * 10)}`
+      ].join(';');
+      el.innerHTML = `<span class="rain-tilt"><span class="q-ticket q-${kind}">${kind === 'wait' ? '' : MARK_SVG[kind]}</span></span>`;
+      box.appendChild(el);
+      drops.push({
+        el,
+        tilt: el.firstElementChild,
+        r0,
+        baseOpacity: 0.4 + depth * 0.55,
+        speed: 0.35 + depth * 0.75, // nearer tickets fall faster (parallax)
+        spin: (rand() < 0.5 ? -1 : 1) * (0.04 + rand() * 0.08),
+        drift: (-0.08 + rand() * 0.16)
+      });
+    }
+
+    if (prefersReducedMotion()) return; // still scatter
+
+    // 1. Drop in on load.
+    drops.forEach((d, i) => {
+      if (typeof d.tilt.animate !== 'function') return;
+      d.tilt.animate(
+        [
+          { transform: `translate3d(0, -140px, 0) rotate(${d.r0 * 0.3}deg)`, opacity: 0 },
+          { opacity: 1, offset: 0.35 },
+          { transform: `translate3d(0, 0, 0) rotate(${d.r0}deg)`, opacity: 1 }
+        ],
+        { duration: 900, delay: 60 + i * 45, easing: 'cubic-bezier(0.16, 1, 0.3, 1)', fill: 'backwards' }
+      );
+    });
+
+    // 2. Fall with the scroll while the cover is on screen.
+    let active = true;
+    let ticking = false;
+    const update = () => {
+      ticking = false;
+      const y = Math.max(0, window.scrollY);
+      for (const d of drops) {
+        const fall = y * d.speed;
+        d.el.style.transform =
+          `translate3d(${(y * d.drift).toFixed(1)}px, ${fall.toFixed(1)}px, 0) rotate(${(y * d.spin).toFixed(1)}deg)`;
+        // Fade out over the first ~420px of travel so nothing is cut off at the hero's edge.
+        d.el.style.opacity = (d.baseOpacity * Math.max(0, 1 - fall / 420)).toFixed(3);
+      }
+    };
+    const onScroll = () => {
+      if (!active || ticking) return;
+      ticking = true;
+      requestAnimationFrame(update);
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver((entries) => {
+        active = entries[0].isIntersecting;
+        if (active) onScroll();
+      }).observe(box.closest('.cover-sheet') || box);
+    }
+    update();
+  }
+
+  /* --------------------------------------------------------------------------
+     Interactive nutshell: same layout as the reviewed PNG, with hover details
+     and smooth zoom (pinch, Ctrl/Cmd + scroll, double-click, or the buttons).
+     -------------------------------------------------------------------------- */
+  function initNutshell() {
+    const figure = document.getElementById('nutshell-figure');
+    const live = document.getElementById('nutshell-live');
+    const svg = document.getElementById('nutshell-svg');
+    const tip = document.getElementById('nutshell-tip');
+    const readout = document.getElementById('nutshell-readout');
+    if (!figure || !live || !svg || !window.fetch) return;
+
+    const OUTCOMES = [
+      ['successful', 'Successful'],
+      ['partial', 'Partially successful'],
+      ['denied', 'Denied'],
+      ['closed', 'Closed'],
+      ['other', 'Open or referred']
+    ];
+    const OUTCOME_LABEL = Object.fromEntries(OUTCOMES);
+    const VIEW = { x: 0, y: 135, w: 1880, h: 810 };
+    const PLOT_LEFT = 345; // dots never slide under the row labels
+    const MAX_ZOOM = 6;
+
+    fetch('assets/data/nutshell.json?v=20261113b')
+      .then((res) => (res.ok ? res.json() : Promise.reject(res.status)))
+      .then(build)
+      .catch(() => { /* keep the static PNG */ });
+
+    function formatWait(days) {
+      if (days == null) return 'No recorded agency reply';
+      const minutes = days * 1440;
+      if (minutes < 60) return `First reply after ${Math.max(1, Math.round(minutes))} min`;
+      if (days < 1) return `First reply after ${(days * 24).toFixed(1)} hours`;
+      if (days < 2) return `First reply after ${days.toFixed(2)} days`;
+      return `First reply after ${days.toFixed(1)} days`;
+    }
+
+    function build(data) {
+      const C = data.colors;
+      const raise = data.raise;
+      const rowTop = 255 - raise;
+      const rowBottom = 900 - raise;
+      const r = data.dotDiameter / 2;
+      const P = data.points.map(([x, y, outcome, days, g, topic]) => ({ x, y, outcome, days, g, topic }));
+      const AUTO_K = 3.4; // hover auto-zoom level
+      const pos = (days) => data.timeLeft + ((Math.log10(days) - Math.log10(data.timeMin)) / Math.log10(data.timeMax / data.timeMin)) * (data.timeRight - data.timeLeft);
+      // [days, label, level]: level 0 always shows; finer levels appear as you zoom in.
+      const TICKS = [
+        [1 / 1440, '1 min', 1], [5 / 1440, '5 min', 0], [15 / 1440, '15 min', 1], [30 / 1440, '30 min', 1],
+        [1 / 24, '1 hour', 0], [2 / 24, '2 hours', 1], [3 / 24, '3 hours', 1], [0.25, '6 hours', 0], [0.5, '12 hours', 1],
+        [1, '1 day', 0], [2, '2 days', 1], [3, '3 days', 1], [4, '4 days', 2], [5, '5 days', 1], [7, '7 days', 0],
+        [10, '10 days', 1], [14, '14 days', 2], [21, '21 days', 2], [30, '30 days', 0], [60, '60 days', 1],
+        [90, '90 days', 0], [180, '180 days', 1], [365, '1 year', 0], [730, '2 years', 1]
+      ];
+
+      const t = (x, y, s, size, fill, anchor = 'middle', weight = 400, extra = '') =>
+        `<text x="${x}" y="${y}" font-size="${size}" fill="${fill}" text-anchor="${anchor}" font-weight="${weight}" dominant-baseline="middle" ${extra}>${s}</text>`;
+
+      svg.setAttribute('viewBox', `${VIEW.x} ${VIEW.y} ${VIEW.w} ${VIEW.h}`);
+      const parts = [];
+      parts.push(`<defs><clipPath id="nutshell-clip"><rect x="${PLOT_LEFT}" y="${rowTop - 6}" width="${VIEW.x + VIEW.w - PLOT_LEFT}" height="${rowBottom - rowTop + 6}"/></clipPath></defs>`);
+      parts.push(`<rect x="${VIEW.x}" y="${VIEW.y}" width="${VIEW.w}" height="${VIEW.h}" fill="#1c1246"/>`);
+
+      // Zoomable layer: everything positioned on the data scale.
+      const rx = data.referenceX;
+      const rows = data.groups.map((g, i) => {
+        const dots = P.filter((p) => p.g === i)
+          .map((p) => `<circle class="dot o-${p.outcome}" cx="${p.x}" cy="${p.y}" r="${r}" fill="${C[p.outcome]}"/>`)
+          .join('');
+        return `<g class="group-row" data-g="${i}">${dots}</g>`;
+      }).join('');
+      parts.push(`<g clip-path="url(#nutshell-clip)"><g id="nutshell-zoom">
+        <rect id="nutshell-ref-band" x="${rx - 6}" y="${rowTop}" width="12" height="${rowBottom - rowTop}" fill="#FFB000" fill-opacity="0.1"/>
+        <line x1="${rx}" y1="${rowTop}" x2="${rx}" y2="${rowBottom}" stroke="#FFB000" stroke-width="2" stroke-dasharray="6 5" vector-effect="non-scaling-stroke"/>
+        <line x1="1605" y1="${rowTop}" x2="1605" y2="${rowBottom}" stroke="#5a4999" stroke-width="1" stroke-dasharray="3 6" vector-effect="non-scaling-stroke"/>
+        ${rows}
+        <circle id="nutshell-hover" r="${r + 3}" fill="none" stroke="#FFFFFF" stroke-width="2" vector-effect="non-scaling-stroke" opacity="0"/>
+      </g></g>`);
+
+      // Fixed-size labels that follow the zoom.
+      parts.push(t((data.timeLeft + data.timeRight) / 2 - 50, 220 - raise, 'Time to first agency reply', 27, '#FFFFFF'));
+      parts.push(t(data.noReplyX, 220 - raise, 'No reply', 27, '#FFFFFF', 'middle', 400, 'id="nutshell-noreply-label"'));
+      parts.push(t(rx, 242 - raise, '15 calendar days', 23, '#FFB000', 'middle', 700, 'id="nutshell-ref-label"'));
+      parts.push(`<line x1="${data.timeLeft}" y1="${rowBottom}" x2="${data.timeRight}" y2="${rowBottom}" stroke="#C8C4CC" stroke-width="0.8" id="nutshell-axis"/>`);
+      TICKS.forEach(([d, label], i) => parts.push(`<g class="nutshell-tick" data-i="${i}"><line x1="0" x2="0" y1="${rowBottom}" y2="${rowBottom + 7}" stroke="#C8C4CC" stroke-width="1"/>${t(0, 930 - raise, label, 21, '#C8C4CC')}</g>`));
+      parts.push(t((data.timeLeft + data.timeRight) / 2, 965 - raise, 'Logarithmic time scale', 18, '#C8C4CC'));
+      data.groups.forEach((g, i) => {
+        parts.push(`<g class="nutshell-glabel" data-g="${i}">${t(320, g.center - 11, g.label, 25, '#FFFFFF', 'end')}${t(320, g.center + 19, `n = ${g.n.toLocaleString('en-US')}`, 19, '#C8C4CC', 'end')}</g>`);
+      });
+      svg.innerHTML = parts.join('');
+
+      const layer = svg.querySelector('#nutshell-zoom');
+      const ring = svg.querySelector('#nutshell-hover');
+      const refLabel = svg.querySelector('#nutshell-ref-label');
+      const refBand = svg.querySelector('#nutshell-ref-band');
+      const noReplyLabel = svg.querySelector('#nutshell-noreply-label');
+      const axis = svg.querySelector('#nutshell-axis');
+      const tickEls = Array.from(svg.querySelectorAll('.nutshell-tick'));
+      const glabels = Array.from(svg.querySelectorAll('.nutshell-glabel'));
+      const rowEls = Array.from(svg.querySelectorAll('.group-row'));
+      const dotsByOutcome = {};
+      OUTCOMES.forEach(([k]) => { dotsByOutcome[k] = svg.querySelectorAll(`.o-${k}`); });
+
+      /* ---------- Zoom state: view = base * k + (tx, ty) ---------- */
+      const cur = { k: 1, tx: 0, ty: 0 };
+      const target = { k: 1, tx: 0, ty: 0 };
+      let anim = null;
+      const reduce = prefersReducedMotion();
+
+      const clamp = (z) => {
+        z.k = Math.min(MAX_ZOOM, Math.max(1, z.k));
+        // Hover auto-zoom may run past the edges so the dot can sit dead centre.
+        const padX = autoZoomed ? (VIEW.x + VIEW.w - PLOT_LEFT) / 2 : 0;
+        const padY = autoZoomed ? (rowBottom - rowTop) / 2 : 0;
+        const minX = PLOT_LEFT + (VIEW.x + VIEW.w - PLOT_LEFT) - (VIEW.x + VIEW.w) * z.k - padX;
+        const maxX = PLOT_LEFT - PLOT_LEFT * z.k + padX;
+        const minY = VIEW.y + VIEW.h - (VIEW.y + VIEW.h) * z.k - padY;
+        const maxY = VIEW.y - VIEW.y * z.k + padY;
+        z.tx = Math.min(maxX, Math.max(minX, z.tx));
+        z.ty = Math.min(maxY, Math.max(minY, z.ty));
+        return z;
+      };
+
+      const apply = () => {
+        const { k, tx, ty } = cur;
+        layer.setAttribute('transform', `translate(${tx.toFixed(2)} ${ty.toFixed(2)}) scale(${k.toFixed(4)})`);
+        refBand.setAttribute('x', (rx - 6 / k).toFixed(2));
+        refBand.setAttribute('width', (12 / k).toFixed(3));
+        const sx = (x) => x * k + tx;
+        const sy = (y) => y * k + ty;
+        const visX = (x) => x >= PLOT_LEFT - 5 && x <= VIEW.x + VIEW.w - 20;
+        // Greedy label placement: coarse ticks first, then finer ones where they fit.
+        const placed = [];
+        const order = TICKS.map((tk, i) => i).sort((a, b) => TICKS[a][2] - TICKS[b][2]);
+        const showLevel = k < 1.6 ? 0 : k < 3.5 ? 1 : 2;
+        order.forEach((i) => {
+          const el = tickEls[i];
+          const x = sx(pos(TICKS[i][0]));
+          const fits = TICKS[i][2] <= showLevel && visX(x) && x >= PLOT_LEFT + 30 &&
+            x <= Math.min(VIEW.x + VIEW.w - 40, sx(data.timeRight) + 30) && placed.every((px) => Math.abs(px - x) > 95);
+          if (fits) placed.push(x);
+          el.setAttribute('transform', `translate(${x.toFixed(1)} 0)`);
+          el.style.display = fits ? '' : 'none';
+        });
+        axis.setAttribute('x1', Math.max(PLOT_LEFT, sx(data.timeLeft)).toFixed(1));
+        axis.setAttribute('x2', Math.min(VIEW.x + VIEW.w, sx(data.timeRight)).toFixed(1));
+        const refX = sx(rx);
+        refLabel.setAttribute('x', refX.toFixed(1));
+        refLabel.style.display = visX(refX) ? '' : 'none';
+        const nrX = sx(data.noReplyX);
+        noReplyLabel.setAttribute('x', nrX.toFixed(1));
+        noReplyLabel.style.display = visX(nrX) ? '' : 'none';
+        glabels.forEach((el, i) => {
+          const y = sy(data.groups[i].center);
+          el.setAttribute('transform', `translate(0 ${(y - data.groups[i].center).toFixed(1)})`);
+          el.style.display = y > rowTop - 20 && y < rowBottom + 10 ? '' : 'none';
+        });
+        live.classList.toggle('is-zoomed', k > 1.01);
+        if (k <= 1.001 && target.k <= 1.001) manualZoom = false;
+        zoomOutBtn.disabled = k <= 1.01;
+        resetZoomBtn.disabled = k <= 1.01;
+        zoomInBtn.disabled = k >= MAX_ZOOM - 0.01;
+      };
+
+      // Timed glide: scale changes geometrically (each step of zoom feels the same) and the
+      // point at the centre of the plot travels in a straight line, so nothing swoops.
+      const PCX = (PLOT_LEFT + VIEW.x + VIEW.w) / 2;
+      const PCY = (rowTop + rowBottom) / 2;
+      const easeInOut = (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
+      const easeOut = (t) => 1 - Math.pow(1 - t, 3);
+      let tween = null;
+      const step = (now) => {
+        const tw = tween;
+        if (!tw) { anim = null; return; }
+        const t = Math.min(1, Math.max(0, (now - tw.start) / tw.dur));
+        const e = tw.ease(t);
+        const k = tw.k0 * Math.pow(tw.k1 / tw.k0, e);
+        // The anchor point slides in a straight line on screen while the scale changes.
+        const sx = tw.s0x + (tw.s1x - tw.s0x) * e;
+        const sy = tw.s0y + (tw.s1y - tw.s0y) * e;
+        cur.k = k;
+        cur.tx = sx - tw.ax * k;
+        cur.ty = sy - tw.ay * k;
+        if (t >= 1) {
+          Object.assign(cur, target);
+          tween = null;
+          anim = null;
+          apply();
+          positionTip();
+          if (lastEvent && hovering) show();
+          return;
+        }
+        apply();
+        positionTip();
+        anim = requestAnimationFrame(step);
+      };
+      const go = (instant = false, keepTip = false, dur = 600, ease = easeInOut, anchor = null) => {
+        clamp(target);
+        if (!keepTip) hide();
+        if (instant || reduce) {
+          if (anim) cancelAnimationFrame(anim);
+          anim = null;
+          tween = null;
+          Object.assign(cur, target);
+          apply();
+          return;
+        }
+        // Anchor: a point on the data (base coordinates). Defaults to what sits at the plot centre.
+        const ax = anchor ? anchor.x : (PCX - cur.tx) / cur.k;
+        const ay = anchor ? anchor.y : (PCY - cur.ty) / cur.k;
+        tween = {
+          start: performance.now(), dur, ease,
+          k0: cur.k, k1: target.k, ax, ay,
+          s0x: ax * cur.k + cur.tx, s0y: ay * cur.k + cur.ty,
+          s1x: ax * target.k + target.tx, s1y: ay * target.k + target.ty
+        };
+        if (!anim) anim = requestAnimationFrame(step);
+      };
+
+      // Zoom about a point given in viewBox coordinates.
+      const zoomAt = (factor, vx, vy, instant, keepTip, dur, ease) => {
+        const k = Math.min(MAX_ZOOM, Math.max(1, target.k * factor));
+        const bx = (vx - target.tx) / target.k;
+        const by = (vy - target.ty) / target.k;
+        target.k = k;
+        target.tx = vx - bx * k;
+        target.ty = vy - by * k;
+        go(instant, keepTip, dur, ease, { x: bx, y: by });
+      };
+
+      /* ---------- Hover auto-zoom state ---------- */
+      let selected = null;
+      let autoZoomed = false;
+      let manualZoom = false;
+      let dwellTimer = null;
+      let leaveTimer = null;
+      let holdSelection = null; // {x, y} client point; ignore hover until the pointer moves away from it
+      const clearTimers = () => {
+        clearTimeout(dwellTimer); dwellTimer = null;
+        clearTimeout(leaveTimer); leaveTimer = null;
+      };
+      const takeManual = () => {
+        clearTimers();
+        autoZoomed = false;
+        manualZoom = true;
+      };
+      // Glide so a dot sits in the middle of the plot area.
+      const centerOn = (p, k) => {
+        const cx = (PLOT_LEFT + VIEW.x + VIEW.w) / 2;
+        const cy = (rowTop + rowBottom) / 2;
+        target.k = Math.min(MAX_ZOOM, Math.max(1, k));
+        target.tx = cx - p.x * target.k;
+        target.ty = cy - p.y * target.k;
+        if (lastEvent) holdSelection = { x: lastEvent.clientX, y: lastEvent.clientY };
+        go(false, true, 850, easeInOut, p);
+      };
+
+      const zoomOutAuto = () => {
+        clearTimers();
+        if (!autoZoomed) { hide(); return; }
+        const anchor = selected;
+        autoZoomed = false;
+        Object.assign(target, { k: 1, tx: 0, ty: 0 });
+        go(false, false, 700, easeInOut, anchor);
+      };
+
+      const toView = (ev) => {
+        const pt = svg.createSVGPoint();
+        pt.x = ev.clientX; pt.y = ev.clientY;
+        return pt.matrixTransform(svg.getScreenCTM().inverse());
+      };
+
+      /* ---------- Toolbar: highlight chips + zoom controls ---------- */
+      const legend = live.querySelector('.nutshell-legend');
+      const focus = new Set();
+      const chips = OUTCOMES.map(([key, label]) => {
+        const count = P.filter((p) => p.outcome === key).length;
+        const b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'nutshell-chip';
+        b.setAttribute('aria-pressed', 'false');
+        b.style.setProperty('--c', C[key]);
+        b.innerHTML = `<span class="dot" aria-hidden="true"></span>${label}`;
+        b.addEventListener('click', () => {
+          if (focus.has(key)) focus.delete(key); else focus.add(key);
+          applyFocus();
+        });
+        legend.appendChild(b);
+        return { key, b, count };
+      });
+      const reset = document.createElement('button');
+      reset.type = 'button';
+      reset.className = 'nutshell-chip is-reset';
+      reset.textContent = 'Show all';
+      reset.hidden = true;
+      reset.addEventListener('click', () => { focus.clear(); applyFocus(); });
+      legend.appendChild(reset);
+
+      const zoomBar = document.createElement('div');
+      zoomBar.className = 'nutshell-zoom';
+      zoomBar.setAttribute('role', 'group');
+      zoomBar.setAttribute('aria-label', 'Zoom');
+      const mkBtn = (label, aria, fn) => {
+        const b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'nutshell-zoom-btn';
+        b.textContent = label;
+        b.setAttribute('aria-label', aria);
+        b.addEventListener('click', fn);
+        zoomBar.appendChild(b);
+        return b;
+      };
+      const center = () => [PLOT_LEFT + (VIEW.x + VIEW.w - PLOT_LEFT) / 2, VIEW.y + VIEW.h / 2];
+      const zoomInBtn = mkBtn('+', 'Zoom in', () => { takeManual(); zoomAt(1.8, ...center()); });
+      const zoomOutBtn = mkBtn('−', 'Zoom out', () => { takeManual(); zoomAt(1 / 1.8, ...center()); });
+      const resetZoomBtn = mkBtn('Reset', 'Reset zoom', () => {
+        clearTimers();
+        autoZoomed = false;
+        manualZoom = false;
+        Object.assign(target, { k: 1, tx: 0, ty: 0 });
+        go();
+      });
+      resetZoomBtn.classList.add('is-text');
+      legend.appendChild(zoomBar);
+
+      function applyFocus() {
+        svg.classList.toggle('has-focus', focus.size > 0);
+        chips.forEach(({ key, b }) => {
+          const on = focus.has(key);
+          b.setAttribute('aria-pressed', String(on));
+          dotsByOutcome[key].forEach((d) => d.classList.toggle('is-on', on));
+        });
+        reset.hidden = focus.size === 0;
+        if (!focus.size) {
+          readout.textContent = `All ${P.length.toLocaleString('en-US')} sampled requests shown (unweighted). Rest on a dot to zoom in where your cursor is and see what the request was about; drag to pan, and move out of the chart to zoom back out. Pinch, Ctrl/⌘ + scroll, or double-click also zoom.`;
+          return;
+        }
+        const n = chips.filter((c) => focus.has(c.key)).reduce((s, c) => s + c.count, 0);
+        const names = chips.filter((c) => focus.has(c.key)).map((c) => OUTCOME_LABEL[c.key].toLowerCase());
+        const list = names.length > 1 ? `${names.slice(0, -1).join(', ')} or ${names.at(-1)}` : names[0];
+        readout.textContent = `Highlighting ${list}: ${n.toLocaleString('en-US')} of ${P.length.toLocaleString('en-US')} sampled requests (unweighted).`;
+      }
+
+      /* ---------- Hover / tap ---------- */
+      let frame = null;
+      let lastEvent = null;
+      let hovering = false;
+      function hide() {
+        selected = null;
+        ring.setAttribute('opacity', '0');
+        tip.classList.remove('is-on');
+        rowEls.forEach((el) => el.classList.remove('is-dim'));
+        glabels.forEach((el) => el.classList.remove('is-dim'));
+      }
+
+      function positionTip() {
+        if (!selected || !tip.classList.contains('is-on')) return;
+        const box = svg.getBoundingClientRect();
+        const scale = box.width / VIEW.w;
+        const px = (selected.x * cur.k + cur.tx - VIEW.x) * scale;
+        const py = (selected.y * cur.k + cur.ty - VIEW.y) * scale;
+        let left = px + 18;
+        if (left + tip.offsetWidth > box.width - 8) left = px - tip.offsetWidth - 18;
+        tip.style.left = `${Math.max(8, left)}px`;
+        tip.style.top = `${Math.max(8, Math.min(py - 18, box.height - tip.offsetHeight - 8))}px`;
+      }
+
+      function select(best) {
+        selected = best;
+        ring.setAttribute('cx', best.x);
+        ring.setAttribute('cy', best.y);
+        ring.setAttribute('opacity', '1');
+        rowEls.forEach((el) => el.classList.toggle('is-dim', Number(el.dataset.g) !== best.g));
+        glabels.forEach((el) => el.classList.toggle('is-dim', Number(el.dataset.g) !== best.g));
+        const g = data.groups[best.g];
+        tip.innerHTML =
+          `<span class="tip-topic">${data.topics[best.topic]}</span>` +
+          `<span class="tip-meta">${g.label}</span>` +
+          `<span class="tip-wait">${formatWait(best.days)}</span>` +
+          `<span class="tip-outcome" style="--c:${C[best.outcome]}">${OUTCOME_LABEL[best.outcome]}</span>`;
+        tip.classList.add('is-on');
+        positionTip();
+      }
+
+      function show() {
+        frame = null;
+        const ev = lastEvent;
+        if (!ev || dragging) return;
+        if (anim) return; // keep the current dot while the view glides
+        if (holdSelection) {
+          if (Math.hypot(ev.clientX - holdSelection.x, ev.clientY - holdSelection.y) < 6) return;
+          holdSelection = null;
+        }
+        const v = toView(ev);
+        let best = null;
+        if (v.x >= PLOT_LEFT) {
+          const bx = (v.x - cur.tx) / cur.k;
+          const by = (v.y - cur.ty) / cur.k;
+          const reach = Math.max(r + 2, 14 / cur.k);
+          let bestD = reach * reach;
+          for (const p of P) {
+            if (focus.size && !focus.has(p.outcome)) continue;
+            const dx = p.x - bx;
+            const dy = p.y - by;
+            const d = dx * dx + dy * dy;
+            if (d < bestD) { bestD = d; best = p; }
+          }
+        }
+
+        if (!best) {
+          // Zoomed in: keep the last card until the pointer leaves the chart box.
+          if (!autoZoomed && !manualZoom) hide();
+          return;
+        }
+
+        const changed = best !== selected;
+        if (changed) select(best);
+
+        // Rest on a dot to glide in around the cursor. Restart the wait whenever the dot changes.
+        if (!manualZoom && !autoZoomed && !reduce && cur.k < 1.01 && (changed || !dwellTimer)) {
+          clearTimeout(dwellTimer);
+          const anchor = best;
+          dwellTimer = setTimeout(() => {
+            dwellTimer = null;
+            if (selected !== anchor || manualZoom || autoZoomed || !hovering || !lastEvent) return;
+            autoZoomed = true;
+            // Zoom around the cursor: the point under the pointer stays put.
+            const v = toView(lastEvent);
+            holdSelection = { x: lastEvent.clientX, y: lastEvent.clientY };
+            zoomAt(AUTO_K / target.k, v.x, v.y, false, true, 850, easeInOut);
+          }, 220);
+        }
+      }
+
+      /* ---------- Pointer: hover, drag to pan, double-click to zoom ---------- */
+      let dragging = false;
+      let dragStart = null;
+      svg.addEventListener('pointermove', (ev) => {
+        lastEvent = ev;
+        hovering = true;
+        if (dragStart) {
+          const v = toView(ev);
+          const dx = v.x - dragStart.vx;
+          const dy = v.y - dragStart.vy;
+          if (!dragging && Math.hypot(ev.clientX - dragStart.cx, ev.clientY - dragStart.cy) > 4) {
+            dragging = true;
+            clearTimers();
+            if (!autoZoomed) manualZoom = true;
+            live.classList.add('is-dragging');
+            hide();
+          }
+          if (dragging) {
+            target.tx = dragStart.tx + dx;
+            target.ty = dragStart.ty + dy;
+            clamp(target);
+            Object.assign(cur, target);
+            apply();
+          }
+          return;
+        }
+        if (!frame) frame = requestAnimationFrame(show);
+      });
+      svg.addEventListener('pointerdown', (ev) => {
+        lastEvent = ev;
+        if (cur.k > 1.01 && ev.button === 0) {
+          const v = toView(ev);
+          dragStart = { vx: v.x, vy: v.y, cx: ev.clientX, cy: ev.clientY, tx: cur.tx, ty: cur.ty };
+          svg.setPointerCapture(ev.pointerId);
+        }
+        if (ev.pointerType !== 'mouse') show();
+      });
+      const endDrag = (ev) => {
+        const wasDrag = dragging;
+        if (!wasDrag && ev && ev.type === 'pointerup' && cur.k > 1.01 && !anim) {
+          holdSelection = null;
+          lastEvent = ev;
+          show();
+        }
+        dragStart = null;
+        if (dragging) {
+          dragging = false;
+          live.classList.remove('is-dragging');
+        }
+      };
+      svg.addEventListener('pointerup', endDrag);
+      svg.addEventListener('pointercancel', endDrag);
+      svg.addEventListener('pointerleave', (ev) => {
+        hovering = false;
+        clearTimeout(dwellTimer); dwellTimer = null;
+        if (dragStart) return;
+        if (autoZoomed) zoomOutAuto();
+        else if (ev.pointerType === 'mouse') hide();
+      });
+      svg.addEventListener('dblclick', (ev) => {
+        ev.preventDefault();
+        takeManual();
+        const v = toView(ev);
+        if (cur.k >= MAX_ZOOM - 0.01) { Object.assign(target, { k: 1, tx: 0, ty: 0 }); go(); return; }
+        zoomAt(2, v.x, v.y);
+      });
+
+      // Trackpad pinch (Chrome/Edge/Firefox report it as Ctrl + wheel) and Ctrl/Cmd + scroll.
+      // Plain scrolling still scrolls the page.
+      svg.addEventListener('wheel', (ev) => {
+        if (!(ev.ctrlKey || ev.metaKey)) return;
+        ev.preventDefault();
+        takeManual();
+        const v = toView(ev);
+        const delta = ev.deltaMode === 1 ? ev.deltaY * 16 : ev.deltaY;
+        zoomAt(Math.exp(-delta * 0.01), v.x, v.y, false, false, 220, easeOut);
+      }, { passive: false });
+
+      // Safari trackpad pinch.
+      let gestureBase = 1;
+      svg.addEventListener('gesturestart', (ev) => { ev.preventDefault(); takeManual(); gestureBase = target.k; });
+      svg.addEventListener('gesturechange', (ev) => {
+        ev.preventDefault();
+        const v = toView(ev);
+        zoomAt((gestureBase * ev.scale) / target.k, v.x, v.y, false, false, 160, easeOut);
+      });
+      svg.addEventListener('gestureend', (ev) => ev.preventDefault());
+
+      live.hidden = false;
+      figure.classList.add('is-interactive');
+      apply();
+      applyFocus();
+    }
+  }
+
+  /* --------------------------------------------------------------------------
      Boot
      -------------------------------------------------------------------------- */
   document.addEventListener('DOMContentLoaded', () => {
+    initTicketRain();
+    initNutshell();
     const scrollyCtrl = initScrollytelling();
     initQueueAndDashboard();
     const stampCtrl = initStampObserver();

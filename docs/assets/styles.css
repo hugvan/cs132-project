@@ -129,7 +129,6 @@ table,
 .btn-meta,
 .step-code,
 .ledger-tag,
-.dossier-meta-bar,
 .ticket-field-label,
 .ticket-perforation,
 .clock-value,
@@ -373,22 +372,9 @@ section {
 /* ---------- Cover Sheet ---------- */
 
 .cover-sheet {
-  padding: 1.5rem 0 4rem;
+  padding: 3.5rem 0 4rem;
 }
 
-.dossier-meta-bar {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 0.5rem 1.25rem;
-  padding: 0 0 0.75rem;
-  border-bottom: 1px solid var(--color-line-strong);
-  font-family: var(--sans);
-  font-size: var(--12px);
-  font-weight: 700;
-  color: var(--color-dark-tan);
-  margin-bottom: 2.25rem;
-}
 
 .cover-grid {
   display: grid;
@@ -475,6 +461,51 @@ section {
 }
 
 /* Record Audit Summary Panel */
+
+/* ---------- Cover: tickets that fall as you scroll ---------- */
+
+.cover-sheet {
+  position: relative;
+  overflow: clip;
+}
+
+.ticket-rain {
+  position: relative;
+  z-index: 0;
+  align-self: stretch;
+  min-height: 360px;
+  pointer-events: none;
+}
+
+.rain-drop {
+  position: absolute;
+  top: calc(var(--yf, 0.5) * 82%);
+  left: var(--x);
+  width: calc(50px * var(--s, 1));
+  opacity: var(--o, 1);
+  will-change: transform;
+}
+
+.rain-tilt {
+  display: block;
+  transform: rotate(var(--r0));
+}
+
+.ticket-rain .q-ticket {
+  --notch: 3px;
+  max-width: none;
+  width: 100%;
+}
+
+.ticket-rain .q-ticket .q-mark {
+  stroke-width: 2.2;
+}
+
+/* Count cards sit in front, so falling tickets slip behind them */
+.scope-ledger {
+  position: relative;
+  z-index: 1;
+}
 
 .filing-summary {
   background: var(--color-tan-tint);
@@ -1687,6 +1718,251 @@ tbody tr:last-child td {
   border-radius: var(--border-radius);
 }
 
+/* Interactive nutshell (screen only; the PNG stays for print and small screens) */
+.nutshell-live {
+  margin-bottom: 0.25rem;
+}
+
+.exhibit-a-figure.is-interactive .nutshell-static {
+  display: none;
+}
+
+.nutshell-legend {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem 0.5rem;
+  margin-bottom: 0.85rem;
+}
+
+.nutshell-legend-label {
+  margin-right: 0.25rem;
+  font-size: var(--14px);
+  font-weight: 600;
+  color: #E2E8F0;
+}
+
+.nutshell-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.4rem 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 999px;
+  background: transparent;
+  color: #FFFFFF;
+  font-family: var(--sans);
+  font-size: var(--14px);
+  cursor: pointer;
+  transition: background calc(0.15 * var(--1s)) ease, border-color calc(0.15 * var(--1s)) ease;
+}
+
+.nutshell-chip:hover {
+  border-color: rgba(255, 255, 255, 0.6);
+}
+
+.nutshell-chip[aria-pressed="true"] {
+  background: rgba(255, 255, 255, 0.14);
+  border-color: #FFFFFF;
+}
+
+.nutshell-chip:focus-visible {
+  outline: 2px solid #FFB000;
+  outline-offset: 2px;
+}
+
+.nutshell-chip .dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--c);
+}
+
+.nutshell-chip[hidden] {
+  display: none;
+}
+
+.nutshell-chip.is-reset {
+  color: #E2E8F0;
+  border-style: dashed;
+}
+
+.nutshell-zoom {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  margin-left: auto;
+}
+
+.nutshell-zoom-btn {
+  min-width: 2.1rem;
+  height: 2.1rem;
+  padding: 0 0.6rem;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: var(--border-radius);
+  background: transparent;
+  color: #FFFFFF;
+  font-family: var(--sans);
+  font-size: var(--18px);
+  line-height: 1;
+  cursor: pointer;
+}
+
+.nutshell-zoom-btn.is-text {
+  font-size: var(--14px);
+}
+
+.nutshell-zoom-btn:hover:not(:disabled) {
+  border-color: rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.nutshell-zoom-btn:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.nutshell-zoom-btn:focus-visible {
+  outline: 2px solid #FFB000;
+  outline-offset: 2px;
+}
+
+.nutshell-live.is-zoomed .nutshell-svg {
+  cursor: grab;
+}
+
+.nutshell-live.is-dragging .nutshell-svg {
+  cursor: grabbing;
+}
+
+.nutshell-svg .nutshell-glabel {
+  transition: opacity calc(0.2 * var(--1s)) ease;
+}
+
+.nutshell-svg .nutshell-glabel.is-dim {
+  opacity: 0.35;
+}
+
+.nutshell-stage {
+  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: var(--border-radius);
+  background: #1c1246;
+  touch-action: manipulation;
+}
+
+.nutshell-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  cursor: crosshair;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.nutshell-svg text {
+  font-family: var(--sans);
+}
+
+.nutshell-svg .dot {
+  transition: opacity calc(0.2 * var(--1s)) ease;
+}
+
+.nutshell-svg.has-focus .dot {
+  opacity: 0.12;
+}
+
+.nutshell-svg.has-focus .dot.is-on {
+  opacity: 1;
+}
+
+.nutshell-svg .group-row.is-dim {
+  opacity: 0.35;
+}
+
+.nutshell-tip {
+  position: absolute;
+  z-index: 2;
+  min-width: 12rem;
+  max-width: 17rem;
+  padding: 0.65rem 0.8rem;
+  border-radius: var(--border-radius);
+  background: #FFFFFF;
+  color: var(--color-fg);
+  font-size: var(--14px);
+  line-height: 1.35;
+  box-shadow: 0 6px 18px rgb(0 0 0 / 0.28);
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity calc(0.12 * var(--1s)) ease, transform calc(0.12 * var(--1s)) ease;
+}
+
+.nutshell-tip.is-on {
+  opacity: 1;
+  transform: none;
+}
+
+.nutshell-tip strong,
+.nutshell-tip .tip-topic {
+  display: block;
+  font-family: var(--serif);
+  font-size: var(--18px);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.nutshell-tip .tip-meta {
+  display: block;
+  margin: 0.15rem 0 0.35rem;
+  font-size: var(--12px);
+  color: var(--color-dark-tan);
+}
+
+.nutshell-tip .tip-wait {
+  display: block;
+}
+
+.nutshell-tip .tip-outcome {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-top: 0.2rem;
+  font-weight: 600;
+}
+
+.nutshell-tip .tip-outcome::before {
+  content: "";
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--c);
+}
+
+.nutshell-readout {
+  margin: 0.7rem 0 0;
+  min-height: 1.4em;
+  font-size: var(--14px);
+  color: #E2E8F0;
+}
+
+.nutshell-credit {
+  margin: 0.35rem 0 0;
+  font-size: var(--12px);
+  line-height: 1.5;
+  color: #C8C4CC;
+}
+
+@media (max-width: 760px) {
+  .nutshell-live {
+    display: none !important;
+  }
+
+  .exhibit-a-figure.is-interactive .nutshell-static {
+    display: block;
+  }
+}
+
 .exhibit-a-figure figcaption {
   margin-top: 0.85rem;
   font-size: var(--14px);
@@ -1955,6 +2231,10 @@ footer a:visited {
 }
 
 @media (max-width: 1020px) {
+  .ticket-rain {
+    min-height: 220px;
+  }
+
   .masthead-inner {
     flex-wrap: wrap;
     padding: 0.55rem 1.5rem;
@@ -2436,6 +2716,18 @@ footer a:visited {
 }
 
 @media print {
+  .nutshell-live {
+    display: none !important;
+  }
+
+  .exhibit-a-figure .nutshell-static {
+    display: block !important;
+  }
+
+  .rain-drop {
+    transform: none !important;
+  }
+
   * {
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
@@ -2608,7 +2900,196 @@ footer a:visited {
 
   .exhibit-a-head h2,
   .exhibit-a-tag,
-  .exhibit-a-figure figcaption {
+  /* Interactive nutshell (screen only; the PNG stays for print and small screens) */
+.nutshell-live {
+  margin-bottom: 0.25rem;
+}
+
+.exhibit-a-figure.is-interactive .nutshell-static {
+  display: none;
+}
+
+.nutshell-legend {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem 0.5rem;
+  margin-bottom: 0.85rem;
+}
+
+.nutshell-legend-label {
+  margin-right: 0.25rem;
+  font-size: var(--14px);
+  font-weight: 600;
+  color: #E2E8F0;
+}
+
+.nutshell-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.4rem 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 999px;
+  background: transparent;
+  color: #FFFFFF;
+  font-family: var(--sans);
+  font-size: var(--14px);
+  cursor: pointer;
+  transition: background calc(0.15 * var(--1s)) ease, border-color calc(0.15 * var(--1s)) ease;
+}
+
+.nutshell-chip:hover {
+  border-color: rgba(255, 255, 255, 0.6);
+}
+
+.nutshell-chip[aria-pressed="true"] {
+  background: rgba(255, 255, 255, 0.14);
+  border-color: #FFFFFF;
+}
+
+.nutshell-chip:focus-visible {
+  outline: 2px solid #FFB000;
+  outline-offset: 2px;
+}
+
+.nutshell-chip .dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--c);
+}
+
+.nutshell-chip[hidden] {
+  display: none;
+}
+
+.nutshell-chip.is-reset {
+  color: #E2E8F0;
+  border-style: dashed;
+}
+
+.nutshell-stage {
+  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: var(--border-radius);
+  background: #1c1246;
+  touch-action: manipulation;
+}
+
+.nutshell-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  cursor: crosshair;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.nutshell-svg text {
+  font-family: var(--sans);
+}
+
+.nutshell-svg .dot {
+  transition: opacity calc(0.2 * var(--1s)) ease;
+}
+
+.nutshell-svg.has-focus .dot {
+  opacity: 0.12;
+}
+
+.nutshell-svg.has-focus .dot.is-on {
+  opacity: 1;
+}
+
+.nutshell-svg .group-row.is-dim {
+  opacity: 0.35;
+}
+
+.nutshell-tip {
+  position: absolute;
+  z-index: 2;
+  min-width: 12rem;
+  max-width: 17rem;
+  padding: 0.65rem 0.8rem;
+  border-radius: var(--border-radius);
+  background: #FFFFFF;
+  color: var(--color-fg);
+  font-size: var(--14px);
+  line-height: 1.35;
+  box-shadow: 0 6px 18px rgb(0 0 0 / 0.28);
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity calc(0.12 * var(--1s)) ease, transform calc(0.12 * var(--1s)) ease;
+}
+
+.nutshell-tip.is-on {
+  opacity: 1;
+  transform: none;
+}
+
+.nutshell-tip strong,
+.nutshell-tip .tip-topic {
+  display: block;
+  font-family: var(--serif);
+  font-size: var(--18px);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.nutshell-tip .tip-meta {
+  display: block;
+  margin: 0.15rem 0 0.35rem;
+  font-size: var(--12px);
+  color: var(--color-dark-tan);
+}
+
+.nutshell-tip .tip-wait {
+  display: block;
+}
+
+.nutshell-tip .tip-outcome {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-top: 0.2rem;
+  font-weight: 600;
+}
+
+.nutshell-tip .tip-outcome::before {
+  content: "";
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--c);
+}
+
+.nutshell-readout {
+  margin: 0.7rem 0 0;
+  min-height: 1.4em;
+  font-size: var(--14px);
+  color: #E2E8F0;
+}
+
+.nutshell-credit {
+  margin: 0.35rem 0 0;
+  font-size: var(--12px);
+  line-height: 1.5;
+  color: #C8C4CC;
+}
+
+@media (max-width: 760px) {
+  .nutshell-live {
+    display: none !important;
+  }
+
+  .exhibit-a-figure.is-interactive .nutshell-static {
+    display: block;
+  }
+}
+
+.exhibit-a-figure figcaption {
     color: #1c1246 !important;
   }
 

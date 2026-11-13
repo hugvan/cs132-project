@@ -182,7 +182,7 @@ def draw(sample):
               frameon=False, labelcolor=TEXT, fontsize=13, handletextpad=.5, columnspacing=2.5)
     footer_font = fm.FontProperties(fname=str(ROOT / "assets/fonts/Roboto-CondensedRegular.ttf"))
     footer_lines = [
-        "Data: eFOI portal, 2025 requests · Observed 29 September 2026 · Unweighted stratified sample",
+        "Data: eFOI portal, 2025 requests. Observed 29 September 2026. Unweighted stratified sample.",
         "Chart: V. Aquino, E. Lim, J. Mayuyu, C. Sim, PILIPINUTS 2026",
     ]
     for y, line in zip((1028, 1050), footer_lines):
