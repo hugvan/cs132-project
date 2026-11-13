@@ -131,12 +131,12 @@ def draw(sample):
         ax.text(x, y, label, fontsize=size, color=color, va="center", **kwargs)
 
     text(WIDTH / 2, 85, HEADLINE, 32, weight="bold", ha="center")
-    text((TIME_LEFT + TIME_RIGHT) / 2, 220 - GRAPH_RAISE, "Time to first agency reply · calendar time", 17, ha="center")
+    text((TIME_LEFT + TIME_RIGHT) / 2, 220 - GRAPH_RAISE, "Time to first agency reply", 17, ha="center")
     text(NO_REPLY_X, 220 - GRAPH_RAISE, "No reply", 17, ha="center")
     reference_x = time_position(REFERENCE_DAYS)
     ax.plot([reference_x, reference_x], [255 - GRAPH_RAISE, 900 - GRAPH_RAISE],
             color="#FFB000", linewidth=1, linestyle=(0, (5, 5)), alpha=.85, zorder=1)
-    text(reference_x, 242 - GRAPH_RAISE, "15 calendar days", 10, "#FFB000", ha="center")
+    text(reference_x, 242 - GRAPH_RAISE, "15 calendar days", 15, "#FFB000", ha="center")
     # A categorical break prevents the no-reply column from implying elapsed time.
     ax.plot([1605, 1605], [255 - GRAPH_RAISE, 900 - GRAPH_RAISE], color="#514B55", lw=1, ls=(0, (3, 6)))
     dot_size = (DOT_DIAMETER * 72 / 100)**2
