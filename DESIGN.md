@@ -18,7 +18,7 @@ colors:
   category-steel: "#3B82A6"
   category-gold: "#D49B2A"
   category-gray: "#6B7280"
-  darkroom-ground: "#0B0D10"
+  darkroom-ground: "#1c1246"
 typography:
   display:
     fontFamily: "Source Serif 4, Iowan Old Style, Georgia, Times New Roman, serif"
@@ -125,7 +125,7 @@ Every factual statistical claim, sample caveat, calendar-vs-working-day qualifie
   - Unsuccessful / 15 d ref.: `#F46201`
   - Referred: `#D49B2A`
   - Open: `#6B7280`
-- **Darkroom Specimen Bezel (`#nutshell`)**: `#0B0D10` dark frame with `#FFFFFF` / `#E2E8F0` / `#93C5FD` contrast around `assets/figures/nutshell.png` (`PilipiNuts 2026`), collapsing to white/black outline in `@media print`.
+- **Darkroom Specimen Bezel (`#nutshell`)**: `#1c1246` deep indigo frame with `#FFFFFF` / `#E2E8F0` / `#93C5FD` contrast around `assets/figures/nutshell.png` (`PilipiNuts 2026`), collapsing to white/indigo outline in `@media print`.
 
 ## Typography
 

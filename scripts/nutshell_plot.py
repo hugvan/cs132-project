@@ -20,7 +20,7 @@ from analysis import GROUP_ORDER, LABELS, SUCCESSFUL_OUTCOMES
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT_DIR = ROOT / "reports/figures"
-BG, TEXT, MUTED = "#1B181C", "#FFFFFF", "#C8C4CC"
+BG, TEXT, MUTED = "#1c1246", "#FFFFFF", "#C8C4CC"
 COLORS = {"successful": "#648FFF", "partial": "#A3BCFF", "denied": "#DC267F", "closed": "#F08EBB", "other": "#A9A3AE"}
 REFERENCE_DAYS = 15  # Calendar-time reference, not a working-day compliance cutoff.
 HEADLINE = "eFOI Response Times and Request Outcomes, 2025"
@@ -138,7 +138,7 @@ def draw(sample):
             color="#FFB000", linewidth=1, linestyle=(0, (5, 5)), alpha=.85, zorder=1)
     text(reference_x, 242 - GRAPH_RAISE, "15 calendar days", 15, "#FFB000", ha="center")
     # A categorical break prevents the no-reply column from implying elapsed time.
-    ax.plot([1605, 1605], [255 - GRAPH_RAISE, 900 - GRAPH_RAISE], color="#514B55", lw=1, ls=(0, (3, 6)))
+    ax.plot([1605, 1605], [255 - GRAPH_RAISE, 900 - GRAPH_RAISE], color="#5a4999", lw=1, ls=(0, (3, 6)))
     dot_size = (DOT_DIAMETER * 72 / 100)**2
     total = 0
     max_offset = 0

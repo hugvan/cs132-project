@@ -8,10 +8,10 @@
   <meta property="og:title" content="Who Gets an Answer? — FYI">
   <meta property="og:description" content="Comparing 2025 Philippine eFOI response times and outcomes: why a fast reply is not a yes.">
   <meta property="og:type" content="website">
-  <title>Who Gets an Answer? · FYI</title>
+  <title>Who Gets an Answer? — FYI</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Public+Sans:ital,wght@0,400;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,700;1,8..60,400&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,400;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,700;1,8..60,400&display=swap">
   <link rel="stylesheet" href="assets/styles.css">
   <script src="assets/app.js" defer></script>
 </head>
@@ -24,7 +24,7 @@
         <strong class="brand-mark">FYI<span>.</span></strong>
         <span class="brand-meta">
           <span>FOI Your Information</span>
-          <span>CS 132 · Section WFX · Group 1</span>
+          <span>CS 132, Section WFX, Group 1</span>
         </span>
       </a>
       <nav aria-label="Main navigation">
@@ -41,12 +41,6 @@
 
   <main id="main">
     <section class="cover-sheet" aria-labelledby="title">
-      <div class="dossier-meta-bar">
-        <span>DOSSIER NO. CS132-WFX-01</span>
-        <span>PILIPINAS IN A NUTSHELL · 2026</span>
-        <span>SDG 16 · TARGETS 16.6 &amp; 16.10</span>
-        <span>OBSERVED 29 SEPT 2026</span>
-      </div>
 
       <div class="cover-grid">
         <div class="cover-lead">
@@ -64,14 +58,14 @@
 
         <aside class="filing-summary" aria-label="Case filing summary">
           <div class="filing-summary-head">
-            <span>RECORD AUDIT BRIEF</span>
-            <span class="stamp stamp-inline stamp-neutral">COMPLETE · EDA</span>
+            <span>Record audit brief</span>
+            <span class="stamp stamp-inline stamp-neutral">EDA COMPLETE</span>
           </div>
           <dl class="filing-dl">
             <div><dt>Legal anchor</dt><dd><a href="https://lawphil.net/executive/execord/eo2016/eo_2_2016.html">Executive Order No. 2, s. 2016</a> (15 working days; LGUs voluntary)</dd></div>
             <div><dt>Portal scope</dt><dd>271,232 listed requests across 739 directory agencies on collection day</dd></div>
             <div><dt>Core qualifier</dt><dd>First-message calendar times do not directly measure working-day compliance; an early reply may be an acknowledgment.</dd></div>
-            <div><dt>Public dataset</dt><dd><a href="https://docs.google.com/spreadsheets/d/10om8YdCtoXA7cndqIHQegUSYfqqeKhTvkbDoB-45Vrc/edit?usp=sharing">Google Sheet (3 tabs)</a> · <a href="https://github.com/hugvan/cs132-project">GitHub Repo</a></dd></div>
+            <div><dt>Public dataset</dt><dd><a href="https://docs.google.com/spreadsheets/d/10om8YdCtoXA7cndqIHQegUSYfqqeKhTvkbDoB-45Vrc/edit?usp=sharing">Google Sheet (3 tabs)</a>, <a href="https://github.com/hugvan/cs132-project">GitHub Repo</a></dd></div>
           </dl>
         </aside>
       </div>
@@ -99,13 +93,11 @@
     <section id="intro" class="scrolly-section" aria-labelledby="intro-title">
       <div class="section-ledger-head">
         <h2 id="intro-title">From filing to outcome: tracing a public record</h2>
-        <span class="ledger-tag">01 · LIFECYCLE AUDIT</span>
       </div>
 
       <div class="scrolly-layout">
         <div class="intro-steps">
           <article class="step is-active" id="step-0" data-step="0">
-            <span class="step-code">STEP 01 · LEGAL MANDATE</span>
             <h3>Executive Order No. 2 sets a 15-working-day ceiling—but not for everyone.</h3>
             <p>Signed July 23, 2016, EO No. 2 binds Executive Branch offices—national agencies (NGA), government corporations (GOCC), state universities (SUC), water districts, and law enforcement (LEA). Local government units (LGU) are only “encouraged to observe and be guided by” the order. Agencies must reply within 15 working days (extendable to 20 for extensive searches).</p>
             <div class="scroll-cue" aria-hidden="true">
@@ -115,25 +107,21 @@
           </article>
 
           <article class="step" id="step-1" data-step="1">
-            <span class="step-code">STEP 02 · PUBLIC CENSUS &amp; SAMPLE</span>
             <h3>We audited all 979 listing pages of 2025 filings and 1,641 conversation timelines.</h3>
             <p>On September 29, 2026, a browser-driven scraper collected pages 1,024–2,002 of the <a href="https://www.foi.gov.ph/requests/">eFOI request browser</a>, yielding 14,668 unique 2025 requests after removing 17 cross-page duplicates. A stratified random sample (seed 132, capped at 300 per group across quarters; LGUs and water districts taken in full) added minute-level agency reply timestamps.</p>
           </article>
 
           <article class="step" id="step-2" data-step="2">
-            <span class="step-code">STEP 03 · MISSING RECORDS &amp; THE 90-DAY GAP</span>
             <h3>22 sampled pages had vanished, and 90 days of Q2 are empty on the portal.</h3>
             <p>Between March 20 (22:30) and June 18 (16:00), 2025, the eFOI portal lists zero public requests—leaving Q2 with only 324 late-June filings. Meanwhile, 22 of 1,663 sampled detail pages were no longer public on collection day (20 not found, 2 login-only: 20 LEA Q1, 2 NGA Q1) and are excluded rather than replaced.</p>
           </article>
 
           <article class="step" id="step-3" data-step="3">
-            <span class="step-code">STEP 04 · FIRST REPLY</span>
             <h3>Most replies arrive within two calendar days—but calendar days ≠ working days.</h3>
             <p>Across the 1,436 sampled requests with an agency message, 42.2% received a first reply within 24 hours (overall median 1.58 days, mean 17.44 days, skew 4.82; 15.3% waited over 15 calendar days). Crucially, first-message calendar times do not directly measure compliance with EO 2’s 15-working-day deadline—and 205 sampled requests never received any public message.</p>
           </article>
 
           <article class="step" id="step-4" data-step="4">
-            <span class="step-code">STEP 05 · OBSERVED OUTCOME</span>
             <h3>Fast acknowledgments do not predict successful disclosure.</h3>
             <p>Among 1,387 closed sampled requests with a recorded reply, weighted medians are 1.51 days for successful outcomes and 1.01 days for unsuccessful ones (weighted Mann–Whitney permutation p = 0.989). A fast first response only starts the clock; it does not mean the agency said yes.</p>
           </article>
@@ -142,8 +130,8 @@
         <div class="intro-sticky">
           <div class="routing-board" role="region" aria-label="eFOI request lifecycle routing diagram">
             <div class="routing-board-head">
-              <span>ROUTING DIAGRAM · FORM EFOI-2025</span>
-              <span id="routing-progress-label" class="mono">STAGE 01 / 05</span>
+              <span>Routing diagram, form eFOI-2025</span>
+              <span id="routing-progress-label" class="num">Stage 1 of 5</span>
             </div>
 
             <svg id="paper-trail-svg" viewBox="0 0 560 500" width="100%" height="100%" role="img" aria-label="Routing diagram tracing an eFOI request from filing through the 15-day benchmark and first agency reply to observed outcome">
@@ -155,35 +143,35 @@
               <g class="route-node is-reached" data-node="0">
                 <circle cx="76" cy="58" r="8" fill="#FFFFFF" stroke="#1D4ED8" stroke-width="3"></circle>
                 <rect x="108" y="32" width="424" height="54" rx="3" fill="#FFFFFF" stroke="#1c1246" stroke-width="1.25"></rect>
-                <text x="122" y="53" class="svg-mono-label">01 · REQUEST FILED (t = 0.00 d)</text>
-                <text x="122" y="73" class="svg-body-label">14,668 public 2025 filings · EO No. 2 (524 agencies)</text>
+                <text x="122" y="53" class="svg-mono-label">1. Request filed (t = 0.00 d)</text>
+                <text x="122" y="73" class="svg-body-label">14,668 public 2025 filings, EO No. 2 (524 agencies)</text>
               </g>
 
               <g class="route-node" data-node="1">
                 <circle cx="210" cy="140" r="8" fill="#FFFFFF" stroke="#1D4ED8" stroke-width="3"></circle>
                 <rect x="234" y="114" width="298" height="54" rx="3" fill="#FFFFFF" stroke="#1c1246" stroke-width="1.25"></rect>
-                <text x="248" y="135" class="svg-mono-label">02 · STRATIFIED AUDIT SAMPLE</text>
+                <text x="248" y="135" class="svg-mono-label">2. Stratified audit sample</text>
                 <text x="248" y="155" class="svg-body-label">1,663 drawn (seed 132) → 1,641 collected</text>
               </g>
 
               <g class="route-node" data-node="2">
                 <circle cx="76" cy="225" r="8" fill="#FFFFFF" stroke="#F46201" stroke-width="3"></circle>
                 <rect x="108" y="198" width="424" height="56" rx="3" fill="#FFFFFF" stroke="#F46201" stroke-width="1.5"></rect>
-                <text x="122" y="220" class="svg-mono-alert">03 · SOURCE CAVEATS LOGGED</text>
-                <text x="122" y="240" class="svg-body-label">90-day Mar–Jun gap (Q2 = 324) · 22 vanished pages</text>
+                <text x="122" y="220" class="svg-mono-alert">3. Source caveats logged</text>
+                <text x="122" y="240" class="svg-body-label">90-day Mar–Jun gap (Q2 = 324), 22 vanished pages</text>
               </g>
 
               <g class="route-node" data-node="3">
                 <circle cx="76" cy="318" r="8" fill="#FFFFFF" stroke="#1D4ED8" stroke-width="3"></circle>
                 <rect x="108" y="292" width="424" height="56" rx="3" fill="#FFFFFF" stroke="#1c1246" stroke-width="1.25"></rect>
-                <text x="122" y="314" class="svg-mono-label">04 · FIRST AGENCY REPLY (n = 1,436)</text>
-                <text x="122" y="334" class="svg-body-label">Median 1.58 cal. days · 205 silent (blank, never 0)</text>
+                <text x="122" y="314" class="svg-mono-label">4. First agency reply (n = 1,436)</text>
+                <text x="122" y="334" class="svg-body-label">Median 1.58 cal. days, 205 silent (blank, never 0)</text>
               </g>
 
               <g class="route-node" data-node="4">
                 <circle cx="210" cy="426" r="8" fill="#1c1246" stroke="#1D4ED8" stroke-width="3"></circle>
                 <rect x="234" y="396" width="298" height="62" rx="3" fill="#1c1246"></rect>
-                <text x="248" y="419" class="svg-mono-inv">05 · OBSERVED OUTCOME (29 SEPT)</text>
+                <text x="248" y="419" class="svg-mono-inv">5. Observed outcome (29 Sept)</text>
                 <text x="248" y="440" class="svg-body-inv">Speed vs. success: p = 0.989 (no link found)</text>
               </g>
             </svg>
@@ -195,7 +183,6 @@
     <section id="pick" class="queue-section" aria-labelledby="pick-title">
       <div class="queue-header">
         <div>
-          <span class="ledger-tag">02 · AGENCY GROUP COMPARISON</span>
           <h2 id="pick-title">Inspect an Agency Group</h2>
           <p class="queue-desc">Select an agency group to inspect its weighted median calendar-day first reply against EO No. 2’s 15-day reference, along with its nonresponse rate and actual success odds.</p>
         </div>
@@ -209,39 +196,39 @@
         <button type="button" class="group-btn is-selected" data-group="WATER-DISTRICT" aria-pressed="true">
           <span class="btn-code">WD</span>
           <span class="btn-name">Water districts</span>
-          <span class="btn-meta">N = 287 · n = 287</span>
+          <span class="btn-meta">N = 287, n = 287</span>
         </button>
         <button type="button" class="group-btn" data-group="LEA" aria-pressed="false">
           <span class="btn-code">LEA</span>
           <span class="btn-name">Law enforcement</span>
-          <span class="btn-meta">N = 359 · n = 280</span>
+          <span class="btn-meta">N = 359, n = 280</span>
         </button>
         <button type="button" class="group-btn" data-group="NGA" aria-pressed="false">
           <span class="btn-code">NGA</span>
           <span class="btn-name">National agencies</span>
-          <span class="btn-meta">N = 12,219 · n = 298</span>
+          <span class="btn-meta">N = 12,219, n = 298</span>
         </button>
         <button type="button" class="group-btn" data-group="GOCC" aria-pressed="false">
           <span class="btn-code">GOCC</span>
           <span class="btn-name">Government corps</span>
-          <span class="btn-meta">N = 1,284 · n = 300</span>
+          <span class="btn-meta">N = 1,284, n = 300</span>
         </button>
         <button type="button" class="group-btn" data-group="SUC" aria-pressed="false">
           <span class="btn-code">SUC</span>
           <span class="btn-name">State universities</span>
-          <span class="btn-meta">N = 344 · n = 301</span>
+          <span class="btn-meta">N = 344, n = 301</span>
         </button>
         <button type="button" class="group-btn" data-group="LGU" aria-pressed="false">
           <span class="btn-code">LGU</span>
           <span class="btn-name">Local governments</span>
-          <span class="btn-meta">N = 175 · n = 175</span>
+          <span class="btn-meta">N = 175, n = 175</span>
         </button>
       </div>
 
       <div id="ticket-stub" class="ticket-stub is-stamped" aria-live="polite">
         <div class="ticket-perforation">
-          <span>2025 AGENCY RECORD</span>
-          <span id="ticket-serial" class="mono">TKT-WD-0287</span>
+          <span>2025 agency record</span>
+          <span id="ticket-serial" class="num">TKT-WD-0287</span>
           <button type="button" id="replay-ticket-btn" class="btn-replay">Replay</button>
         </div>
 
@@ -249,10 +236,10 @@
           <div class="ticket-identity">
             <div class="ticket-group-row">
               <div>
-                <span class="ticket-field-label">RECEIVING GROUP</span>
+                <span class="ticket-field-label">Receiving group</span>
                 <h3 id="ticket-group-name">Water districts (WATER-DISTRICT)</h3>
               </div>
-              <div id="ticket-stamp" class="stamp stamp-alert">FAST REPLY · 26.1% SILENCE</div>
+              <div id="ticket-stamp" class="stamp stamp-alert">FAST REPLY, 26.1% SILENCE</div>
             </div>
             <p id="ticket-note" class="ticket-note">Fast first responders when they reply (1.12 d weighted median), yet 75 of 287 requests never received a public agency message—and all 20 closed silent requests ended unsuccessful.</p>
           </div>
@@ -260,25 +247,25 @@
           <div class="ticket-clock-panel">
             <div class="clock-readout-row">
               <div>
-                <span class="ticket-field-label">ELAPSED TO FIRST MESSAGE (CALENDAR DAYS)</span>
-                <div class="clock-value"><span id="ticket-clock-num" class="mono">1.12</span> <small>weighted median days</small></div>
+                <span class="ticket-field-label">Elapsed to first message (calendar days)</span>
+                <div class="clock-value"><span id="ticket-clock-num" class="num">1.12</span> <small>weighted median days</small></div>
               </div>
               <div class="clock-iqr">
-                <span class="ticket-field-label">SAMPLE IQR (P25–P75)</span>
-                <span id="ticket-iqr" class="mono">0.76 – 6.56 d</span>
+                <span class="ticket-field-label">Sample IQR (P25–P75)</span>
+                <span id="ticket-iqr" class="num">0.76 – 6.56 d</span>
               </div>
             </div>
 
             <div class="benchmark-track" aria-label="Calendar days relative to 15-day reference">
               <div class="benchmark-bar">
-                <div id="ticket-clock-fill" class="benchmark-fill" style="width: 7.5%;"></div>
+                <div id="ticket-clock-fill" class="benchmark-fill" style="transform: scaleX(0.075);"></div>
                 <span class="benchmark-marker" style="left: 100%;"></span>
               </div>
-              <div class="benchmark-ticks mono">
+              <div class="benchmark-ticks">
                 <span>0 d</span>
                 <span>5 d</span>
                 <span>10 d</span>
-                <span>15 d EO 2 ref.*</span>
+                <span>EO No. 2: 15 days*</span>
               </div>
             </div>
             <p class="clock-disclaimer">*First-message calendar times do not directly measure compliance with EO No. 2’s 15-working-day deadline.</p>
@@ -286,18 +273,18 @@
 
           <div class="ticket-metrics-grid">
             <div class="ticket-metric">
-              <span class="ticket-field-label">NO RECORDED REPLY (WEIGHTED)</span>
-              <strong id="ticket-noreply" class="mono">26.1%</strong>
+              <span class="ticket-field-label">No recorded reply (weighted)</span>
+              <strong id="ticket-noreply" class="num">26.1%</strong>
               <span id="ticket-noreply-count" class="ticket-sub">75 of 287 sampled</span>
             </div>
             <div class="ticket-metric">
-              <span class="ticket-field-label">SUCCESS RATE (ALL REQUESTS)</span>
-              <strong id="ticket-success-all" class="mono">33.1%</strong>
+              <span class="ticket-field-label">Success rate (all requests)</span>
+              <strong id="ticket-success-all" class="num">33.1%</strong>
               <span id="ticket-frame-count" class="ticket-sub">95 of 287 in frame</span>
             </div>
             <div class="ticket-metric">
-              <span class="ticket-field-label">SUCCESS RATE (CLOSED ONLY)</span>
-              <strong id="ticket-success-closed" class="mono">43.2%</strong>
+              <span class="ticket-field-label">Success rate (closed only)</span>
+              <strong id="ticket-success-closed" class="num">43.2%</strong>
               <span id="ticket-open-share" class="ticket-sub">22.6% still open on Sept 29</span>
             </div>
           </div>
@@ -308,7 +295,7 @@
     <section id="dashboard" class="dashboard-section" aria-labelledby="dashboard-title">
       <div class="tracker-bar" id="tracker-bar">
         <div class="tracker-status">
-          <span class="tracker-count mono" id="tracker-count">Inspected 1 / 6 agency groups</span>
+          <span class="tracker-count" id="tracker-count">Inspected 1 / 6 agency groups</span>
           <span class="tracker-hint">Select an agency group above or click any card below to inspect all 6 groups.</span>
         </div>
         <div class="tracker-controls">
@@ -335,7 +322,6 @@
 
       <div class="section-ledger-head">
         <h2 id="dashboard-title">Agency group ledger &amp; completion tracker</h2>
-        <span class="ledger-tag">03 · 6-GROUP AUDIT</span>
       </div>
 
       <div id="group-grid" class="group-grid" aria-label="Six agency group audit cards"></div>
@@ -343,13 +329,12 @@
       <article class="exhibit-panel queue-exhibit" aria-labelledby="queue-title">
         <div class="exhibit-head">
           <div>
-            <span class="exhibit-code mono">NOW SERVING · 1,641 SAMPLED REQUESTS</span>
-            <h3 id="queue-title">Who reached the counter, and what came back</h3>
+                        <h3 id="queue-title">Who reached the counter, and what came back <span class="h-qual">1,641 sampled requests</span></h3>
           </div>
           <div class="queue-controls">
             <div class="queue-clock" aria-hidden="true">
               <span class="ticket-field-label">Counter clock</span>
-              <span id="queue-clock-val" class="mono">4.68 d</span>
+              <span id="queue-clock-val" class="num">4.68 d</span>
             </div>
             <button type="button" id="queue-replay-btn" class="btn-replay" aria-controls="queue-board">Replay</button>
           </div>
@@ -358,9 +343,9 @@
         <ul class="queue-key" aria-label="Ticket key">
           <li><span class="q-ticket q-succ is-key" aria-hidden="true"><svg class="q-mark" viewBox="0 0 16 16"><path d="M3.2 8.6l3 3 6.6-7"/></svg></span>Successful (incl. partial)</li>
           <li><span class="q-ticket q-unsucc is-key" aria-hidden="true"><svg class="q-mark" viewBox="0 0 16 16"><path d="M4 4l8 8M12 4l-8 8"/></svg></span>Unsuccessful</li>
-          <li><span class="q-ticket q-open is-key" aria-hidden="true"><svg class="q-mark" viewBox="0 0 16 16"><circle cx="8" cy="8" r="3.4"/></svg></span>Replied · not closed</li>
+          <li><span class="q-ticket q-open is-key" aria-hidden="true"><svg class="q-mark" viewBox="0 0 16 16"><circle cx="8" cy="8" r="3.4"/></svg></span>Replied, not closed</li>
           <li><span class="q-ticket q-wait is-key" aria-hidden="true"></span>No recorded reply</li>
-          <li><span class="q-ticket q-wait q-silent-closed is-key" aria-hidden="true"><svg class="q-mark" viewBox="0 0 16 16"><path d="M4 4l8 8M12 4l-8 8"/></svg></span>No reply · closed unsuccessful</li>
+          <li><span class="q-ticket q-wait q-silent-closed is-key" aria-hidden="true"><svg class="q-mark" viewBox="0 0 16 16"><path d="M4 4l8 8M12 4l-8 8"/></svg></span>No reply, closed unsuccessful</li>
         </ul>
 
         <div id="queue-board" class="queue-board"></div>
@@ -371,14 +356,13 @@
       <div class="research-block" id="research" aria-labelledby="research-title">
         <div class="section-ledger-head">
           <h2 id="research-title">Three questions, tested against the record</h2>
-          <span class="ledger-tag">HYPOTHESES &amp; VERDICTS · <span class="no-upper">α</span> = 0.05</span>
         </div>
 
         <div class="question-grid">
           <article class="question-card" data-stamp-target>
             <div class="question-top">
-              <span class="question-num mono">RQ 01</span>
-              <span class="stamp stamp-alert scroll-stamp">H₀ REJECTED · p = 2.80×10⁻⁴⁵</span>
+              <span class="question-num">RQ1</span>
+              <span class="stamp stamp-alert scroll-stamp">H₀ REJECTED, p = 2.80×10⁻⁴⁵</span>
             </div>
             <h3>How long does each agency group take to post its first response?</h3>
             <p class="hyp-line"><strong>H₀:</strong> First-response time is the same across agency groups.</p>
@@ -388,8 +372,8 @@
 
           <article class="question-card" data-stamp-target>
             <div class="question-top">
-              <span class="question-num mono">RQ 02</span>
-              <span class="stamp stamp-alert scroll-stamp">H₀ REJECTED · V = 0.096</span>
+              <span class="question-num">RQ2</span>
+              <span class="stamp stamp-alert scroll-stamp">H₀ REJECTED, V = 0.096</span>
             </div>
             <h3>Do the shares of successful and unsuccessful requests differ by agency group?</h3>
             <p class="hyp-line"><strong>H₀:</strong> The success rate is the same across agency groups.</p>
@@ -399,8 +383,8 @@
 
           <article class="question-card" data-stamp-target>
             <div class="question-top">
-              <span class="question-num mono">RQ 03</span>
-              <span class="stamp stamp-neutral scroll-stamp">NO LINK FOUND · p = 0.99</span>
+              <span class="question-num">RQ3</span>
+              <span class="stamp stamp-neutral scroll-stamp">NO LINK FOUND, p = 0.99</span>
             </div>
             <h3>Among closed requests, are faster first responses linked to a successful outcome?</h3>
             <p class="hyp-line"><strong>H₀:</strong> First-response time is not related to the outcome of a closed request.</p>
@@ -422,7 +406,6 @@
       <div id="eda" class="eda-block" aria-labelledby="eda-title">
         <div class="section-ledger-head">
           <h2 id="eda-title">Exploratory analysis &amp; interactive exhibits</h2>
-          <span class="ledger-tag">04 · CHARTS &amp; TESTS</span>
         </div>
 
         <div class="analysis-intro">
@@ -441,7 +424,7 @@
                 <thead>
                   <tr><th scope="col">Agency group</th><th scope="col">Replied n</th><th scope="col">Raw W</th><th scope="col">Raw p</th><th scope="col">Log W</th><th scope="col">Log p</th></tr>
                 </thead>
-                <tbody class="mono">
+                <tbody class="num">
                   <tr><th scope="row">NGA</th><td>281</td><td>0.312</td><td>4.4e-31</td><td>0.982</td><td>0.0013</td></tr>
                   <tr><th scope="row">GOCC</th><td>260</td><td>0.414</td><td>3.0e-28</td><td>0.969</td><td>2.0e-05</td></tr>
                   <tr><th scope="row">SUC</th><td>260</td><td>0.497</td><td>1.5e-26</td><td>0.963</td><td>3.3e-06</td></tr>
@@ -458,7 +441,6 @@
         <article class="exhibit-panel" aria-labelledby="rq1-results">
           <div class="exhibit-head">
             <div>
-              <span class="exhibit-code mono">EXHIBIT 01 · RESPONSE TIME &amp; NONRESPONSE</span>
               <h3 id="rq1-results">First agency responses by agency group</h3>
             </div>
             <div class="view-toggle" role="group" aria-label="RQ1 chart view mode">
@@ -492,7 +474,7 @@
                   <thead>
                     <tr><th scope="col">Pair</th><th scope="col">Weighted medians</th><th scope="col">Raw p</th><th scope="col">Bonferroni p</th><th scope="col">Significant</th></tr>
                   </thead>
-                  <tbody class="mono">
+                  <tbody class="num">
                     <tr><th scope="row">LGU vs LEA</th><td>4.68 d vs 0.56 d</td><td>1.34e-29</td><td>2.01e-28</td><td>Yes</td></tr>
                     <tr><th scope="row">SUC vs LEA</th><td>3.24 d vs 0.56 d</td><td>4.81e-28</td><td>7.22e-27</td><td>Yes</td></tr>
                     <tr><th scope="row">GOCC vs LEA</th><td>2.65 d vs 0.56 d</td><td>9.99e-22</td><td>1.50e-20</td><td>Yes</td></tr>
@@ -519,8 +501,7 @@
         <article class="exhibit-panel" aria-labelledby="rq2-results">
           <div class="exhibit-head">
             <div>
-              <span class="exhibit-code mono">EXHIBIT 02 · REQUEST OUTCOMES (FULL 2025 FRAME)</span>
-              <h3 id="rq2-results">Observed outcomes by agency group</h3>
+              <h3 id="rq2-results">Observed outcomes by agency group <span class="h-qual">full 2025 frame</span></h3>
             </div>
             <div class="view-toggle" role="group" aria-label="RQ2 denominator mode">
               <button type="button" class="toggle-btn is-active" data-rq2-view="all">All 14,668 requests</button>
@@ -545,7 +526,7 @@
                   <thead>
                     <tr><th scope="col">Agency group</th><th scope="col">Frame N</th><th scope="col">Success</th><th scope="col">Partial</th><th scope="col">Unsucc.</th><th scope="col">Open</th><th scope="col">Referred</th><th scope="col">All-req success</th><th scope="col">Closed-only success</th></tr>
                   </thead>
-                  <tbody class="mono">
+                  <tbody class="num">
                     <tr><th scope="row">LGU</th><td>175</td><td>70.3%</td><td>4.6%</td><td>7.4%</td><td>16.6%</td><td>1.1%</td><td>74.9%</td><td>91.0%</td></tr>
                     <tr><th scope="row">GOCC</th><td>1,284</td><td>55.1%</td><td>9.5%</td><td>22.8%</td><td>10.4%</td><td>2.3%</td><td>64.6%</td><td>73.9%</td></tr>
                     <tr><th scope="row">LEA</th><td>359</td><td>61.3%</td><td>2.2%</td><td>35.4%</td><td>1.1%</td><td>0.0%</td><td>63.5%</td><td>64.2%</td></tr>
@@ -564,8 +545,7 @@
         <article class="exhibit-panel" aria-labelledby="rq3-results">
           <div class="exhibit-head">
             <div>
-              <span class="exhibit-code mono">EXHIBIT 03 · SPEED VS. SUCCESS (CLOSED REQUESTS)</span>
-              <h3 id="rq3-results">Success proportions by first-response time</h3>
+              <h3 id="rq3-results">Success proportions by first-response time <span class="h-qual">closed requests</span></h3>
             </div>
             <div class="view-toggle" role="group" aria-label="RQ3 comparison mode">
               <button type="button" class="toggle-btn is-active" data-rq3-view="bands">Speed quartile bands</button>
@@ -594,7 +574,7 @@
                   <thead>
                     <tr><th scope="col">Agency group</th><th scope="col">Succ. n</th><th scope="col">Unsucc. n</th><th scope="col">Median succ.</th><th scope="col">Median unsucc.</th><th scope="col">p (replied)</th><th scope="col">Closed no-reply</th><th scope="col">p (with no-reply)</th></tr>
                   </thead>
-                  <tbody class="mono">
+                  <tbody class="num">
                     <tr><th scope="row">NGA</th><td>196</td><td>80</td><td>1.42 d</td><td>0.93 d</td><td>0.949</td><td>0</td><td>0.949</td></tr>
                     <tr><th scope="row">GOCC</th><td>195</td><td>55</td><td>2.65 d</td><td>3.04 d</td><td>0.911</td><td>2</td><td>0.608</td></tr>
                     <tr><th scope="row">SUC</th><td>165</td><td>74</td><td>2.99 d</td><td>3.72 d</td><td>0.366</td><td>0</td><td>0.366</td></tr>
@@ -614,8 +594,7 @@
       <section id="nutshell" class="exhibit-a" aria-labelledby="nutshell-title">
         <div class="exhibit-a-head">
           <div>
-            <span class="exhibit-a-tag mono">EXHIBIT A · PILIPINUTS 2026 NUTSHELL</span>
-            <h2 id="nutshell-title">eFOI Response Times and Request Outcomes, 2025</h2>
+                        <h2 id="nutshell-title">eFOI Response Times and Request Outcomes, 2025</h2>
           </div>
           <a class="btn-download-pdf" href="assets/figures/nutshell.pdf" download>
             <span>Download the nutshell PDF</span>
@@ -635,7 +614,6 @@
     <section id="methodology" class="methodology-section" aria-labelledby="data-title">
       <div class="section-ledger-head">
         <h2 id="data-title">Data repository, protocol &amp; audit trail</h2>
-        <span class="ledger-tag">05 · ARCHIVAL METHODOLOGY</span>
       </div>
 
       <div class="data-grid" id="data">
@@ -653,7 +631,7 @@
         </div>
 
         <aside class="sheet-card">
-          <span class="ticket-field-label">DATA DELIVERABLE</span>
+          <span class="ticket-field-label">Data deliverable</span>
           <h3>The shared dataset</h3>
           <p>The <a href="https://docs.google.com/spreadsheets/d/10om8YdCtoXA7cndqIHQegUSYfqqeKhTvkbDoB-45Vrc/edit?usp=sharing">Google Sheet</a> has three tabs: <code>efoi_2025</code> (study sample), <code>frame_2025</code> (all 2025 requests), and <code>agencies</code> (directory with groups). Request <code>title</code> and <code>detail_url</code> are omitted from the public copy because some titles name private individuals; rows can still be looked up by tracking number.</p>
           <p class="sheet-links">
@@ -710,7 +688,7 @@
             <table>
               <caption>2025 quarterly counts (note 90-day gap Mar 20 – Jun 18)</caption>
               <thead><tr><th scope="col">Quarter</th><th scope="col">Frame requests</th><th scope="col">Sampled</th></tr></thead>
-              <tbody class="mono">
+              <tbody class="num">
                 <tr><th scope="row">Q1</th><td>4,701</td><td>467</td></tr>
                 <tr><th scope="row">Q2 (late June only)</th><td>324</td><td>64</td></tr>
                 <tr><th scope="row">Q3</th><td>4,902</td><td>597</td></tr>
@@ -722,7 +700,7 @@
             <table>
               <caption>22 vanished pages vs. LEA Q1 frame outcome mix</caption>
               <thead><tr><th scope="col">Listing outcome</th><th scope="col">Lost pages (n = 22)</th><th scope="col">All LEA Q1 frame</th></tr></thead>
-              <tbody class="mono">
+              <tbody class="num">
                 <tr><th scope="row">Successful</th><td>13.6%</td><td>55.6%</td></tr>
                 <tr><th scope="row">Partially successful</th><td>0.0%</td><td>1.6%</td></tr>
                 <tr><th scope="row">Unsuccessful</th><td>77.3%</td><td>41.1%</td></tr>
@@ -737,25 +715,24 @@
     <section id="conclusion" class="conclusion-section" aria-labelledby="conclusion-title">
       <div class="section-ledger-head">
         <h2 id="conclusion-title">Conclusions &amp; call to action</h2>
-        <span class="ledger-tag">06 · WHAT THE RECORD DEMANDS</span>
       </div>
 
       <p class="conclusion-lead">Measuring 14,668 requests shows that Philippine eFOI responsiveness cannot be judged by first-reply speed alone: agencies frequently reply within 48 hours, yet success rates differ across groups and silence concentrates sharply in Water Districts. Each group of actors has a specific lever grounded in this record:</p>
 
       <div class="cta-grid">
         <article class="cta-card">
-          <span class="cta-role mono">01 · FOR REQUESTERS &amp; CITIZENS</span>
           <h3>Track fulfillment, not just the first ping</h3>
+          <p class="cta-role">For requesters &amp; citizens</p>
           <p>Do not treat a rapid 1-day acknowledgment as approval—speed does not predict a yes (p = 0.989). Log your filing timestamp, track EO No. 2’s 15-working-day response and appeal windows directly, and anticipate higher silence when filing with Water Districts (26.1% no recorded reply).</p>
         </article>
         <article class="cta-card">
-          <span class="cta-role mono">02 · FOR FOI-PMO &amp; AGENCIES</span>
           <h3>Audit silence, vanished records, and the Q2 gap</h3>
+          <p class="cta-role">For FOI-PMO &amp; agencies</p>
           <p>Investigate the 90-day March 20 – June 18, 2025 public listing gap and why 20 sampled LEA Q1 pages disappeared from public view (77.3% unsuccessful at listing). Prioritize Water District support: all 20 closed Water District requests with no reply ended unsuccessful (p = 0.0164 exploratory subgroup check).</p>
         </article>
         <article class="cta-card">
-          <span class="cta-role mono">03 · FOR CIVIC RESEARCHERS</span>
           <h3>Weight strata and never zero out silence</h3>
+          <p class="cta-role">For civic researchers</p>
           <p>National agencies account for 83.3% of 2025 filings (12,219 of 14,668) but 18.2% of the stratified sample. Always apply <code>collected_weights</code> for population totals, leave blank <code>first_response_days</code> un-imputed, and test both all-request and closed-only denominators.</p>
         </article>
       </div>
@@ -763,8 +740,8 @@
 
     <section id="team" class="team-section" aria-labelledby="team-title">
       <div class="section-ledger-head">
-        <h2 id="team-title">FYI. FOI Your Information.</h2>
-        <span class="ledger-tag">CS 132 · AY 2026–2027 SEM 1 · SECTION WFX · GROUP 1</span>
+        <h2 id="team-title"><span class="fyi-mark">FYI<span>.</span></span> FOI Your Information.</h2>
+        <p class="team-meta">CS 132, AY 2026–2027, Semester 1, Section WFX, Group 1</p>
       </div>
       <ul class="team-list">
         <li>Vaughn Aquino</li>
@@ -778,20 +755,23 @@
       <h2 id="references-title">Sources &amp; project materials</h2>
       <ol>
         <li>Office of the President. <a href="https://lawphil.net/executive/execord/eo2016/eo_2_2016.html"><cite>Executive Order No. 2, s. 2016: Operationalizing in the Executive Branch the People's Constitutional Right to Information and the State Policies to Full Public Disclosure and Transparency in the Public Service and Providing Guidelines Therefor</cite></a>. July 23, 2016. Coverage (Sec. 2), response period (Sec. 9), appeals (Sec. 13).</li>
-        <li><a href="https://www.foi.gov.ph/requests/">eFOI request browser</a> · data source (listing and detail pages).</li>
-        <li><a href="https://www.foi.gov.ph/agencies/">eFOI agency directory</a> · agency groups.</li>
-        <li><a href="https://www.foi.gov.ph/terms-of-service/">eFOI terms of service</a> · research-use terms.</li>
-        <li><a href="https://sdgs.un.org/goals/goal16">United Nations: Sustainable Development Goal 16</a> · research context.</li>
-        <li><a href="https://github.com/hugvan/cs132-project">Project repository</a> · scraper, cleaning scripts, notebooks 01–03, and documentation.</li>
-        <li><a href="https://docs.google.com/spreadsheets/d/10om8YdCtoXA7cndqIHQegUSYfqqeKhTvkbDoB-45Vrc/edit?usp=sharing">Project Google Sheet</a> · public dataset tabs (<code>efoi_2025</code>, <code>frame_2025</code>, <code>agencies</code>).</li>
+        <li><a href="https://www.foi.gov.ph/requests/">eFOI request browser</a>: data source (listing and detail pages).</li>
+        <li><a href="https://www.foi.gov.ph/agencies/">eFOI agency directory</a>: agency groups.</li>
+        <li><a href="https://www.foi.gov.ph/terms-of-service/">eFOI terms of service</a>: research-use terms.</li>
+        <li><a href="https://sdgs.un.org/goals/goal16">United Nations: Sustainable Development Goal 16</a>: research context.</li>
+        <li><a href="https://github.com/hugvan/cs132-project">Project repository</a>: scraper, cleaning scripts, notebooks 01–03, and documentation.</li>
+        <li><a href="https://docs.google.com/spreadsheets/d/10om8YdCtoXA7cndqIHQegUSYfqqeKhTvkbDoB-45Vrc/edit?usp=sharing">Project Google Sheet</a>: public dataset tabs (<code>efoi_2025</code>, <code>frame_2025</code>, <code>agencies</code>).</li>
       </ol>
       <p class="small">Data collected September 29, 2026.</p>
     </section>
   </main>
 
   <footer>
-    <span>FYI — FOI Your Information · CS 132 Section WFX Group 1</span>
+    <span><span class="fyi-mark fyi-mark-inverse">FYI<span>.</span></span> FOI Your Information, CS 132 Section WFX Group 1</span>
     <a href="#title">Back to top ↑</a>
   </footer>
+<!-- impeccable-live-start -->
+<script src="http://localhost:8400/live.js?token=5503f22e-17cc-48ab-b3c3-20e41a109c11"></script>
+<!-- impeccable-live-end -->
 </body>
 </html>

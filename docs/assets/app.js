@@ -37,7 +37,7 @@
       mwP: 0.674,
       closedNoReply: 20,
       mwPWith: 0.0164,
-      stamp: 'FAST REPLY · 26.1% SILENCE',
+      stamp: 'FAST REPLY, 26.1% SILENCE',
       stampTone: 'alert',
       note: 'Fast first responders when they reply (1.12 d weighted median), yet 75 of 287 requests never received a public agency message—and all 20 closed silent requests ended unsuccessful.'
     },
@@ -71,7 +71,7 @@
       mwP: 0.108,
       closedNoReply: 0,
       mwPWith: 0.108,
-      stamp: 'FASTEST REPLY · 0.7% SILENCE',
+      stamp: 'FASTEST REPLY, 0.7% SILENCE',
       stampTone: 'neutral',
       note: 'Quickest initial reply across all six groups (0.56 d weighted median, 99.3% replied), though 20 Q1 sampled pages had vanished from public view before collection day.'
     },
@@ -105,7 +105,7 @@
       mwP: 0.949,
       closedNoReply: 0,
       mwPWith: 0.949,
-      stamp: '83.3% OF VOLUME · p = 0.949',
+      stamp: '83.3% OF VOLUME, p = 0.949',
       stampTone: 'neutral',
       note: 'Handles 12,219 of 14,668 public 2025 filings (83.3%), posts a 1.16 d weighted median first reply, and shows no evidence that faster replies help closed requests succeed (p = 0.949).'
     },
@@ -139,7 +139,7 @@
       mwP: 0.911,
       closedNoReply: 2,
       mwPWith: 0.608,
-      stamp: '2.65 D MEDIAN · 73.9% CLOSED',
+      stamp: '2.65 D MEDIAN, 73.9% CLOSED',
       stampTone: 'neutral',
       note: 'Second-largest 2025 group (1,284 filings). Weighted median reply arrives in 2.65 calendar days, with 73.9% success among closed requests and 13.3% without recorded replies.'
     },
@@ -173,7 +173,7 @@
       mwP: 0.366,
       closedNoReply: 0,
       mwPWith: 0.366,
-      stamp: '3.24 D MEDIAN · 17.2% OPEN',
+      stamp: '3.24 D MEDIAN, 17.2% OPEN',
       stampTone: 'neutral',
       note: 'Weighted median reply takes 3.24 calendar days (upper quartile reaches 15.57 days), and 17.2% of 2025 filings remained open on collection day.'
     },
@@ -181,7 +181,7 @@
       id: 'LGU',
       code: 'LGU',
       shortName: 'Local governments',
-      fullName: 'Local governments (LGU · voluntary EO 2)',
+      fullName: 'Local governments (LGU, voluntary EO 2)',
       serial: 'TKT-LGU-0175',
       frame: 175,
       sample: 175,
@@ -207,7 +207,7 @@
       mwP: 0.401,
       closedNoReply: 0,
       mwPWith: 0.401,
-      stamp: 'SLOWEST (4.68 D) · 91.0% CLOSED',
+      stamp: 'SLOWEST (4.68 D), 91.0% CLOSED',
       stampTone: 'neutral',
       note: 'Only encouraged (not mandated) under EO No. 2. Slowest median first reply (4.68 d, 17.1% silent) yet posts the highest full-frame (74.9%) and closed-only (91.0%) success shares.'
     }
@@ -266,7 +266,7 @@
         node.classList.toggle('is-reached', i <= currentStage);
       });
       if (progressLabel) {
-        progressLabel.textContent = `STAGE 0${currentStage + 1} / 05`;
+        progressLabel.textContent = `Stage ${currentStage + 1} of 5`;
       }
       if (prefersReducedMotion()) {
         path.style.strokeDashoffset = '0';
@@ -311,7 +311,7 @@
       lockComplete: () => {
         steps.forEach((s) => s.classList.add('is-active'));
         nodes.forEach((n) => n.classList.add('is-reached'));
-        if (progressLabel) progressLabel.textContent = 'STAGE 05 / 05';
+        if (progressLabel) progressLabel.textContent = 'Stage 5 of 5';
         path.style.strokeDashoffset = '0';
       },
       restoreStage: () => applyStage(currentStage)
@@ -339,7 +339,7 @@
       const count = state.inspected.size;
       countEl.textContent =
         count === GROUPS.length
-          ? `Inspected ${count} / ${GROUPS.length} agency groups · Full audit complete`
+          ? `Inspected ${count} / ${GROUPS.length} agency groups. Full audit complete`
           : `Inspected ${count} / ${GROUPS.length} agency groups`;
     }
     const cards = document.querySelectorAll('.group-card');
@@ -348,7 +348,7 @@
       const done = state.inspected.has(id);
       card.classList.toggle('is-inspected', done);
       const pill = card.querySelector('.audit-pill');
-      if (pill) pill.textContent = done ? 'AUDITED' : 'PENDING';
+      if (pill) pill.textContent = done ? 'Audited' : 'Pending';
     });
   }
 
@@ -449,20 +449,20 @@
 
     function finishStatic() {
       clockNum.textContent = g.wMedian.toFixed(2);
-      fillEl.style.width = `${targetWidth.toFixed(1)}%`;
+      fillEl.style.transform = `scaleX(${(targetWidth / 100).toFixed(4)})`;
       stub.classList.add('is-stamped');
     }
 
     function runCountUp() {
       stub.classList.remove('is-stamped');
-      const duration = 420;
+      const duration = 700;
       const start = performance.now();
 
       function step(now) {
         const t = Math.min(1, (now - start) / duration);
-        const eased = 1 - Math.pow(1 - t, 3);
+        const eased = t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
         clockNum.textContent = (g.wMedian * eased).toFixed(2);
-        fillEl.style.width = `${(targetWidth * eased).toFixed(1)}%`;
+        fillEl.style.transform = `scaleX(${((targetWidth / 100) * eased).toFixed(4)})`;
 
         if (t < 1) {
           state.clockRaf = requestAnimationFrame(step);
@@ -503,10 +503,10 @@
             <div>
               <div class="group-card-head">
                 <div>
-                  <span class="group-card-code">${g.code} · N = ${formatInt(g.frame)}</span>
+                  <span class="group-card-code">${g.code} (N = ${formatInt(g.frame)})</span>
                   <h3>${g.shortName}</h3>
                 </div>
-                <span class="audit-pill">${inspected ? 'AUDITED' : 'PENDING'}</span>
+                <span class="audit-pill">${inspected ? 'Audited' : 'Pending'}</span>
               </div>
             </div>
             <div class="group-card-metrics">
@@ -591,7 +591,7 @@
      -------------------------------------------------------------------------- */
   const QUEUE_TICKETS = 20;
   const QUEUE_WAIT_SLOTS = 5;
-  const QUEUE_CLOCK = { offset: 0.3, scale: 0.62 }; // seconds = offset + scale·log2(1 + days)
+  const QUEUE_CLOCK = { offset: 0.3, scale: 0.62 }; // seconds = offset + scale * log2(1 + days)
   const QUEUE_STAGGER = 0.028;
   const QUEUE_TRAVEL = 0.45;
   const QUEUE_STAMP_LAG = 0.3;
@@ -673,16 +673,16 @@
       return `
         <div class="queue-lane" role="img" aria-label="${label}">
           <div class="lane-label">
-            <span class="lane-code mono">${g.code}</span>
+            <span class="lane-code">${g.code}</span>
             <span class="lane-name">${g.shortName}</span>
-            <span class="lane-median mono">median ${g.wMedian.toFixed(2)} d</span>
+            <span class="lane-median">median ${g.wMedian.toFixed(2)} d</span>
           </div>
           <div class="lane-track" aria-hidden="true">
             <div class="lane-wait">${waitHtml}</div>
             <div class="lane-window"></div>
             <div class="lane-served">${servedHtml}</div>
           </div>
-          <div class="lane-count mono" aria-hidden="true">
+          <div class="lane-count" aria-hidden="true">
             <span>n = ${g.sample}</span>
             <span>${g.noReplyCount} no reply</span>
           </div>
@@ -695,7 +695,7 @@
         <div class="lane-track">
           <span class="qb-wait">Awaiting first reply</span>
           <span class="lane-window"></span>
-          <span class="qb-served">Replied · stamped with outcome</span>
+          <span class="qb-served">Replied and stamped with outcome</span>
         </div>
         <span class="qb-count">Sample</span>
       </div>
@@ -733,14 +733,17 @@
       stopClock();
       board.classList.add('no-anim', 'is-queued');
       if (clockEl) clockEl.textContent = '0.00 d';
-      void board.offsetWidth;
-      board.classList.remove('no-anim');
+      requestAnimationFrame(() => board.classList.remove('no-anim'));
     };
 
     const play = () => {
-      void board.offsetWidth;
-      board.classList.remove('is-queued');
-      runClock();
+      // Let the queued state commit for one frame instead of forcing a sync reflow.
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          board.classList.remove('is-queued');
+          runClock();
+        });
+      });
     };
 
     const lockComplete = () => {
@@ -835,8 +838,8 @@
 
     const W = 820;
     const rowH = 44;
-    const topPad = 32;
-    const H = topPad + rows.length * rowH + 28;
+    const topPad = mode === 'noreply' ? 32 : 58;
+    const H = topPad + rows.length * rowH + 30;
     const labelX = 152;
     const medBarMax = mode === 'both' ? 255 : 530;
     const nrStart = mode === 'both' ? 500 : 168;
@@ -847,10 +850,9 @@
       if (mode === 'noreply') return '';
       const barW = Math.max(4, (g.wMedian / 15) * medBarMax);
       return `
-        <line x1="${eo15x}" y1="${topPad - 4}" x2="${eo15x}" y2="${H - 22}" stroke="#F46201" stroke-width="1.25" stroke-dasharray="3 3" />
         <rect x="${labelX}" y="${y + 10}" width="${medBarMax}" height="18" fill="#F7F7F5" />
         <rect x="${labelX}" y="${y + 10}" width="${barW.toFixed(1)}" height="18" fill="#1c1246" />
-        <text x="${(labelX + barW + 8).toFixed(1)}" y="${y + 23}" font-family="JetBrains Mono, monospace" font-size="11.5" font-weight="700" fill="#1c1246">${g.wMedian.toFixed(2)} d</text>
+        <text x="${(labelX + barW + 8).toFixed(1)}" y="${y + 23}" font-family="Public Sans, sans-serif" font-size="11.5" font-weight="700" fill="#1c1246">${g.wMedian.toFixed(2)} d</text>
       `;
     };
 
@@ -858,21 +860,21 @@
       if (mode === 'median') return '';
       const barW = Math.max(3, (g.noReplyPct / 30) * nrBarMax);
       const isAlert = g.noReplyPct >= 20;
-      const fill = isAlert ? '#F46201' : '#4B5058';
+      const fill = isAlert ? '#F46201' : '#4F4A6B';
       return `
         <rect x="${nrStart}" y="${y + 10}" width="${nrBarMax}" height="18" fill="#F7F7F5" />
         <rect x="${nrStart}" y="${y + 10}" width="${barW.toFixed(1)}" height="18" fill="${fill}" />
-        <text x="${(nrStart + barW + 8).toFixed(1)}" y="${y + 23}" font-family="JetBrains Mono, monospace" font-size="11.5" font-weight="700" fill="${fill}">${g.noReplyPct.toFixed(1)}%</text>
+        <text x="${(nrStart + barW + 8).toFixed(1)}" y="${y + 23}" font-family="Public Sans, sans-serif" font-size="11.5" font-weight="700" fill="${fill}">${g.noReplyPct.toFixed(1)}%</text>
       `;
     };
 
     const headers = [];
     if (mode !== 'noreply') {
-      headers.push(`<text x="${labelX}" y="18" font-family="JetBrains Mono, monospace" font-size="10.5" font-weight="700" fill="#4B5058">WEIGHTED MEDIAN FIRST REPLY (SCALE: 0–15 D)</text>`);
-      headers.push(`<text x="${eo15x}" y="${H - 6}" text-anchor="end" font-family="JetBrains Mono, monospace" font-size="10" fill="#F46201">15 d ref.</text>`);
+      headers.push(`<text x="${labelX}" y="18" font-family="Public Sans, sans-serif" font-size="10.5" font-weight="700" fill="#4F4A6B">Weighted median first reply (0–15 days)</text>`);
+      headers.push(`<text x="${eo15x}" y="${H - 6}" text-anchor="end" font-family="Public Sans, sans-serif" font-size="10" fill="#4F4A6B">EO No. 2 allows 15 working days; bars show calendar days</text>`);
     }
     if (mode !== 'median') {
-      headers.push(`<text x="${nrStart}" y="18" font-family="JetBrains Mono, monospace" font-size="10.5" font-weight="700" fill="#4B5058">NO RECORDED REPLY % (SCALE: 0–30%)</text>`);
+      headers.push(`<text x="${nrStart}" y="18" font-family="Public Sans, sans-serif" font-size="10.5" font-weight="700" fill="#4F4A6B">No recorded reply (0–30%)</text>`);
     }
 
     const rowEls = rows
@@ -895,9 +897,16 @@
       <svg class="chart-svg" viewBox="0 0 ${W} ${H}" role="img" aria-label="First response times and no-reply percentages across the six agency groups">
         ${headers.join('')}
         ${rowEls}
+        ${mode === 'noreply' ? '' : `
+        <g class="eo15-ref" aria-hidden="true">
+          <rect x="${eo15x - 7}" y="${topPad - 4}" width="14" height="${H - topPad - 26}" fill="#F46201" fill-opacity="0.08" />
+          <line x1="${eo15x}" y1="${topPad - 6}" x2="${eo15x}" y2="${H - 22}" stroke="#F46201" stroke-width="2.5" />
+          <rect x="${eo15x - 58}" y="26" width="116" height="22" rx="3" fill="#FFF4EC" stroke="#F46201" stroke-width="1.5" />
+          <text x="${eo15x}" y="41" text-anchor="middle" font-family="Public Sans, sans-serif" font-size="11.5" font-weight="700" fill="#1c1246">EO No. 2: 15 days</text>
+        </g>`}
       </svg>
       <div id="rq1-readout" class="chart-readout">
-        <strong>${focused.code} (${focused.shortName}):</strong> weighted median ${focused.wMedian.toFixed(2)} cal. days · unweighted IQR ${focused.p25.toFixed(2)}–${focused.p75.toFixed(2)} d (${focused.replied}/${focused.sample} replied; ${focused.noReplyCount} blank = ${focused.noReplyPct.toFixed(1)}% weighted no-reply).
+        <strong>${focused.code} (${focused.shortName}):</strong> weighted median ${focused.wMedian.toFixed(2)} cal. days; unweighted IQR ${focused.p25.toFixed(2)}–${focused.p75.toFixed(2)} d (${focused.replied}/${focused.sample} replied; ${focused.noReplyCount} blank = ${focused.noReplyPct.toFixed(1)}% weighted no-reply).
       </div>
     `;
 
@@ -907,7 +916,7 @@
         const g = GROUP_MAP[row.dataset.group];
         if (!g || !readout) return;
         state.rq1FocusId = g.id;
-        readout.innerHTML = `<strong>${g.code} (${g.shortName}):</strong> weighted median ${g.wMedian.toFixed(2)} cal. days · unweighted IQR ${g.p25.toFixed(2)}–${g.p75.toFixed(2)} d (${g.replied}/${g.sample} replied; ${g.noReplyCount} blank = ${g.noReplyPct.toFixed(1)}% weighted no-reply).`;
+        readout.innerHTML = `<strong>${g.code} (${g.shortName}):</strong> weighted median ${g.wMedian.toFixed(2)} cal. days; unweighted IQR ${g.p25.toFixed(2)}–${g.p75.toFixed(2)} d (${g.replied}/${g.sample} replied; ${g.noReplyCount} blank = ${g.noReplyPct.toFixed(1)}% weighted no-reply).`;
       };
       row.addEventListener('mouseenter', updateReadout);
       row.addEventListener('focus', updateReadout);
@@ -983,7 +992,7 @@
             <text x="8" y="${y + 22}" font-family="'Public Sans', sans-serif" font-size="13" font-weight="700" fill="#1c1246">${g.shortName}</text>
             ${rects}
             <rect x="${barX}" y="${y + 8}" width="${barW}" height="20" fill="none" stroke="#1c1246" stroke-width="0.9" />
-            <text x="${barX + barW + 10}" y="${y + 22}" font-family="JetBrains Mono, monospace" font-size="11.5" font-weight="700" fill="#1c1246">${nLabel}</text>
+            <text x="${barX + barW + 10}" y="${y + 22}" font-family="Public Sans, sans-serif" font-size="11.5" font-weight="700" fill="#1c1246">${nLabel}</text>
             <title>${g.shortName}: combined success ${totalSucc.toFixed(1)}%</title>
           </g>
         `;
@@ -1026,7 +1035,7 @@
           const y = plotB - (tick / 100) * plotH;
           return `
             <line x1="${plotL}" y1="${y.toFixed(1)}" x2="${plotR}" y2="${y.toFixed(1)}" stroke="#D2D4CF" stroke-width="1" />
-            <text x="${plotL - 10}" y="${(y + 4).toFixed(1)}" text-anchor="end" font-family="JetBrains Mono, monospace" font-size="10.5" fill="#4B5058">${tick}%</text>
+            <text x="${plotL - 10}" y="${(y + 4).toFixed(1)}" text-anchor="end" font-family="Public Sans, sans-serif" font-size="10.5" fill="#4F4A6B">${tick}%</text>
           `;
         })
         .join('');
@@ -1040,9 +1049,9 @@
         return `
           <g>
             <rect x="${bx.toFixed(1)}" y="${by.toFixed(1)}" width="${bw}" height="${bh.toFixed(1)}" fill="#155E63" stroke="#1c1246" stroke-width="1.25" />
-            <text x="${cx.toFixed(1)}" y="${(by - 8).toFixed(1)}" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="12" font-weight="700" fill="#1c1246">${b.pct.toFixed(1)}%</text>
-            <text x="${cx.toFixed(1)}" y="${plotB + 19}" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" font-weight="700" fill="#1c1246">${b.label}</text>
-            <text x="${cx.toFixed(1)}" y="${plotB + 35}" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="#4B5058">n = ${b.n}</text>
+            <text x="${cx.toFixed(1)}" y="${(by - 8).toFixed(1)}" text-anchor="middle" font-family="Public Sans, sans-serif" font-size="12" font-weight="700" fill="#1c1246">${b.pct.toFixed(1)}%</text>
+            <text x="${cx.toFixed(1)}" y="${plotB + 19}" text-anchor="middle" font-family="Public Sans, sans-serif" font-size="11" font-weight="700" fill="#1c1246">${b.label}</text>
+            <text x="${cx.toFixed(1)}" y="${plotB + 35}" text-anchor="middle" font-family="Public Sans, sans-serif" font-size="10" fill="#4F4A6B">n = ${b.n}</text>
           </g>
         `;
       }).join('');
@@ -1077,7 +1086,7 @@
         const y = topPad + idx * rowH;
         const sx = scaleL + (g.mwSuccMed / maxDays) * scaleW;
         const ux = scaleL + (g.mwUnsuccMed / maxDays) * scaleW;
-        const pColor = g.mwPWith < 0.05 ? '#F46201' : '#4B5058';
+        const pColor = g.mwPWith < 0.05 ? '#F46201' : '#4F4A6B';
         const pNote =
           g.closedNoReply > 0
             ? `p = ${g.mwP} → ${g.mwPWith} (${g.closedNoReply} silent)`
@@ -1089,7 +1098,7 @@
             <line x1="${Math.min(sx, ux).toFixed(1)}" y1="${y + 18}" x2="${Math.max(sx, ux).toFixed(1)}" y2="${y + 18}" stroke="#1c1246" stroke-width="2" />
             <circle cx="${sx.toFixed(1)}" cy="${y + 18}" r="5.5" fill="#155E63" stroke="#1c1246" stroke-width="1" />
             <rect x="${(ux - 5).toFixed(1)}" y="${y + 13}" width="10" height="10" fill="#F46201" stroke="#1c1246" stroke-width="1" />
-            <text x="${scaleL + scaleW + 14}" y="${y + 22}" font-family="JetBrains Mono, monospace" font-size="10.8" font-weight="700" fill="${pColor}">${pNote}</text>
+            <text x="${scaleL + scaleW + 14}" y="${y + 22}" font-family="Public Sans, sans-serif" font-size="10.8" font-weight="700" fill="${pColor}">${pNote}</text>
             <title>${g.shortName}: median successful ${g.mwSuccMed.toFixed(2)} d vs unsuccessful ${g.mwUnsuccMed.toFixed(2)} d</title>
           </g>
         `;
@@ -1102,8 +1111,8 @@
         <span class="legend-item"><span class="legend-swatch" style="background:#F46201"></span><span>Median: unsuccessful (closed replied)</span></span>
       </div>
       <svg class="chart-svg" viewBox="0 0 ${W} ${H}" role="img" aria-label="Within-group unweighted medians for closed successful versus unsuccessful requests and no-reply sensitivity">
-        <text x="${scaleL}" y="16" font-family="JetBrains Mono, monospace" font-size="10.5" font-weight="700" fill="#4B5058">UNWEIGHTED GROUP MEDIANS (0 – 8.5 CAL. DAYS)</text>
-        <text x="${scaleL + scaleW + 14}" y="16" font-family="JetBrains Mono, monospace" font-size="10.5" font-weight="700" fill="#4B5058">MANN–WHITNEY P (REPLIED / +NO-REPLY)</text>
+        <text x="${scaleL}" y="16" font-family="Public Sans, sans-serif" font-size="10.5" font-weight="700" fill="#4F4A6B">Unweighted group medians (0–8.5 calendar days)</text>
+        <text x="${scaleL + scaleW + 14}" y="16" font-family="Public Sans, sans-serif" font-size="10.5" font-weight="700" fill="#4F4A6B">Mann–Whitney p (replied / +no-reply)</text>
         ${rows}
       </svg>
     `;

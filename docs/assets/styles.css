@@ -7,11 +7,11 @@
   /* Public Dossier Design Tokens */
   --color-bg: #FFFFFF;
   --color-fg: #1c1246;
-  --color-black: #000000;
+  --color-black: #1c1246;
   --color-white: #FFFFFF;
   --color-tan: #ECECE8;
   --color-medium-tan: #D2D4CF;
-  --color-dark-tan: #4B5058;
+  --color-dark-tan: #4F4A6B;
   --color-tan-tint: #F7F7F5;
   --color-accent-orange: #F46201;
   --color-accent-dark-orange: #e45b00;
@@ -25,13 +25,18 @@
   --category-green: #155E63;
   --category-yellow: #D49B2A;
   --category-cyan: #1D4ED8;
-  --category-purple: #4B5058;
+  --category-purple: #4F4A6B;
   --category-gray: #6B7280;
 
   /* Typography */
   --sans: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
   --serif: "Source Serif 4", Iowan Old Style, Georgia, "Times New Roman", serif;
-  --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --mono: var(--sans);
+  --code: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  /* Box rules: deep indigo at low strength */
+  --color-line: rgb(28 18 70 / 0.16);
+  --color-line-strong: rgb(28 18 70 / 0.28);
 
   /* Scale */
   --12px: 0.75rem;
@@ -116,7 +121,7 @@ body {
   word-wrap: break-word;
 }
 
-.mono,
+.num,
 code,
 table,
 .scope-cell strong,
@@ -135,10 +140,10 @@ table,
 }
 
 code {
-  font-family: var(--mono);
+  font-family: var(--code);
   font-size: 0.85em;
   background: var(--color-tan-tint);
-  border: 1px solid var(--color-tan);
+  border: 1px solid var(--color-line);
   border-radius: var(--border-radius);
   padding: 0.08em 0.32em;
 }
@@ -229,6 +234,24 @@ img {
   color: var(--color-accent-orange);
 }
 
+/* FYI wordmark used inline wherever the name appears */
+.fyi-mark {
+  font-family: var(--serif);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--color-accent-purple);
+}
+
+.fyi-mark span {
+  color: var(--color-accent-orange);
+}
+
+.fyi-mark-inverse {
+  font-size: 1.4em;
+  line-height: 1;
+  color: #93C5FD;
+}
+
 .brand-meta {
   display: flex;
   flex-direction: column;
@@ -237,8 +260,6 @@ img {
   font-size: 0.7rem;
   font-weight: 400;
   line-height: 1.3;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
   color: var(--color-dark-tan);
   white-space: nowrap;
 }
@@ -299,14 +320,6 @@ section {
   color: var(--color-fg);
 }
 
-.ledger-tag {
-  font-family: var(--sans);
-  font-size: var(--12px);
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--color-dark-tan);
-}
 
 /* ---------- Stamps & Editorial Badges ---------- */
 
@@ -369,12 +382,10 @@ section {
   justify-content: space-between;
   gap: 0.5rem 1.25rem;
   padding: 0 0 0.75rem;
-  border-bottom: 1px solid var(--color-fg);
+  border-bottom: 1px solid var(--color-line-strong);
   font-family: var(--sans);
   font-size: var(--12px);
   font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
   color: var(--color-dark-tan);
   margin-bottom: 2.25rem;
 }
@@ -467,7 +478,7 @@ section {
 
 .filing-summary {
   background: var(--color-tan-tint);
-  border: 1.5px solid var(--color-fg);
+  border: 1.5px solid var(--color-line);
   border-radius: var(--border-radius);
   padding: 1.45rem 1.55rem;
 }
@@ -478,13 +489,11 @@ section {
   justify-content: space-between;
   gap: 0.75rem;
   padding-bottom: 0.75rem;
-  border-bottom: 1px solid var(--color-fg);
+  border-bottom: 1px solid var(--color-line-strong);
   margin-bottom: 1.1rem;
   font-family: var(--sans);
   font-size: var(--12px);
   font-weight: 700;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
   color: var(--color-dark-tan);
 }
 
@@ -506,7 +515,6 @@ section {
   font-family: var(--sans);
   font-size: var(--12px);
   font-weight: 700;
-  text-transform: uppercase;
   color: var(--color-dark-tan);
 }
 
@@ -525,7 +533,7 @@ section {
 
 .scope-cell {
   padding: 1.15rem 1.25rem;
-  border: 1px solid var(--color-fg);
+  border: 1px solid var(--color-line);
   border-radius: var(--border-radius);
   background: var(--color-tan-tint);
 }
@@ -571,7 +579,7 @@ section {
   padding: 1.5rem 1.65rem;
   margin: 0 0 18vh;
   opacity: 0.42;
-  transition: opacity calc(0.25 * var(--1s)) ease, background calc(0.25 * var(--1s)) ease;
+  transition: opacity calc(0.4 * var(--1s)) cubic-bezier(0.16, 1, 0.3, 1), background calc(0.4 * var(--1s)) ease;
 }
 
 .step:last-child {
@@ -583,16 +591,6 @@ section {
   background: var(--color-tan-tint);
 }
 
-.step-code {
-  display: inline-block;
-  margin-bottom: 0.55rem;
-  font-family: var(--sans);
-  font-size: var(--12px);
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  color: var(--color-dark-tan);
-}
 
 .step.is-active .step-code {
   color: var(--color-accent-purple);
@@ -622,8 +620,6 @@ section {
   font-family: var(--sans);
   font-size: var(--12px);
   font-weight: 700;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
   color: var(--color-dark-tan);
 }
 
@@ -638,7 +634,7 @@ section {
 .routing-board {
   width: 100%;
   background: var(--color-tan-tint);
-  border: 1px solid var(--color-fg);
+  border: 1px solid var(--color-line);
   border-radius: var(--border-radius);
   overflow: hidden;
   display: flex;
@@ -652,12 +648,10 @@ section {
   gap: 0.75rem;
   padding: 0.75rem 1.15rem;
   background: var(--color-tan);
-  border-bottom: 1px solid var(--color-fg);
+  border-bottom: 1px solid var(--color-line-strong);
   font-family: var(--sans);
   font-size: var(--12px);
   font-weight: 700;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
   color: var(--color-fg);
 }
 
@@ -669,12 +663,12 @@ section {
 }
 
 #routing-path {
-  transition: stroke-dashoffset calc(0.45 * var(--1s)) cubic-bezier(0.22, 1, 0.36, 1);
+  transition: stroke-dashoffset calc(0.8 * var(--1s)) cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .route-node {
   opacity: 0.35;
-  transition: opacity calc(0.25 * var(--1s)) ease;
+  transition: opacity calc(0.4 * var(--1s)) cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .route-node.is-reached {
@@ -686,7 +680,6 @@ section {
   font-size: 11.5px;
   font-weight: 700;
   fill: var(--color-fg);
-  letter-spacing: 0.04em;
 }
 
 .svg-mono-alert {
@@ -694,7 +687,6 @@ section {
   font-size: 11.5px;
   font-weight: 700;
   fill: var(--color-accent-orange);
-  letter-spacing: 0.04em;
 }
 
 .svg-mono-inv {
@@ -702,7 +694,6 @@ section {
   font-size: 11.5px;
   font-weight: 700;
   fill: var(--color-bg);
-  letter-spacing: 0.04em;
 }
 
 .svg-body-label {
@@ -805,10 +796,9 @@ section {
 }
 
 .btn-code {
-  font-family: var(--mono);
+  font-family: var(--code);
   font-size: var(--12px);
   font-weight: 700;
-  letter-spacing: 0.05em;
 }
 
 .btn-name {
@@ -833,7 +823,7 @@ section {
 .ticket-stub {
   position: relative;
   background: var(--color-tan-tint);
-  border: 1.5px solid var(--color-fg);
+  border: 1.5px solid var(--color-line);
   border-radius: var(--border-radius);
 }
 
@@ -847,11 +837,10 @@ section {
   padding: 0.75rem 1.45rem;
   background: var(--color-tan);
   border-radius: 2px 2px 0 0;
-  border-bottom: 1.5px dashed var(--color-fg);
+  border-bottom: 1.5px dashed var(--color-line-strong);
   font-family: var(--mono);
   font-size: var(--12px);
   font-weight: 700;
-  letter-spacing: 0.05em;
   color: var(--color-fg);
 }
 
@@ -865,7 +854,7 @@ section {
   height: 20px;
   border-radius: 50%;
   background: var(--color-bg);
-  border: 1.5px solid var(--color-fg);
+  border: 1.5px solid var(--color-line);
   z-index: 2;
   pointer-events: none;
 }
@@ -920,8 +909,6 @@ section {
   font-family: var(--sans);
   font-size: 0.7rem;
   font-weight: 700;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
   color: var(--color-dark-tan);
   margin-bottom: 0.25rem;
 }
@@ -1012,18 +999,22 @@ section {
 }
 
 .benchmark-fill {
+  width: 100%;
   height: 100%;
   background: var(--color-accent-purple);
-  transition: width calc(0.12 * var(--1s)) linear;
+  transform-origin: left center;
+  will-change: transform;
 }
 
 .benchmark-marker {
   position: absolute;
-  top: -3px;
-  bottom: -3px;
-  width: 2px;
+  top: -7px;
+  bottom: -7px;
+  width: 3px;
+  border-radius: 1px;
   background: var(--color-accent-orange);
-  transform: translateX(-2px);
+  box-shadow: 0 0 0 4px var(--color-accent-orange-tint, #FFF4EC);
+  transform: translateX(-3px);
 }
 
 .benchmark-ticks {
@@ -1035,7 +1026,12 @@ section {
 }
 
 .benchmark-ticks span:last-child {
-  color: var(--color-accent-orange);
+  margin-top: 0.3rem;
+  padding: 0.12rem 0.45rem;
+  border-radius: var(--border-radius);
+  background: #FFF4EC;
+  box-shadow: inset 0 0 0 1.5px var(--color-accent-orange);
+  color: var(--color-fg);
   font-weight: 700;
 }
 
@@ -1058,7 +1054,7 @@ section {
 .ticket-metric {
   padding: 1.05rem 1.2rem;
   background: var(--color-bg);
-  border-right: 1px solid var(--color-fg);
+  border-right: 1px solid var(--color-line-strong);
 }
 
 .ticket-metric:last-child {
@@ -1102,6 +1098,9 @@ section {
   border-radius: var(--border-radius);
 }
 
+
+
+
 .tracker-status {
   display: flex;
   flex-wrap: wrap;
@@ -1133,7 +1132,6 @@ section {
   font-family: var(--sans);
   font-size: var(--12px);
   font-weight: 700;
-  text-transform: uppercase;
   color: var(--color-fg);
 }
 
@@ -1224,12 +1222,12 @@ section {
   color: var(--color-fg);
 }
 
+
+
 .audit-pill {
   font-family: var(--sans);
   font-size: 0.68rem;
   font-weight: 700;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
   padding: 0.22rem 0.55rem;
   border-radius: 999px;
   color: var(--color-dark-tan);
@@ -1254,7 +1252,6 @@ section {
   font-family: var(--sans);
   font-size: 0.66rem;
   font-weight: 700;
-  text-transform: uppercase;
   color: var(--color-dark-tan);
 }
 
@@ -1300,7 +1297,7 @@ section {
 
 .question-card {
   background: var(--color-tan-tint);
-  border: 1.5px solid var(--color-fg);
+  border: 1.5px solid var(--color-line);
   border-radius: var(--border-radius);
   padding: 1.45rem 1.45rem;
   display: flex;
@@ -1321,7 +1318,6 @@ section {
   font-family: var(--sans);
   font-size: var(--12px);
   font-weight: 700;
-  letter-spacing: 0.06em;
   color: var(--color-dark-tan);
 }
 
@@ -1358,8 +1354,6 @@ section {
   font-family: var(--sans);
   font-size: var(--12px);
   font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
   color: var(--color-dark-tan);
 }
 
@@ -1445,16 +1439,6 @@ section {
   margin-bottom: 1.35rem;
 }
 
-.exhibit-code {
-  display: block;
-  font-family: var(--sans);
-  font-size: var(--12px);
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  color: var(--color-dark-tan);
-  margin-bottom: 0.22rem;
-}
 
 .exhibit-head h3 {
   margin: 0;
@@ -1515,7 +1499,7 @@ section {
   display: inline-block;
   width: 12px;
   height: 12px;
-  border: 1px solid var(--color-fg);
+  border: 1px solid var(--color-line);
   border-radius: 2px;
 }
 
@@ -1641,9 +1625,9 @@ tbody tr:last-child td {
 
 .exhibit-a {
   margin-bottom: 3.5rem;
-  background: #0B0D10;
+  background: var(--color-fg);
   color: #F5F5F2;
-  border: 1px solid var(--color-fg);
+  border: 1px solid var(--color-line);
   border-radius: var(--border-radius);
   padding: 1.5rem 1.55rem;
 }
@@ -1659,15 +1643,6 @@ tbody tr:last-child td {
   border-bottom: 1px solid rgba(255, 255, 255, 0.22);
 }
 
-.exhibit-a-tag {
-  display: block;
-  font-family: var(--sans);
-  font-size: var(--12px);
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  color: #93C5FD;
-  margin-bottom: 0.25rem;
-}
 
 .exhibit-a-head h2 {
   margin: 0;
@@ -1774,7 +1749,6 @@ tbody tr:last-child td {
   font-family: var(--sans);
   font-size: var(--12px);
   font-weight: 700;
-  text-transform: uppercase;
   color: var(--color-fg);
 }
 
@@ -1872,14 +1846,12 @@ tbody tr:last-child td {
   padding: 1.35rem 1.4rem;
 }
 
-.cta-role {
-  display: block;
+.cta-card .cta-role {
+  margin: -0.15rem 0 0.75rem;
   font-family: var(--sans);
-  font-size: var(--12px);
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  color: var(--color-accent-orange);
-  margin-bottom: 0.4rem;
+  font-size: var(--14px);
+  font-weight: 600;
+  color: var(--color-dark-tan);
 }
 
 .cta-card h3 {
@@ -2078,7 +2050,7 @@ footer a:visited {
 
   .ticket-metric {
     border-right: 0;
-    border-bottom: 1px solid var(--color-fg);
+    border-bottom: 1px solid var(--color-line-strong);
   }
 
   .ticket-metric:last-child {
@@ -2151,8 +2123,8 @@ footer a:visited {
   --q-gap: 5px;
   --q-window-gap: 0.75rem;
   display: grid;
-  border-top: 1.5px solid var(--color-fg);
-  border-bottom: 1.5px solid var(--color-fg);
+  border-top: 1.5px solid var(--color-line-strong);
+  border-bottom: 1.5px solid var(--color-line-strong);
 }
 
 .queue-board-head,
@@ -2167,8 +2139,6 @@ footer a:visited {
   padding: 0.55rem 0 0.4rem;
   font-size: 0.7rem;
   font-weight: 700;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
   color: var(--color-dark-tan);
 }
 
@@ -2271,7 +2241,7 @@ footer a:visited {
   width: 100%;
   max-width: 30px;
   aspect-ratio: 5 / 7;
-  border: 1.5px solid var(--color-fg);
+  border: 1.5px solid var(--color-line);
   border-radius: 2px;
   background-color: var(--color-bg);
   -webkit-mask:
@@ -2343,6 +2313,7 @@ footer a:visited {
 /* ---------- Motion: served tickets slide out of the counter window, then get stamped ---------- */
 
 .lane-served .q-ticket {
+  will-change: transform, opacity;
   transition:
     transform calc(0.45 * var(--1s)) cubic-bezier(0.16, 1, 0.3, 1) calc(var(--d, 0) * var(--1s)),
     opacity calc(0.12 * var(--1s)) linear calc(var(--d, 0) * var(--1s)),
@@ -2553,7 +2524,7 @@ footer a:visited {
     margin: 0 0 7pt !important;
     padding: 8pt 10pt !important;
     opacity: 1 !important;
-    border-color: #4B5058 !important;
+    border-color: #4F4A6B !important;
     page-break-inside: avoid;
     break-inside: avoid;
   }
@@ -2682,4 +2653,26 @@ footer a:visited {
     page-break-inside: avoid;
     break-inside: avoid;
   }
+}
+
+/* Denominator qualifier carried on chart headings */
+.h-qual {
+  display: block;
+  margin-top: 0.2rem;
+  font-family: var(--sans);
+  font-size: var(--14px);
+  font-weight: 400;
+  letter-spacing: 0;
+  color: var(--color-dark-tan);
+}
+
+.team-meta {
+  margin: 0;
+  font-size: var(--14px);
+  color: var(--color-dark-tan);
+}
+
+/* Keep the ticket body on its own layer while it tears and prints */
+.ticket-body {
+  will-change: transform, clip-path;
 }
